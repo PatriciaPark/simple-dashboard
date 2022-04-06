@@ -1,2 +1,3 @@
+/** test code */
 var msg = 'hello world';
 console.log(msg);
