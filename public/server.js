@@ -41,9 +41,6 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to simple-dashboard application." });
 });
-app.get("/index", (req, res) => {
-  res.location('./index.html');
-});
 
 // routes
 // require("./routes/route")(app);
