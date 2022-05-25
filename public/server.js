@@ -38,9 +38,9 @@ app.use(
 // });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to simple-dashboard application." });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to simple-dashboard application." });
+// });
 
 // routes
 // require("./routes/route")(app);
