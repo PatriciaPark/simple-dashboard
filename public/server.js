@@ -39,7 +39,8 @@ const Role = db.role;
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to simple-dashboard application." });
+  res.sendFile('./index.html', {root: __dirname })
+  // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
 // routes
