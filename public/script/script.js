@@ -106,10 +106,11 @@ function signUp(){
             }),
         }).then(res => res.json())
         .then(res => {
-            alert(res);
-            alert(res.status);
-            alert(res.json());
-            alert(res.text());
+            alert("res.value: " + res.value);
+            alert("res.status: " + res.status);
+            alert("res.json(): " + res.json());
+            alert("res.text(): " + res.text());
+            alert(userFullName + " " + userEmail);
           if (res.success) {
             alert("Signup Succeessful");
             window.location.replace("../index.html");
