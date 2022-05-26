@@ -108,10 +108,7 @@ function signUp(){
         })
         .then((response) => response.json())
         .then((data) => {
-            // console.log('Success:', data);
-
-            alert("Signup Succeessful");
-            window.location.replace("../index.html");
+            console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Fail:', error);
