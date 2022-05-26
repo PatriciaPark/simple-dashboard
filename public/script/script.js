@@ -108,9 +108,8 @@ function signUp(){
         })
         .then((response) => response.json())
         .then((data) => {
-            if(data){
-                alert(data);
-                console.log('Fail:', data);
+            if(data.message){
+                alert(data.message);
             } else {
                 console.log('Success11:', data);
                 alert("Signup Successful");
