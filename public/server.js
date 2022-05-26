@@ -50,7 +50,7 @@ require("./routes/tutorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(3306, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
