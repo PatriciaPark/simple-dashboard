@@ -109,12 +109,14 @@ function signUp(){
         .then((response) => response.json())
         .then((data) => {
             if(data){
-                alert(data[1]);
+                alert(data);
+                console.log('Fail:', data);
             } else {
+                console.log('Success11:', data);
                 alert("Signup Successful");
                 window.location.replace("../index.html");
             }
-            // console.log('Success:', data);
+            console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Fail:', error);
