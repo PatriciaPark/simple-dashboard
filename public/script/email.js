@@ -1,16 +1,15 @@
 import { getAuth, sendSignInLinkToEmail } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
-import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js';
-require('dotenv').config();
+import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js'; 
 
 document.getElementById("resendEmailA").addEventListener("click", sendEmailVerification, false);
 let config = {
-  apiKey: process.env.APIKEY,
-  authDomain: process.env.AUTHDOMAIN,
-  projectId: process.env.PROJECTID,
-  storageBucket: process.env.STOREBUKET,
-  messagingSenderId: process.env.MESSAGINGSENDERID,
-  appId: process.env.APPID,
-  measurementId: process.env.MEASUREMENTID
+  apiKey: "AIzaSyCBSfZbINX0RkfDLZ_dUWeAE383iXLgowg",
+  authDomain: "simple-dashboard-48420.firebaseapp.com",
+  projectId: "simple-dashboard-48420",
+  storageBucket: "simple-dashboard-48420.appspot.com",
+  messagingSenderId: "132374569431",
+  appId: "1:132374569431:web:df01c30c4f0f25ed3cab92",
+  measurementId: "G-Y72JJ0Q98H"
 };
 
 const app = firebase.initializeApp(config);
