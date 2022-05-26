@@ -1,5 +1,6 @@
 import { getAuth, sendSignInLinkToEmail } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
-import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js'; 
+import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js';
+require('dotenv').config();
 
 document.getElementById("resendEmailA").addEventListener("click", sendEmailVerification, false);
 let config = {
