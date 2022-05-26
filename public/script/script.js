@@ -109,7 +109,7 @@ function signUp(){
         .then((response) => response.json())
         .then((data) => {
             if(data){
-                alert(data);
+                alert(data[1]);
             } else {
                 alert("Signup Successful");
                 window.location.replace("../index.html");
