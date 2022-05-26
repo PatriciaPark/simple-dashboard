@@ -111,39 +111,25 @@ function signUp(){
             if(data.message){
                 alert(data.message);
             } else {
-                console.log('Success11:', data);
+                // firebase users authentication
+                firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
+                    var user = firebase.auth().currentUser;
+                    var uid;
+                    if (user != null) {
+                        uid = user.uid;
+                    }    
+                }).catch((error) => {
+                    alert(error.message);
+                });
+                // Signup Successful
                 alert("Signup Successful");
                 window.location.replace("../index.html");
             }
-            console.log('Success:', data);
+            // console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Fail:', error);
         });
-
-        //
-        // fetch("/api/users", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         username: userFullName,
-        //         email: userEmail,
-        //         password: userPassword,
-        //     }),
-        // }).then(res => res.json())
-        // .then(res => {
-        //   if (res.success) {
-        //     alert("Signup Succeessful");
-        //     window.location.replace("../index.html");
-        //   }
-        // }).catch((error) => {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     alert(errorCode + ": " + errorMessage);
-        // });
         
         // firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
         //     var user = firebase.auth().currentUser;
@@ -152,13 +138,13 @@ function signUp(){
         //         uid = user.uid;
         //     }
         //     //var firebaseRef = firebase.database().ref();
-        //     var userData = {
-        //         userFullName: userFullName,
-        //         userEmail: userEmail,
-        //         userPassword: userPassword
-        //     }
-        //     firebaseRef.child(uid).set(userData);
-        //     window.location.replace("../index.html");
+        //     // var userData = {
+        //     //     userFullName: userFullName,
+        //     //     userEmail: userEmail,
+        //     //     userPassword: userPassword
+        //     // }
+        //     // firebaseRef.child(uid).set(userData);
+        //     // window.location.replace("../index.html");
             
         // }).catch((error) => {
         //     // Handle Errors here.

@@ -20,8 +20,8 @@ function sendEmailVerification(){
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'https://simple-dashboard-48420.web.app/',
-    // This must be true.
+    // url: 'https://simple-dashboard-48420.web.app/',
+    url: 'https://simple-dashboard-pyjee8.herokuapp.com/',
     handleCodeInApp: true
   };
   sendSignInLinkToEmail(auth, email, actionCodeSettings)
