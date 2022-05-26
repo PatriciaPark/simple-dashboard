@@ -97,7 +97,7 @@ function signUp(){
         async function postData(url='/api/users',data = {username: userFullName,email: userEmail,password: userPassword}) {
             const response = await fetch(url, {
               method: 'POST', // *GET, POST, PUT, DELETE 등
-              mode: 'cors', // no-cors, *cors, same-origin
+              mode: 'no-cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
               credentials: 'same-origin', // include, *same-origin, omit
               headers: {
