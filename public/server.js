@@ -29,7 +29,7 @@ app.use(
 const db = require("./models");
 const Role = db.role;
 
-db.sequelize.sync();
+// db.sequelize.sync();
 
 // force: true will drop the table if it already exists
 // db.sequelize.sync({force: true}).then(() => {
@@ -50,7 +50,7 @@ require("./routes/tutorial.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
-app.listen(3306, () => {
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
