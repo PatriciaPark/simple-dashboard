@@ -117,12 +117,6 @@ function signUp(){
             });
             return response.json(); // JSON 응답을 네이티브 JavaScript 객체로 파싱
           }
-          
-          postData('https://example.com/answer', { answer: 42 }).then((data) => {
-            console.log(data); // JSON 데이터가 `data.json()` 호출에 의해 파싱됨
-          });
-
-
 
         //
         // fetch("/api/users", {
