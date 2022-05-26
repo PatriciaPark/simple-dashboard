@@ -38,9 +38,9 @@ app.use(
 // });
 
 // simple route
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to simple-dashboard application." });
-// });
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to simple-dashboard application." });
+});
 
 // routes
 // require("./routes/route")(app);
@@ -49,8 +49,8 @@ require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
 
 // set port, listen for requests
-// const PORT = process.env.PORT || 3000;
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 
