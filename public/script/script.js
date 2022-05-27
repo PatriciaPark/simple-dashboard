@@ -180,11 +180,14 @@ function signIn(){
   var checkUserPasswordValid = userSIPassword.match(userSIPasswordFormate);
 
   if(checkUserEmailValid == null){
+      document.getElementById("userSIEmail").focus();
+      alert("Please check your Email Address");
       return checkUserSIEmail();
   }else if(checkUserPasswordValid == null){
       return checkUserSIPassword();
   }else{
       // Signin successful
+      var data ={ email: userSIEmail };
       fetch('/api/users/verified', {
         method: 'GET',
         headers: {
