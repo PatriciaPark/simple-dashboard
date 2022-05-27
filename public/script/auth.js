@@ -4,9 +4,9 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // User successfully signed in
-      console.log("Signin successful");
+      console.log("*****Signin successful*****");
       // update database - email verification(emailVerification= 0 -> 1)
-      const email = window.localStorage.getItem('emailForSignIn');
+      const email = firebase.auth().currentUser.email;
       var data = { email: email };
       fetch('/api/users/verificationData', {
           method: 'PUT',
