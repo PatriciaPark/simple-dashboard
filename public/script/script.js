@@ -122,7 +122,7 @@ function signUp(){
                     console.log(error.message);
                 });
                 // Signup Successful
-                sessionStorage.setItem('userSIEmail', userEmail);
+                // sessionStorage.setItem('userSIEmail', userEmail);
                 alert("Signup Successful");
                 window.location.replace("../views/email_verification.html");
             }
