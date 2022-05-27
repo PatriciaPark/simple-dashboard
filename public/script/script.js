@@ -186,46 +186,39 @@ function signIn(){
   }else if(checkUserPasswordValid == null){
       return checkUserSIPassword();
   }else{
-      // Signin successful
-      var data ={ email: userSIEmail };
-      fetch('/api/users/verified', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if(data.message){
-                // Not verified email yet : emailVerification=0
-                console.log(data.message);
-                sessionStorage.setItem('userSIEmail', userSIEmail);
-                window.location.replace("./views/email_verification.html");
-            } else {
-                // Already verified email : emailVerification=0
-                // update database - login count(loginCnt), last session(lastSession)
-                var data = { email:userSIEmail };
-                fetch('/api/users/loginData', {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log('Success:', data);
-                    })
-                    .catch((error) => {
-                        console.error('Fail:', error);
-                });
-                window.location.replace("./views/dashboard.html");
-            }
-            // console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Fail:', error);
+    // Signin successful
+    fetch('/api/users/'+ userSIEmail)
+    .then((response) => response.json())
+    .then((data) => {
+        if(data.message){
+            // Not verified email yet : emailVerification=0
+            console.log(data.message);
+            sessionStorage.setItem('userSIEmail', userSIEmail);
+            window.location.replace("./views/email_verification.html");
+        } else {
+            // Already verified email : emailVerification=0
+            // update database - login count(loginCnt), last session(lastSession)
+            var data = { email:userSIEmail };
+            fetch('/api/users/loginData', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Fail:', error);
+            });
+            window.location.replace("./views/dashboard.html");
+        }
+        console.log("Success:" + data);
+    })
+    .catch((error) => {
+    console.error('Fail:', error);
     });
   }
 }

@@ -3,7 +3,7 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
-      console.log("Result: " + authResult);
+      console.log("Auth Result: " + authResult);
       return true;
     },
     uiShown() {
