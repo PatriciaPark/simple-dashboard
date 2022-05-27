@@ -4,6 +4,7 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // update database - email verification(emailVerification= 0 -> 1)
+      const email = sessionStorage.getItem('userSIEmail');
       var data = { email: email };
       fetch('/api/users/verificationData', {
           method: 'PUT',
