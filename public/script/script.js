@@ -94,6 +94,7 @@ function signUp(){
         alert("Please check your password");
       return checkUserConfirmPassword();
     }else{
+        // Signup
         var data = {  username: userFullName,
                         email: userEmail,
                         password: userPassword
@@ -109,8 +110,10 @@ function signUp(){
         .then((response) => response.json())
         .then((data) => {
             if(data.message){
+                // "Failed! Email is already in use!"
                 alert(data.message);
             } else {
+                // Signup Successful
                 sessionStorage.setItem('userSIEmail', userEmail);
                 // firebase users authentication
                 firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
@@ -122,7 +125,6 @@ function signUp(){
                 }).catch((error) => {
                     console.log(error.message);
                 });
-                // Signup Successful
                 alert("Signup Successful");
                 window.location.replace("../views/email_verification.html");
             }
@@ -183,36 +185,45 @@ function signIn(){
       return checkUserSIPassword();
   }else{
       // Signin successful
-      firebase.auth().signInWithEmailAndPassword(userSIEmail, userSIPassword).then((success) => {
-        if(firebase.auth().emailVerified==true){
-            window.location.replace("./views/dashboard.html");
-            //update database - login count(loginCnt), last session(lastSession)
-            var data = { email:userSIEmail };
-            fetch('/api/users/loginData', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    // console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Fail:', error);
+      fetch('/api/users/verified', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message){
+                // Not verified email yet : emailVerification=0
+                console.log(data.message);
+                sessionStorage.setItem('userSIEmail', userSIEmail);
+                window.location.replace("./views/email_verification.html");
+            } else {
+                // Already verified email : emailVerification=0
+                // update database - login count(loginCnt), last session(lastSession)
+                var data = { email:userSIEmail };
+                fetch('/api/users/loginData', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Fail:', error);
                 });
-        } else {
-            sessionStorage.setItem('userSIEmail', userSIEmail);
-            window.location.replace("./views/email_verification.html");
-        }              
-      }).catch((error) => {
-          // Handle Errors here.
-          alert("Wrong ID or Password");
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          alert(errorCode + ": " + errorMessage);
-      });
+                window.location.replace("./views/dashboard.html");
+            }
+            // console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Fail:', error);
+    });
   }
 }
 // Save profile and update database

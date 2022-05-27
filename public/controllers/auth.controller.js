@@ -37,16 +37,16 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
   };
-  exports.findAllPublished = (req, res) => {
-    User.getAllPublished((err, data) => {
-      if (err)
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving users."
-        });
-      else res.send(data);
-    });
-  };
+exports.verified = (req, res) => {
+  User.getEmailVerified((err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    else res.send(data);
+  });
+};
 // Find a single User with an id
 exports.findOne = (req, res) => {
     User.findById(req.params.id, (err, data) => {
@@ -62,6 +62,22 @@ exports.findOne = (req, res) => {
           }
         } else res.send(data);
       });
+};
+// Find email verified Users
+exports.findVerified = (req, res) => {
+  User.findByEmailVerified(req.params.email, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with email ${req.params.email}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving User with email " + req.params.email
+        });
+      }
+    } else res.send(data);
+  });
 };
 // Update a User by the id in the request
 exports.update = (req, res) => {
@@ -117,6 +133,33 @@ exports.loginData = (req, res) => {
     }
   );
 };
+// Update verificationData data
+exports.verificationData = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be null!"
+    });
+  }
+  console.log(req.body);
+  User.updateEmailVerification(
+    req.params.email,
+    new User(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User with email ${req.params.email}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating User with email " + req.params.email
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
     User.remove(req.params.id, (err, data) => {
@@ -143,10 +186,6 @@ exports.deleteAll = (req, res) => {
           });
         else res.send({ message: `All Users were deleted successfully!` });
       });
-};
-// Find all published Users
-exports.findAllPublished = (req, res) => {
-  
 };
 
 // const db = require("../models");

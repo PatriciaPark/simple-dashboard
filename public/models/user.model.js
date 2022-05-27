@@ -47,6 +47,22 @@ User.getAll = (email, result) => {
     result(null, res);
   });
 };
+User.findByEmailVerified = (email, result) => {
+  sql.query(`SELECT * FROM users WHERE emailVerification=1 AND email = ${email}`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      console.log("found user: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+    // not found User with the id
+    result({ kind: "not_found" }, null);
+  });
+};
 User.updateById = (email, user, result) => {
   sql.query(
     "UPDATE users SET username = ?, password = ? WHERE email = ?",
@@ -65,6 +81,21 @@ User.updateById = (email, user, result) => {
 User.updateLogin = (email, result) => {
   sql.query(
     "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
+    [email],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("users: ", res);
+      result(null, res);
+    }
+  );
+};
+User.updateEmailVerification = (email, result) => {
+  sql.query(
+    "UPDATE users SET emailVerification=1 WHERE email = ?",
     [email],
     (err, res) => {
       if (err) {
