@@ -16,37 +16,13 @@ module.exports = app => {
   router.get("/published", users.findAllPublished);
   // Retrieve a single Tutorial with id
   router.get("/:id", users.findOne);
-  // Update a Tutorial with id
+  // Update a User with id
   router.put("/:id", users.update);
-  // Delete a Tutorial with id
+  // Update login data
+  router.put("/loginData", users.loginData);
+  // Delete a User with id
   router.delete("/:id", users.delete);
-  // Delete all Tutorials
+  // Delete all Users
   router.delete("/", users.deleteAll);
   app.use('/api/users', router);
 };
-
-// const { verifySignUp } = require("../middleware");
-// const controller = require("../controllers/auth.controller");
-
-// module.exports = function(app) {
-//   app.use(function(req, res, next) {
-//     res.header(
-//       "Access-Control-Allow-Headers",
-//       "Origin, Content-Type, Accept"
-//     );
-//     next();
-//   });
-
-//   app.post("/api/auth/signup",
-    // [
-    //   verifySignUp.checkDuplicateUsernameOrEmail,
-    //   verifySignUp.checkRolesExisted
-    // ],
-//     controller.signup
-//   );
-
-//   app.post("/api/auth/signin", controller.signin);
-
-//   app.post("/api/auth/signout", controller.signout);
-
-// };

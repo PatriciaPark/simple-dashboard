@@ -90,6 +90,33 @@ exports.update = (req, res) => {
     }
   );
 };
+// Update login data
+exports.loginData = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be null!"
+    });
+  }
+  console.log(req.body);
+  User.updateLogin(
+    req.params.email,
+    new User(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User with email ${req.params.email}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating User with email " + req.params.email
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
     User.remove(req.params.id, (err, data) => {

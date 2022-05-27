@@ -94,7 +94,7 @@ function signUp(){
         alert("Please check your password");
       return checkUserConfirmPassword();
     }else{
-        const data = {  username: userFullName,
+        var data = {  username: userFullName,
                         email: userEmail,
                         password: userPassword
                     };
@@ -119,7 +119,7 @@ function signUp(){
                         uid = user.uid;
                     }    
                 }).catch((error) => {
-                    alert(error.message);
+                    console.log(error.message);
                 });
                 // Signup Successful
                 alert("Signup Successful");
@@ -130,28 +130,6 @@ function signUp(){
         .catch((error) => {
             console.error('Fail:', error);
         });
-        
-        // firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
-        //     var user = firebase.auth().currentUser;
-        //     var uid;
-        //     if (user != null) {
-        //         uid = user.uid;
-        //     }
-        //     //var firebaseRef = firebase.database().ref();
-        //     // var userData = {
-        //     //     userFullName: userFullName,
-        //     //     userEmail: userEmail,
-        //     //     userPassword: userPassword
-        //     // }
-        //     // firebaseRef.child(uid).set(userData);
-        //     // window.location.replace("../index.html");
-            
-        // }).catch((error) => {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     alert(errorCode + ": " + errorMessage);
-        // });
     }
 }
 
@@ -203,9 +181,26 @@ function signIn(){
   }else if(checkUserPasswordValid == null){
       return checkUserSIPassword();
   }else{
+      // Signin successful
       firebase.auth().signInWithEmailAndPassword(userSIEmail, userSIPassword).then((success) => {
         if(firebase.auth().emailVerified==true){
             window.location.replace("./views/dashboard.html");
+            //update database - login count(loginCnt), last session(lastSession)
+            var data = { email:userSIEmail };
+            fetch('/api/users/loginData', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    // console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Fail:', error);
+                });
         } else {
             sessionStorage.setItem('userSIEmail', userSIEmail);
             window.location.replace("./views/email_verification.html");

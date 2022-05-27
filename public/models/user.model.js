@@ -57,13 +57,23 @@ User.updateById = (email, user, result) => {
         result(null, err);
         return;
       }
-      if (res.affectedRows == 0) {
-        // not found Tutorial with the id
-        result({ kind: "not_found" }, null);
-        return;
-      }
       console.log("updated user: ", { email: email, ...user });
       result(null, { email: email, ...user });
+    }
+  );
+};
+User.updateLogin = (email, result) => {
+  sql.query(
+    "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
+    [email],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("users: ", res);
+      result(null, res);
     }
   );
 };
