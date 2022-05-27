@@ -1,3 +1,5 @@
+var request = require('request');
+
 function emailVerification(email){
     const data = { email: email };
     // update database - email verification(emailVerification= 0 -> 1)
