@@ -189,7 +189,7 @@ function signIn(){
       // Signin successful
       var data ={ email: userSIEmail };
       fetch('/api/users/verified', {
-        method: 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },

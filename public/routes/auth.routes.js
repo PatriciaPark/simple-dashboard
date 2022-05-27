@@ -10,10 +10,10 @@ module.exports = app => {
       verifySignUp.checkRolesExisted
     ],
     users.create);
+  // Retrieve verified email user
+  router.post("/verified", users.findVerified);
   // Retrieve all Tutorials
   router.get("/", users.findAll);
-  // Retrieve verified email user
-  router.get("/verified", users.findVerified);
   // Retrieve a single Tutorial with id
   router.get("/:id", users.findOne);
   // Update a User with id
