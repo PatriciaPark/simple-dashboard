@@ -5,6 +5,7 @@ const uiConfig = {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // User successfully signed in
       console.log("Signin successful");
+      return true;
     },
     uiShown() {
       document.getElementById('loader').style.display = 'none';
