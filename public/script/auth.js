@@ -3,8 +3,10 @@ const ui = new firebaseui.auth.AuthUI(firebase.auth());
 const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
+      // User successfully signed in
+      console.log("Signin successful");
       // update database - email verification(emailVerification= 0 -> 1)
-      const email = firebase.auth().currentUser.email;
+      const email = window.localStorage.getItem('emailForSignIn');
       var data = { email: email };
       fetch('/api/users/verificationData', {
           method: 'PUT',
@@ -25,7 +27,6 @@ const uiConfig = {
     },
     uiShown() {
       document.getElementById('loader').style.display = 'none';
-      document.getElementById('signInForm').style.display = 'none';
     },
   },
   signInFlow: 'popup',
