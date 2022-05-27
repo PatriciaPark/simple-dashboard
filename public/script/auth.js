@@ -5,6 +5,8 @@ const uiConfig = {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // User successfully signed in
       console.log("Signin successful");
+      const email = sessionStorage.getItem('emailForSignIn');
+      window.localStorage.setItem('emailForSignIn', email);
       return true;
     },
     uiShown() {

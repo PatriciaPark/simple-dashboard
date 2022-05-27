@@ -1,6 +1,6 @@
 function emailVerification(){
     // update database - email verification(emailVerification= 0 -> 1)
-    const email = firebase.auth().currentUser.email;
+    const email = sessionStorage.getItem('emailForSignIn');
     var data = { email: email };
     fetch('/api/users/verificationData', {
         method: 'PUT',
