@@ -39,3 +39,7 @@ function sendEmailVerification(){
       alert(errorCode + ": " + errorMessage);
     });
 }
+
+window.addEventListener('DOMContentLoaded', function() {
+  sendEmailVerification();
+});

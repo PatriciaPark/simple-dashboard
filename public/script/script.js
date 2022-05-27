@@ -123,7 +123,7 @@ function signUp(){
                 });
                 // Signup Successful
                 alert("Signup Successful");
-                window.location.replace("../index.html");
+                window.location.replace("../views/email_verification.html");
             }
             // console.log('Success:', data);
         })
