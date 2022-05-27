@@ -6,7 +6,6 @@ const uiConfig = {
       // User successfully signed in
       console.log("Signin successful");
       const email = sessionStorage.getItem('emailForSignIn');
-      window.localStorage.setItem('emailForSignIn', email);
       return true;
     },
     uiShown() {
@@ -14,7 +13,7 @@ const uiConfig = {
     },
   },
   signInFlow: 'popup',
-  signInSuccessUrl: './views/dashboard.html',
+  signInSuccessUrl: './views/dashboard.html?email=' + email,
   signInOptions: [
     //firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,

@@ -1,7 +1,6 @@
-function emailVerification(){
+function emailVerification(email){
+    const data = { email: email };
     // update database - email verification(emailVerification= 0 -> 1)
-    const email = sessionStorage.getItem('emailForSignIn');
-    var data = { email: email };
     fetch('/api/users/verificationData', {
         method: 'PUT',
         headers: {
@@ -16,10 +15,8 @@ function emailVerification(){
         .catch((error) => {
             console.error('Fail:', error);
     });
-    console.log("Auth Result: " + authResult);
-    return true;
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    emailVerification();
+    emailVerification(request.query.email);
 });
