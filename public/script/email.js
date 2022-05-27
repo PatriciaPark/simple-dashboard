@@ -30,8 +30,7 @@ function sendEmailVerification(){
       // Save the email locally so you don't need to ask the user for it again
       // if they open the link on the same device.
       window.localStorage.setItem('emailForSignIn', email);
-      alert("Resend Email Successfully");
-      window.location.replace("../index.html");
+      alert("Send Email Successfully");
     })
     .catch((error) => {
       const errorCode = error.code;
