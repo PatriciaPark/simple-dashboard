@@ -111,6 +111,7 @@ function signUp(){
             if(data.message){
                 alert(data.message);
             } else {
+                sessionStorage.setItem('userSIEmail', userEmail);
                 // firebase users authentication
                 firebase.auth().createUserWithEmailAndPassword(userEmail, userPassword).then((success) => {
                     var user = firebase.auth().currentUser;
@@ -122,7 +123,6 @@ function signUp(){
                     console.log(error.message);
                 });
                 // Signup Successful
-                // sessionStorage.setItem('userSIEmail', userEmail);
                 alert("Signup Successful");
                 window.location.replace("../views/email_verification.html");
             }
