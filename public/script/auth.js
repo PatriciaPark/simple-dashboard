@@ -1,11 +1,11 @@
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
+const email = sessionStorage.getItem('emailForSignIn');
 
 const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // User successfully signed in
       console.log("Signin successful");
-      const email = sessionStorage.getItem('emailForSignIn');
       return true;
     },
     uiShown() {
