@@ -4,7 +4,7 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult(authResult, redirectUrl) {
       // update database - email verification(emailVerification= 0 -> 1)
-      const email = sessionStorage.getItem('userSIEmail');
+      const email = firebase.auth().currentUser.email;
       var data = { email: email };
       fetch('/api/users/verificationData', {
           method: 'PUT',
@@ -25,6 +25,7 @@ const uiConfig = {
     },
     uiShown() {
       document.getElementById('loader').style.display = 'none';
+      document.getElementById('signInForm').style.display = 'none';
     },
   },
   signInFlow: 'popup',
