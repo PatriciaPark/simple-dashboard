@@ -5,7 +5,7 @@ const User = function(user) {
   this.username = user.username;
   this.password = user.password;
 };
-const Patch = function(user) {
+const Login = function(user) {
   this.email = user.email;
 };
 
@@ -82,7 +82,7 @@ User.updateById = (email, user, result) => {
     }
   );
 };
-Patch.updateLogin = (email, user, result) => {
+Login.updateLogin = (email, user, result) => {
   sql.query(
     "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
     [email],
@@ -97,7 +97,7 @@ Patch.updateLogin = (email, user, result) => {
     }
   );
 };
-Patch.updateEmailVerification = (email, user, result) => {
+Login.updateEmailVerification = (email, user, result) => {
   sql.query(
     "UPDATE users SET emailVerification=1 WHERE email = ?",
     [email],
