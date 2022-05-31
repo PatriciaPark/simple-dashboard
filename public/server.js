@@ -31,7 +31,7 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // simple route
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.get("/", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
