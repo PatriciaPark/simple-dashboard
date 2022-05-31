@@ -76,7 +76,10 @@ exports.findVerified = (req, res) => {
           message: "Error retrieving User with email " + req.params.email
         });
       }
-    } else res.send(data);
+    } else {
+      res.send(data);
+    }
+    console.log("*****data: " + data);
   });
 };
 // Update a User by the id in the request
