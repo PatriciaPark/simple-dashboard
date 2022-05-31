@@ -28,8 +28,8 @@ function sendEmailVerification(){
     .then(() => {
       // The link was successfully sent. Inform the user.
       // Save the email locally so you don't need to ask the user for it again
-      alert("Send Email Successfully: " + email);
       window.localStorage.setItem('emailForSignIn', email);
+      alert("Send Email Successfully: " + email);
     })
     .catch((error) => {
       const errorCode = error.code;
