@@ -12,7 +12,7 @@ const uiConfig = {
     },
   },
   signInFlow: 'popup',
-  signInSuccessUrl: './views/dashboard.ejs',
+  signInSuccessUrl: '../views/dashboard.ejs',
   signInOptions: [
     //firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,

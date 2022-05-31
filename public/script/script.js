@@ -211,10 +211,10 @@ function signIn(){
                 // Not verified email yet : emailVerification=0
                 console.log(data.message);
                 sessionStorage.setItem('userSIEmail', userSIEmail);
-                window.location.replace("./views/email_verification.html");
+                window.location.replace("../views/email_verification.html");
             } else {
                 // Already verified email : emailVerification=0
-                window.location.replace("./views/dashboard.ejs");
+                window.location.replace("../views/dashboard.ejs");
             }
         })
         .catch((error) => {
