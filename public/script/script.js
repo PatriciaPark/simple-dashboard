@@ -191,7 +191,7 @@ function signIn(){
     var data = { email: userSIEmail, loginCnt: 'loginCnt+1' };
     Promise.all([        
         fetch('/api/users/loginCount/'+ userSIEmail, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
