@@ -79,7 +79,6 @@ exports.findVerified = (req, res) => {
     } else {
       res.send(data);
     }
-    console.log("*****data: " + data);
   });
 };
 // Update a User by the id in the request
