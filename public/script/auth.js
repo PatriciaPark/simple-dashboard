@@ -1,5 +1,5 @@
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-const email = sessionStorage.getItem('emailForSignIn');
+const email = localStorage.getItem('emailForSignIn');
 
 const uiConfig = {
   callbacks: {
