@@ -3,7 +3,7 @@ const email = localStorage.getItem('emailForSignIn');
 function emailVerification(email){
     const data = { emailVerification: 1 };
     // update database - email verification(emailVerification= 0 -> 1)
-    fetch('/api/users/verificationData'+ email, {
+    fetch('/api/users/verificationData/'+ email, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
