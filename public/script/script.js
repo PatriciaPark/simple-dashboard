@@ -188,9 +188,7 @@ function signIn(){
   }else{
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
-    var data = { email: userSIEmail,
-                 loginCnt: 'loginCnt+1' 
-                };
+    var data = { email: userSIEmail };
     Promise.all([        
         fetch('/api/users/loginCount/'+ userSIEmail, {
             method: 'PUT',
@@ -200,8 +198,8 @@ function signIn(){
             body: JSON.stringify(data),
         })
         .then((response) => response.json())
-        .then((data) => {
-            console.log('Success Count:', data);
+        .then((json) => {
+            console.log('Success Count:', json);
         })
         .catch((error) => {
             console.error('Fail to Count:', error);
