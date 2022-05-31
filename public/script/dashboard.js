@@ -9,6 +9,7 @@ function emailLinkComplete() {
       // the sign-in operation.
       // Get the email if available. This should be available if the user completes
       // the flow on the same device where they started it.
+      console.log("******************dashboard emailLinkComplete !!!!!!!!!!!!!!!!!!!!!");
       var email = window.localStorage.getItem('emailForSignIn');
       const data = { email: email };
         fetch('/api/users/verificationData', {
@@ -49,25 +50,6 @@ function emailLinkComplete() {
     // [END email_link_complete]
 }
 
-function emailVerification(email){
-    // update database - email verification(emailVerification= 0 -> 1)
-    const email = localStorage.getItem('emailForSignIn');
-    const data = { email: email };
-    fetch('/api/users/verificationData', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Fail:', error);
-    });
-}
 window.addEventListener('DOMContentLoaded', function() {
     emailLinkComplete();
 });
