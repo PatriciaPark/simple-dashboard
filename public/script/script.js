@@ -187,6 +187,22 @@ function signIn(){
       return checkUserSIPassword();
   }else{
     // Signin successful
+    // update database - login count(loginCnt), last session(lastSession)
+    var data = { email:userSIEmail };
+    fetch('/api/users/loginData', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Fail:', error);
+    });
     fetch('/api/users/'+ userSIEmail)
     .then((response) => response.json())
     .then((data) => {
@@ -197,23 +213,7 @@ function signIn(){
             window.location.replace("./views/email_verification.html");
         } else {
             // Already verified email : emailVerification=0
-            // update database - login count(loginCnt), last session(lastSession)
-            var data = { email:userSIEmail };
-            fetch('/api/users/loginData', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Success:', data);
-                    window.location.replace("./views/dashboard.html");
-                })
-                .catch((error) => {
-                    console.error('Fail:', error);
-            });
+            window.location.replace("./views/dashboard.html");
         }
     })
     .catch((error) => {
