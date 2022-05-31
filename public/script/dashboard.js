@@ -17,6 +17,7 @@ function emailVerification(email){
         .catch((error) => {
             console.error('Fail:', error);
     });
+    window.localStorage.removeItem('emailForSignIn');
 }
 
 window.addEventListener('DOMContentLoaded', function() {
