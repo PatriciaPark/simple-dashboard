@@ -209,13 +209,12 @@ function signIn(){
                 .then((response) => response.json())
                 .then((data) => {
                     console.log('Success:', data);
+                    window.location.replace("./views/dashboard.html");
                 })
                 .catch((error) => {
                     console.error('Fail:', error);
             });
-            window.location.replace("./views/dashboard.html");
         }
-        console.log("Success:" + data);
     })
     .catch((error) => {
     console.error('Fail:', error);

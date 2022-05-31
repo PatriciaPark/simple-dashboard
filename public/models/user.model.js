@@ -17,7 +17,7 @@ User.create = (newUser, result) => {
   });
 };
 User.findById = (email, result) => {
-  sql.query(`SELECT * FROM users WHERE email = ${email}`, (err, res) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -61,7 +61,6 @@ User.findByEmailVerified = (email, result) => {
     }
     // not found User with the id
     result({ kind: "not_found" }, null);
-    console.log("*****result: " + result);
   });
 };
 User.updateById = (email, user, result) => {
