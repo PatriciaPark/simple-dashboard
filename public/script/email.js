@@ -14,7 +14,7 @@ let config = {
 
 const app = firebase.initializeApp(config);
 const auth = getAuth(app);
-const email = firebase.auth().currentUser.email;
+const email = sessionStorage.getItem('userSIEmail');
 
 function sendEmailVerification(){
   const actionCodeSettings = {
