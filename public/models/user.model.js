@@ -5,6 +5,10 @@ const User = function(user) {
   this.username = user.username;
   this.password = user.password;
 };
+const Patch = function(user) {
+  this.email = user.email;
+};
+
 User.create = (newUser, result) => {
   sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
     if (err) {
@@ -78,25 +82,25 @@ User.updateById = (email, user, result) => {
     }
   );
 };
-User.updateLogin = (email, data, result) => {
+Patch.updateLogin = (email, user, result) => {
   sql.query(
-    "UPDATE users SET loginCnt = ?, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
-    [data.loginCnt, email],
+    "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
+    [email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("updated user count: ", { email: email, ...data });
-      result(null, { email: email, ...data });
+      console.log("updated user count: ", { email: email, ...user });
+      result(null, { email: email, ...user });
     }
   );
 };
-User.updateEmailVerification = (email, user, result) => {
+Patch.updateEmailVerification = (email, user, result) => {
   sql.query(
-    "UPDATE users SET emailVerification = ? WHERE email = ?",
-    [user.username, user.password, email],
+    "UPDATE users SET emailVerification=1 WHERE email = ?",
+    [email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
