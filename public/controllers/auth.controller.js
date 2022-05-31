@@ -107,7 +107,7 @@ exports.update = (req, res) => {
   );
 };
 // Update login data
-exports.loginData = (req, res) => {
+exports.loginCount = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -130,6 +130,7 @@ exports.loginData = (req, res) => {
           });
         }
       } else res.send(data);
+      console.log("***********login cnt: " + data);
     }
   );
 };

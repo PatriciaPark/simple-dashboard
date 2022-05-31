@@ -190,7 +190,7 @@ function signIn(){
     // update database - login count(loginCnt), last session(lastSession)
     var data = { email:userSIEmail };
     Promise.all([
-        fetch('/api/users/loginData', {
+        fetch('/api/users/loginCount', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
