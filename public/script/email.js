@@ -1,7 +1,7 @@
 import { getAuth, sendSignInLinkToEmail } from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-auth.js';
 import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js'; 
 
-document.getElementById("resendEmailA").addEventListener("click", sendEmailVerification, false);
+document.getElementById("resendEmailA").addEventListener("click", emailLinkSend, false);
 let config = {
   apiKey: "AIzaSyCBSfZbINX0RkfDLZ_dUWeAE383iXLgowg",
   authDomain: "simple-dashboard-48420.firebaseapp.com",
@@ -16,7 +16,7 @@ const app = firebase.initializeApp(config);
 const auth = getAuth(app);
 const email = sessionStorage.getItem('userSIEmail');
 
-function sendEmailVerification(){
+function emailLinkSend(){
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
@@ -39,5 +39,5 @@ function sendEmailVerification(){
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  sendEmailVerification();
+  emailLinkSend();
 });
