@@ -140,3 +140,4 @@ User.removeAll = result => {
   });
 };
 module.exports = User;
+module.exports = Login;
