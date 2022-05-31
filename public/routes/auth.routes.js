@@ -21,7 +21,7 @@ module.exports = app => {
   // Update login data
   router.put("/loginCount/:email", users.loginCount);
   // Update verification data
-  router.patch("/verificationData/:email", users.verificationData);
+  router.put("/verificationData/:email", users.verificationData);
   // Delete a User with id
   router.delete("/:id", users.delete);
   // Delete all Users

@@ -78,18 +78,18 @@ User.updateById = (email, user, result) => {
     }
   );
 };
-User.updateLogin = (email, user, result) => {
+User.updateLogin = (email, data, result) => {
   sql.query(
     "UPDATE users SET loginCnt = ?, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
-    [user.loginCnt, email],
+    [data.loginCnt, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("updated user count: ", { email: email, ...user });
-      result(null, { email: email, ...user });
+      console.log("updated user count: ", { email: email, ...data });
+      result(null, { email: email, ...data });
     }
   );
 };
