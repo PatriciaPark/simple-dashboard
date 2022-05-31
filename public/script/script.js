@@ -199,10 +199,10 @@ function signIn(){
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
+            console.log('Success Count:', data);
         })
         .catch((error) => {
-            console.error('Fail:', error);
+            console.error('Fail to Count:', error);
         }),
         fetch('/api/users/'+ userSIEmail)
         .then((response) => response.json())
@@ -218,7 +218,7 @@ function signIn(){
             }
         })
         .catch((error) => {
-        console.error('Fail:', error);
+        console.error('Fail to Get User:', error);
         })
       ]).then(console.log)
     // fetch('/api/users/loginData', {

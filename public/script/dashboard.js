@@ -12,10 +12,10 @@ function emailVerification(email){
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
+            console.log('Success Email Verification:', data);
         })
         .catch((error) => {
-            console.error('Fail:', error);
+            console.error('Fail to Email Verification:', error);
     });
     window.localStorage.removeItem('emailForSignIn');
 }
