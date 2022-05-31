@@ -139,5 +139,4 @@ User.removeAll = result => {
     result(null, res);
   });
 };
-module.exports = User;
-module.exports = Login;
+module.exports = { User, Login };
