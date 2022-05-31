@@ -193,7 +193,7 @@ function signIn(){
                 };
     Promise.all([        
         fetch('/api/users/loginCount/'+ userSIEmail, {
-            method: 'PATCH',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
