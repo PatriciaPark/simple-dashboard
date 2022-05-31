@@ -6,7 +6,7 @@ function emailVerification(email){
     fetch('/api/users/verificationData', {
         method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=UTF-8',
         },
         body: JSON.stringify(data),
         })
