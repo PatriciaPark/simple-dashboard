@@ -214,43 +214,13 @@ function signIn(){
                 window.location.replace("./views/email_verification.html");
             } else {
                 // Already verified email : emailVerification=0
-                window.location.replace("./views/dashboard.html");
+                window.location.replace("./views/dashboard.ejs");
             }
         })
         .catch((error) => {
         console.error('Fail to Get User:', error);
         })
       ]).then(console.log)
-    // fetch('/api/users/loginData', {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         console.log('Success:', data);
-    //     })
-    //     .catch((error) => {
-    //         console.error('Fail:', error);
-    // });
-    // fetch('/api/users/'+ userSIEmail)
-    // .then((response) => response.json())
-    // .then((data) => {
-    //     if(data.message){
-    //         // Not verified email yet : emailVerification=0
-    //         console.log(data.message);
-    //         sessionStorage.setItem('userSIEmail', userSIEmail);
-    //         window.location.replace("./views/email_verification.html");
-    //     } else {
-    //         // Already verified email : emailVerification=0
-    //         window.location.replace("./views/dashboard.html");
-    //     }
-    // })
-    // .catch((error) => {
-    // console.error('Fail:', error);
-    // });
   }
 }
 // Save profile and update database
