@@ -1,4 +1,4 @@
-var request = require('request');
+const email = localStorage.getItem('emailForSignIn');
 
 function emailVerification(email){
     const data = { email: email };
@@ -20,5 +20,5 @@ function emailVerification(email){
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    emailVerification(request.query.email);
+    emailVerification(email);
 });

@@ -1,5 +1,4 @@
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-const email = localStorage.getItem('emailForSignIn');
 
 const uiConfig = {
   callbacks: {
@@ -13,7 +12,7 @@ const uiConfig = {
     },
   },
   signInFlow: 'popup',
-  signInSuccessUrl: './views/dashboard.html?email=' + email,
+  signInSuccessUrl: './views/dashboard.html',
   signInOptions: [
     //firebase.auth.EmailAuthProvider.PROVIDER_ID,
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
