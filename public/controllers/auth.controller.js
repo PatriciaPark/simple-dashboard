@@ -1,5 +1,4 @@
-const User = require("../models/user.model.js");
-const Login = require("../models/user.model.js");
+const { User, Login } = require("../models/user.model.js");
 const bcrypt = require("bcrypt")
 
 // Create and Save a new User
@@ -118,7 +117,7 @@ exports.loginCount = (req, res) => {
   console.log(req.body);
   Login.updateLogin(
     req.params.email,
-    new User(req.body),
+    new Login(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
@@ -145,7 +144,7 @@ exports.verificationData = (req, res) => {
   console.log(req.body);
   Login.updateEmailVerification(
     req.params.email,
-    new User(req.body),
+    new Login(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
