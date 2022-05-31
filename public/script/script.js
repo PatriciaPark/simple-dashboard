@@ -188,12 +188,12 @@ function signIn(){
   }else{
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
-    var data = { email: userSIEmail };
+    var data = { loginCnt: 'loginCnt+1' };
     Promise.all([        
-        fetch('/api/users/loginCount', {
+        fetch('/api/users/loginCount'+ userSIEmail, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
         })

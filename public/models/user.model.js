@@ -78,33 +78,33 @@ User.updateById = (email, user, result) => {
     }
   );
 };
-User.updateLogin = (email, result) => {
+User.updateLogin = (email, user, result) => {
   sql.query(
-    "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
-    [email],
+    "UPDATE users SET loginCnt = ?, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
+    [user.loginCnt, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("users: ", res);
-      result(null, res);
+      console.log("updated user count: ", { email: email, ...user });
+      result(null, { email: email, ...user });
     }
   );
 };
-User.updateEmailVerification = (email, result) => {
+User.updateEmailVerification = (email, user, result) => {
   sql.query(
-    "UPDATE users SET emailVerification=1 WHERE email = ?",
-    [email],
+    "UPDATE users SET emailVerification = ? WHERE email = ?",
+    [user.username, user.password, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
         return;
       }
-      console.log("users: ", res);
-      result(null, res);
+      console.log("updated user email verification: ", { email: email, ...user });
+      result(null, { email: email, ...user });
     }
   );
 };
