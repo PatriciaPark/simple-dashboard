@@ -4,7 +4,7 @@ function emailVerification(email){
     const data = { email: email };
     // update database - email verification(emailVerification= 0 -> 1)
     fetch('/api/users/verificationData', {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
         },
