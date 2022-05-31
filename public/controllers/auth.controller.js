@@ -130,7 +130,6 @@ exports.loginCount = (req, res) => {
           });
         }
       } else res.send(data);
-      console.log("***********login cnt: " + data);
     }
   );
 };
