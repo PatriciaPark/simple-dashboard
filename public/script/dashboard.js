@@ -22,7 +22,6 @@ fetch('/api/users/verificationData/'+ email, {
 }
 
 function getAllUsers(){
-    const data = { email: email, emailVerification: 1 };
     // Get All users infomation
     fetch('/api/users/')
         .then((response) => response.json())
@@ -35,6 +34,7 @@ function getAllUsers(){
 }
 
 function userData(data) {
+    console.log("############################userData(data)");
     var username = document.getElementById("username");
     // Login user info
     var div = document.createElement("div");
@@ -43,6 +43,7 @@ function userData(data) {
 }
 
 function appendData(data) {
+    console.log("############################appendData(data)");
     var dataList = document.getElementById("dataList");
     // All users info
     if(data.length) {
