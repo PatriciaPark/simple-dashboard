@@ -34,7 +34,6 @@ function getAllUsers(){
 }
 
 function userData(data) {
-    console.log("############################userData(data)");
     var username = document.getElementById("username");
     // Login user info
     var div = document.createElement("div");
@@ -43,18 +42,17 @@ function userData(data) {
 }
 
 function appendData(data) {
-    console.log("############################appendData(data)");
     var dataList = document.getElementById("dataList");
     // All users info
     if(data.length) {
         var div = document.createElement("div").setAttribute("class", "grid-item");
         for(var i = 0; i< data.length; i++) {
-            div.append(data[i].id);
-            div.append(data[i].username);
-            div.append(data[i].email);
-            div.append(data[i].createdAt);
-            div.append(data[i].loginCnt);
-            div.append(data[i].lastSession);
+            div.innerHTML(data[i].id);
+            div.innerHTML(data[i].username);
+            div.innerHTML(data[i].email);
+            div.innerHTML(data[i].createdAt);
+            div.innerHTML(data[i].loginCnt);
+            div.innerHTML(data[i].lastSession);
             
             dataList.appendChild(div);
         }
