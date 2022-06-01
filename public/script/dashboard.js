@@ -47,12 +47,12 @@ function appendData(data) {
     if(data.length) {
         var div = document.createElement("div").setAttribute("class", "grid-item");
         for(var i = 0; i< data.length; i++) {
-            div.innerHTML(data[i].id);
-            div.innerHTML(data[i].username);
-            div.innerHTML(data[i].email);
-            div.innerHTML(data[i].createdAt);
-            div.innerHTML(data[i].loginCnt);
-            div.innerHTML(data[i].lastSession);
+            div.innerHTML = data[i].id;
+            div.innerHTML = data[i].username;
+            div.innerHTML = data[i].email;
+            div.innerHTML = data[i].createdAt;
+            div.innerHTML = data[i].loginCnt;
+            div.innerHTML = data[i].lastSession;
             
             dataList.appendChild(div);
         }
