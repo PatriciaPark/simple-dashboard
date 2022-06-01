@@ -27,7 +27,7 @@ exports.create = (req, res) => {
   };
 // Retrieve all Users from the database (with condition).
 exports.findAll = (req, res) => {
-    const email = req.query.email;
+    const email = null;
     User.getAll(email, (err, data) => {
       if (err)
         res.status(500).send({

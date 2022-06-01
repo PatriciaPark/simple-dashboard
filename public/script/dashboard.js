@@ -21,5 +21,6 @@ function emailVerification(email){
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    emailVerification(email);
+    emailVerification(email),
+    document.getElementById("btnUserInfo").addEventListener("click")
 });
