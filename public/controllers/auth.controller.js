@@ -65,7 +65,7 @@ exports.findOne = (req, res) => {
 };
 // Find email verified Users
 exports.findVerified = (req, res) => {
-  User.findByEmailVerified(req.params.email, (err, user) => {
+  User.findByEmailVerified(req.params.email, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -76,7 +76,7 @@ exports.findVerified = (req, res) => {
           message: "Error retrieving User with email " + req.params.email
         });
       }
-    } else res.render('dashboard', user);  // res.send(data);
+    } else res.render('dashboard', data);  // res.send(data);
   });
 };
 // Update a User by the id in the request
