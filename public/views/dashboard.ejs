@@ -58,18 +58,7 @@
                         <div class="grid-item">Sign up date</div>
                         <div class="grid-item">Number of logins</div>
                         <div class="grid-item">Last user session</div>
-                        <% if(allUsers.length) { %>
-                            <% for(var i = 0; i< allUsers.length; i++) { %> 
-                                <div class="grid-item"><%=allUsers[i].id%></div>
-                                <div class="grid-item"><%=allUsers[i].username%></div>
-                                <div class="grid-item"><%=allUsers[i].email%></div>
-                                <div class="grid-item"><%=allUsers[i].createdAt%></div>
-                                <div class="grid-item"><%=allUsers[i].loginCnt%></div>
-                                <div class="grid-item"><%=allUsers[i].lastSession%></div>
-                            <% } %> 
-                        <% } else { %>
-                            <div class="grid-item">No Data Availed</div>
-                        <% } %> 
+                        
                     </div>
                 </div>
             </div>
