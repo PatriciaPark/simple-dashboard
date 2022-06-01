@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
           message:
             err.message || "Some error occurred while retrieving users."
         });
-      else res.render('dashboard', {users:data});  //res.send(data);
+      else res.render('dashboard', {allUsers:data});  //res.send(data);
     });
   };
 exports.verified = (req, res) => {
