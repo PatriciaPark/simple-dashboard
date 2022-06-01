@@ -213,7 +213,7 @@ function signIn(){
                 sessionStorage.setItem('userSIEmail', userSIEmail);
                 window.location.replace("../views/email_verification.html");
             } else {
-                // Already verified email : emailVerification=0
+                // Already verified email : emailVerification=1
                 window.location.replace("/api/users");
             }
         })
