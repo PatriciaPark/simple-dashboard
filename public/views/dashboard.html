@@ -26,6 +26,7 @@
                 <div class="p-lg-5 p-md-5 px-3 py-4 text-dark">
                     <div id="profileSection">
                         <div class="col-12 col-12 mb-4 text-center">
+                            <!-- username from DB -->
                             <span class="h3" id="username"></span>
                         </div>
                         <div class="col-lg-12 col-md-12 mb-4 text-center">
@@ -43,14 +44,13 @@
                             </div>
                         </div>                 
                         <div class="col-lg-12 col-md-12 mb-3 text-center">
-                            <button type="button" class="btn btn-outline-primary text-uppercase" onclick="location.href='edit_user_info.html';">
-                            Edit Profile<small></small></button>
-                            <button type="button" class="btn btn-outline-secondary text-uppercase" onclick="signOut()">
-                            Sign Out<small></small></button>
+                            <button type="button" class="btn btn-outline-primary text-uppercase" onclick="location.href='edit_user_info.html';">Edit Profile</button>
+                            <button type="button" class="btn btn-outline-secondary text-uppercase" onclick="signOut()">Sign Out</button>
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 text-left">
-                        <p>All User: Today: Avg num of last 7 days:</p>
+                        <!-- User statistics info -->
+                        <p>All User:<span id="allUserCnt"></span> Today:<span id="todayCnt"></span> Avg num of last 7 days:<span id="avgCnt"></span></p>
                     </div>
                     <div class="grid-container">
                         <div class="grid-item">NO</div>
@@ -59,6 +59,7 @@
                         <div class="grid-item">Sign up date</div>
                         <div class="grid-item">Number of logins</div>
                         <div class="grid-item">Last user session</div>
+                        <!-- Users info from DB -->
                         <div id="dataList"></div>
                     </div>
                 </div>
@@ -66,37 +67,5 @@
         </div>
     </form>
     <script data-main="../server" src="../script/script.js"></script>
-    <script>
-        function appendData(data) {
-            var username = document.getElementById("username");
-            var dataList = document.getElementById("dataList");
-            // Login user info
-            if(user.length) {
-                var div = document.createElement("div");
-                div.append(user.username);
-                username.appendChild(div);
-            }
-            // All users info
-            if(data.length) {
-                var div = document.createElement("div").setAttribute("class", "grid-item");
-                for(var i = 0; i< data.length; i++) {
-                    div.append(data[i].id);
-                    div.append(data[i].username);
-                    div.append(data[i].email);
-                    div.append(data[i].createdAt);
-                    div.append(data[i].loginCnt);
-                    div.append(data[i].lastSession);
-                    
-                    dataList.appendChild(div);
-                }
-            } else {
-                div.innerHTML = "No Data Availed";
-            } 
-        }
-
-        window.addEventListener('DOMContentLoaded', function() {
-            appendData();
-        });
-    </script>
 </body>
 </html>
