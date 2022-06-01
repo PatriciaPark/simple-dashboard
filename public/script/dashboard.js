@@ -18,7 +18,6 @@ fetch('/api/users/verificationData/'+ email, {
     .catch((error) => {
         console.error('Fail to Email Verification:', error);
     });
-    window.localStorage.removeItem('emailForSignIn');
 }
 
 function getAllUsers(){
@@ -39,6 +38,8 @@ function userData(data) {
     var div = document.createElement("div");
     div.innerHTML = data.username;
     userName.appendChild(div);
+    // remove email from local storage
+    window.localStorage.removeItem('emailForSignIn');
 }
 
 function appendData(data) {
@@ -47,12 +48,13 @@ function appendData(data) {
     if(data.length) {
         var div = document.createElement("div").setAttribute("class", "grid-item");
         for(var i = 0; i< data.length; i++) {
-            div.innerHTML = data[i].id;
-            div.innerHTML = data[i].username;
-            div.innerHTML = data[i].email;
-            div.innerHTML = data[i].createdAt;
-            div.innerHTML = data[i].loginCnt;
-            div.innerHTML = data[i].lastSession;
+            div.innerHTML = data[i].id + data[i].username + data[i].email + data[i].createdAt + data[i].loginCnt + data[i].lastSession
+            // div.innerHTML = data[i].id;
+            // div.innerHTML = data[i].username;
+            // div.innerHTML = data[i].email;
+            // div.innerHTML = data[i].createdAt;
+            // div.innerHTML = data[i].loginCnt;
+            // div.innerHTML = data[i].lastSession;
             
             dataList.appendChild(div);
         }
