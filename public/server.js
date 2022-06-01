@@ -6,7 +6,7 @@ const path = require('path');
 const app = express();
 
 // set the view engine to ejs
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use(cors());

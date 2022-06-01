@@ -28,7 +28,7 @@ User.findById = (email, result) => {
       return;
     }
     if (res.length) {
-      console.log("found user: ", res[0]);
+      console.log("found user by id(email): ", res[0]);
       result(null, res[0]);
       return;
     }
@@ -39,7 +39,7 @@ User.findById = (email, result) => {
 User.getAll = (email, result) => {
   let query = "SELECT * FROM users";
   if (email) {
-    query += ` WHERE title LIKE '%${email}%'`;
+    query += ` WHERE email LIKE '%${email}%'`;
   }
   sql.query(query, (err, res) => {
     if (err) {

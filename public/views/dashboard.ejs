@@ -20,13 +20,13 @@
     <title>Profile</title>
 </head>
 <body class="bg-light">
-    <form action="/dashboard">
+    <form action="/userInfo">
         <div class="container-fluid">
             <div class="col-lg-10 col-md-10 offset-lg-1 offset-md-1 bg-white shadow my-5 border border-primary">   
                 <div class="p-lg-5 p-md-5 px-3 py-4 text-dark">
                     <div id="profileSection">
                         <div class="col-12 col-12 mb-4 text-center">
-                            <span class="h3" id="userPfFullName">Name</span>
+                            <span class="h3" id="userPfFullName"><%=user.username%></span>
                         </div>
                         <div class="col-lg-12 col-md-12 mb-4 text-center">
                             <div class="row">
@@ -43,14 +43,13 @@
                             </div>
                         </div>                 
                         <div class="col-lg-12 col-md-12 mb-3 text-center">
-                            <button type="button" class="btn btn-outline-primary text-uppercase" onclick="location.href='edit_user_info.html';">
-                            Edit Profile<small></small></button>
-                            <button type="button" class="btn btn-outline-secondary text-uppercase" onclick="signOut()">
-                            Sign Out<small></small></button>
+                            <button type="button" class="btn btn-outline-primary text-uppercase" onclick="location.href='edit_user_info.html';">Edit Profile</button>
+                            <button type="button" class="btn btn-outline-secondary text-uppercase" onclick="signOut()">Sign Out</button>
                         </div>
                     </div>
+                    <button type="submit" id="btnUserInfo" hidden></button>
                     <div class="col-lg-12 col-md-12 text-left">
-                        <p>All User: Today: Avg num of last 7 days:</p>
+                        <p>All User:<%=data.length%>  Today: Avg num of last 7 days:</p>
                     </div>
                     <div class="grid-container">
                         <div class="grid-item">NO</div>

@@ -27,14 +27,14 @@ exports.create = (req, res) => {
   };
 // Retrieve all Users from the database (with condition).
 exports.findAll = (req, res) => {
-    const title = req.query.title;
-    User.getAll(title, (err, data) => {
+    const email = req.query.email;
+    User.getAll(email, (err, data) => {
       if (err)
         res.status(500).send({
           message:
             err.message || "Some error occurred while retrieving users."
         });
-      else res.send(data);
+      else res.render('../views/dashboard', data);  //res.send(data);
     });
   };
 exports.verified = (req, res) => {
@@ -65,7 +65,7 @@ exports.findOne = (req, res) => {
 };
 // Find email verified Users
 exports.findVerified = (req, res) => {
-  User.findByEmailVerified(req.params.email, (err, data) => {
+  User.findByEmailVerified(req.params.email, (err, user) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -76,7 +76,7 @@ exports.findVerified = (req, res) => {
           message: "Error retrieving User with email " + req.params.email
         });
       }
-    } else res.send(data);
+    } else res.render('../views/dashboard', user);  // res.send(data);
   });
 };
 // Update a User by the id in the request
