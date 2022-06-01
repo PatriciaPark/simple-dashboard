@@ -214,7 +214,7 @@ function signIn(){
                 window.location.replace("../views/email_verification.html");
             } else {
                 // Already verified email : emailVerification=1
-                window.location.replace("dashboard");
+                window.location.replace("dashboard.ejs");
             }
         })
         .catch((error) => {
