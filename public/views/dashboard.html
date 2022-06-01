@@ -26,7 +26,7 @@
                 <div class="p-lg-5 p-md-5 px-3 py-4 text-dark">
                     <div id="profileSection">
                         <div class="col-12 col-12 mb-4 text-center">
-                            <span class="h3" id="userPfFullName">Name</span>
+                            <span class="h3" id="username"></span>
                         </div>
                         <div class="col-lg-12 col-md-12 mb-4 text-center">
                             <div class="row">
@@ -59,23 +59,44 @@
                         <div class="grid-item">Sign up date</div>
                         <div class="grid-item">Number of logins</div>
                         <div class="grid-item">Last user session</div>
-                        <% if(data.length) { %>
-                            <% for(var i = 0; i< data.length; i++) { %> 
-                                <div class="grid-item"><%=data[i].id%></div>
-                                <div class="grid-item"><%=data[i].username%></div>
-                                <div class="grid-item"><%=data[i].email%></div>
-                                <div class="grid-item"><%=data[i].createdAt%></div>
-                                <div class="grid-item"><%=data[i].loginCnt%></div>
-                                <div class="grid-item"><%=data[i].lastSession%></div>
-                            <% } %> 
-                        <% } else { %>
-                            <div class="grid-item">No Data Availed</div>
-                        <% } %> 
+                        <div id="dataList"></div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
     <script data-main="../server" src="../script/script.js"></script>
+    <script>
+        function appendData(data) {
+            var username = document.getElementById("username");
+            var dataList = document.getElementById("dataList");
+            // Login user info
+            if(user.length) {
+                var div = document.createElement("div");
+                div.append(user.username);
+                username.appendChild(div);
+            }
+            // All users info
+            if(data.length) {
+                var div = document.createElement("div").setAttribute("class", "grid-item");
+                for(var i = 0; i< data.length; i++) {
+                    div.append(data[i].id);
+                    div.append(data[i].username);
+                    div.append(data[i].email);
+                    div.append(data[i].createdAt);
+                    div.append(data[i].loginCnt);
+                    div.append(data[i].lastSession);
+                    
+                    dataList.appendChild(div);
+                }
+            } else {
+                div.innerHTML = "No Data Availed";
+            } 
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            appendData();
+        });
+    </script>
 </body>
 </html>
