@@ -34,11 +34,11 @@ function getAllUsers(){
 }
 
 function userData(data) {
-    var username = document.getElementById("username");
+    var userName = document.getElementById("username");
     // Login user info
     var div = document.createElement("div");
-    div.append(data.username);
-    username.appendChild(div);
+    div.innerHTML = data.username;
+    userName.appendChild(div);
 }
 
 function appendData(data) {
