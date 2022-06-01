@@ -34,7 +34,7 @@ exports.findAll = (req, res) => {
           message:
             err.message || "Some error occurred while retrieving users."
         });
-      else res.render('dashboard', data);  //res.send(data);
+      else res.render('dashboard', {users:data});  //res.send(data);
     });
   };
 exports.verified = (req, res) => {
@@ -76,7 +76,7 @@ exports.findVerified = (req, res) => {
           message: "Error retrieving User with email " + req.params.email
         });
       }
-    } else res.render('dashboard', data);  // res.send(data);
+    } else res.render('dashboard', {user:data});  // res.send(data);
   });
 };
 // Update a User by the id in the request

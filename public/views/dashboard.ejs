@@ -49,7 +49,7 @@
                     </div>
                     <button type="submit" id="btnUserInfo" hidden></button>
                     <div class="col-lg-12 col-md-12 text-left">
-                        <p>All User:<%=data.length%>  Today: Avg num of last 7 days:</p>
+                        <p>All User:<%=users.length%>  Today: Avg num of last 7 days:</p>
                     </div>
                     <div class="grid-container">
                         <div class="grid-item">NO</div>
@@ -58,14 +58,14 @@
                         <div class="grid-item">Sign up date</div>
                         <div class="grid-item">Number of logins</div>
                         <div class="grid-item">Last user session</div>
-                        <% if(data.length) { %>
-                            <% for(var i = 0; i< data.length; i++) { %> 
-                                <div class="grid-item"><%=data[i].id%></div>
-                                <div class="grid-item"><%=data[i].username%></div>
-                                <div class="grid-item"><%=data[i].email%></div>
-                                <div class="grid-item"><%=data[i].createdAt%></div>
-                                <div class="grid-item"><%=data[i].loginCnt%></div>
-                                <div class="grid-item"><%=data[i].lastSession%></div>
+                        <% if(users.length) { %>
+                            <% for(var i = 0; i< users.length; i++) { %> 
+                                <div class="grid-item"><%=users[i].id%></div>
+                                <div class="grid-item"><%=users[i].username%></div>
+                                <div class="grid-item"><%=users[i].email%></div>
+                                <div class="grid-item"><%=users[i].createdAt%></div>
+                                <div class="grid-item"><%=users[i].loginCnt%></div>
+                                <div class="grid-item"><%=users[i].lastSession%></div>
                             <% } %> 
                         <% } else { %>
                             <div class="grid-item">No Data Availed</div>
