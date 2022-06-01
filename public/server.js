@@ -2,11 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
-// const path = require('path');
+const path = require('path');
 const app = express();
 
 // set the view engine to ejs
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(cors());
