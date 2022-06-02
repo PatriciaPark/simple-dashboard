@@ -207,10 +207,10 @@ function signIn(){
         fetch('/api/users/'+ userSIEmail)
         .then((response) => response.json())
         .then((data) => {
+            sessionStorage.setItem('userSIEmail', userSIEmail);
             if(data.message){
                 // Not verified email yet : emailVerification=0
                 console.log(data.message);
-                sessionStorage.setItem('userSIEmail', userSIEmail);
                 window.location.replace("./views/email_verification.html");
             } else {
                 // Already verified email : emailVerification=1
