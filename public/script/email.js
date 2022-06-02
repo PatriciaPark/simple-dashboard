@@ -29,7 +29,7 @@ function emailLinkSend(){
       // The link was successfully sent. Inform the user.
       // Save the email locally so you don't need to ask the user for it again
       window.localStorage.setItem('emailForSignIn', email);
-      // alert("Send Email Successfully: " + email);
+      alert("Send Email Successfully");
     })
     .catch((error) => {
       const errorCode = error.code;

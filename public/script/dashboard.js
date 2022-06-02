@@ -39,7 +39,7 @@ function userData(data) {
     div.innerHTML = data.username;
     userName.appendChild(div);
     // remove email from local storage
-    window.localStorage.removeItem('emailForSignIn');
+    // window.localStorage.removeItem('emailForSignIn');
 }
 
 function appendData(data) {
