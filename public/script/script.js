@@ -189,7 +189,7 @@ function signIn(){
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
     var data = { email: userSIEmail, loginCnt: 'loginCnt+1' };
-    Promise.all([        
+       
         fetch('/api/users/loginCount/'+ userSIEmail, {
             method: 'PUT',
             headers: {
@@ -220,7 +220,6 @@ function signIn(){
         .catch((error) => {
         console.error('Fail to Get User:', error);
         })
-      ]).then(console.log)
   }
 }
 // Save profile and update database
