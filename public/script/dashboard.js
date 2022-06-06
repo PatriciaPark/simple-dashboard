@@ -51,18 +51,13 @@ function getUserData(data) {
 
 function appendData(data) {
     var dataList = document.getElementById("dataList");
+    var allUserCnt = document.getElementById("allUserCnt");
+    var todayCnt = document.getElementById("todayCnt");
+    var avgCnt = document.getElementById("avgCnt");
     // All users info
     if(data.length) {
+        allUserCnt.innerHTML = data.length;
         for(var i = 0; i< data.length; i++) {
-            // var div = document.createElement("div");
-            // div.setAttribute("class", "grid-item");
-            // div.innerHTML = data[i].id;
-            // div.innerHTML = data[i].username;
-            // div.innerHTML = data[i].email;
-            // div.innerHTML = data[i].createdAt;
-            // div.innerHTML = data[i].loginCnt;
-            // div.innerHTML = data[i].lastSession;
-            // dataList.appendChild(div);
             var result = '';
             result += '<div class="grid-item">' + data[i].id + '</div>';
             result += '<div class="grid-item">' + data[i].username + '</div>';
