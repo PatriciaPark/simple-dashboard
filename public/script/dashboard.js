@@ -31,7 +31,7 @@ function getAllUsers(){
     });
 }
 
-function getUserData(data) {
+function getUserData() {
     if (email == null) {
         email = sessionStorage.getItem('userSIEmail');
     }
@@ -71,6 +71,7 @@ function appendData(data) {
 }
 
 function countVisitors() {
+    console.log("*****************visitors js");
     var todayCnt = document.getElementById("todayCnt");
     var avgCnt = document.getElementById("avgCnt");
     fetch('/api/users/visitors')

@@ -71,7 +71,7 @@ User.countVisitors = (email, result) => {
   console.log("*********visitor model");
   let query = "SELECT count(*) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW() ";
       query += `UNION ALL `;
-      query += `SELECT count(*)/7 as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
+      query += `SELECT round(count(*)/7) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
   sql.query(query, (err, res) => {
     if (err) {
       console.log("error: ", err);
