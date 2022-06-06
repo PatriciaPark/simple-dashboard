@@ -1,4 +1,7 @@
 const email = localStorage.getItem('emailForSignIn');
+if (email == null) {
+    email = sessionStorage.getItem('userSIEmail');
+}
 
 function emailVerification(email){
 const data = { email: email, emailVerification: 1 };
@@ -13,7 +16,6 @@ fetch('/api/users/verificationData/'+ email, {
     .then((response) => response.json())
     .then((data) => {
         console.log('Success Email Verification:', data);
-        userData(data);
     })
     .catch((error) => {
         console.error('Fail to Email Verification:', error);
@@ -49,12 +51,12 @@ function appendData(data) {
     // All users info
     if(data.length) {
         for(var i = 0; i< data.length; i++) {
-            div.append = data[i].id;
-            div.append = data[i].username;
-            div.append = data[i].email;
-            div.append = data[i].createdAt;
-            div.append = data[i].loginCnt;
-            div.append = data[i].lastSession;
+            div.innerHTML = data[i].id;
+            div.innerHTML = data[i].username;
+            div.innerHTML = data[i].email;
+            div.innerHTML = data[i].createdAt;
+            div.innerHTML = data[i].loginCnt;
+            div.innerHTML = data[i].lastSession;
             
             dataList.appendChild(div);
         }
@@ -64,7 +66,8 @@ function appendData(data) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    emailVerification(email);
+    if(email) emailVerification(email);
+    userData();
     getAllUsers();
     // , document.getElementById("btnUserInfo").addEventListener("click")
 });
