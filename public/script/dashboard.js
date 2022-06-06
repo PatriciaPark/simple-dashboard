@@ -1,24 +1,24 @@
-const email = localStorage.getItem('emailForSignIn');
+let email = localStorage.getItem('emailForSignIn');
 if (email == null) {
     email = sessionStorage.getItem('userSIEmail');
 }
 
 function emailVerification(email){
-const data = { email: email, emailVerification: 1 };
+    let data = { email: email, emailVerification: 1 };
 // update database - email verification(emailVerification= 0 -> 1)
-fetch('/api/users/verificationData/'+ email, {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-    })
-    .then((response) => response.json())
-    .then((data) => {
-        console.log('Success Email Verification:', data);
-    })
-    .catch((error) => {
-        console.error('Fail to Email Verification:', error);
+    fetch('/api/users/verificationData/'+ email, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success Email Verification:', data);
+        })
+        .catch((error) => {
+            console.error('Fail to Email Verification:', error);
     });
 }
 
