@@ -70,7 +70,7 @@ function appendData(data) {
             result += '<div class="grid-item">' + data[i].createdAt + '</div>';
             result += '<div class="grid-item">' + data[i].loginCnt + '</div>';
             result += '<div class="grid-item">' + data[i].lastSession + '</div>';
-            dataList.innerHTML = result;
+            dataList.innerHTML += result;
         }
     } else {
         div.innerHTML = "No Data Availed";
