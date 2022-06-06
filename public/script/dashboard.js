@@ -64,9 +64,7 @@ function appendData(data) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    if(email) {
-        emailVerification(email)
-    };
-    getAllUsers()
+    emailVerification(email);
+    getAllUsers();
     // , document.getElementById("btnUserInfo").addEventListener("click")
 });
