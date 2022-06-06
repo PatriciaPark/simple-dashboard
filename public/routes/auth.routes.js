@@ -12,10 +12,10 @@ module.exports = app => {
     users.create);
   // Retrieve all Tutorials
   router.get("/", users.findAll);
-  // Retrieve verified email user
-  router.get("/:email", users.findVerified);
   // Retrieve visitor counts
   router.get("/count", users.visitors);
+  // Retrieve verified email user
+  router.get("/:email", users.findVerified);
   // Retrieve a single Tutorial with id
   router.get("/:id", users.findOne);
   // Update a User with id
