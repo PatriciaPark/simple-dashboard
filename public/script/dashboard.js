@@ -73,14 +73,14 @@ function appendData(data) {
 function countVisitors() {
     var todayCnt = document.getElementById("todayCnt");
     var avgCnt = document.getElementById("avgCnt");
-    fetch('/api/users/count/')
+    fetch('/api/users/count')
         .then((response) => response.json())
         .then((data) => {
             todayCnt.innerHTML = data[0];
             avgCnt.innerHTML = data[1];
         })
         .catch((error) => {
-        console.error('Fail to Get Count Visitors:', error);
+        console.error('Fail to Get Count:', error);
     });
 }
 
