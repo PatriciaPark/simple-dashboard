@@ -47,8 +47,10 @@ function appendData(data) {
     var div = document.createElement("div").setAttribute("class", "grid-item");
     // All users info
     if(data.length) {
+        console.log("data.length: " + data.length);
         for(var i = 0; i< data.length; i++) {
-            div.innerHTML = data[i].id + data[i].username + data[i].email + data[i].createdAt + data[i].loginCnt + data[i].lastSession;
+            console.log("div: " + data[i].id +" "+ data[i].username +" "+ data[i].email +" "+ data[i].createdAt +" "+ data[i].loginCnt +" "+ data[i].lastSession);
+            div.innerHTML = data[i].id;
             // div.innerHTML = data[i].id;
             // div.innerHTML = data[i].username;
             // div.innerHTML = data[i].email;
