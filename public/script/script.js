@@ -189,37 +189,36 @@ function signIn(){
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
     var data = { email: userSIEmail, loginCnt: 'loginCnt+1' };
-       
-        fetch('/api/users/loginCount/'+ userSIEmail, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((json) => {
-            console.log('Success Count:', json);
-        })
-        .catch((error) => {
-            console.error('Fail to Count:', error);
-        }),
-        fetch('/api/users/'+ userSIEmail)
-        .then((response) => response.json())
-        .then((data) => {
-            sessionStorage.setItem('userSIEmail', userSIEmail);
-            if(data.message){
-                // Not verified email yet : emailVerification=0
-                console.log(data.message);
-                window.location.replace("./views/email_verification.html");
-            } else {
-                // Already verified email : emailVerification=1
-                window.location.replace("./views/dashboard.html");
-            }
-        })
-        .catch((error) => {
-        console.error('Fail to Get User:', error);
-        })
+    fetch('/api/users/loginCount/'+ userSIEmail, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((json) => {
+        console.log('Success Count:', json);
+    })
+    .catch((error) => {
+        console.error('Fail to Count:', error);
+    }),
+    fetch('/api/users/'+ userSIEmail)
+    .then((response) => response.json())
+    .then((data) => {
+        sessionStorage.setItem('userSIEmail', userSIEmail);
+        if(data.message){
+            // Not verified email yet : emailVerification=0
+            console.log(data.message);
+            window.location.replace("./views/email_verification.html");
+        } else {
+            // Already verified email : emailVerification=1
+            window.location.replace("./views/dashboard.html");
+        }
+    })
+    .catch((error) => {
+    console.error('Fail to Get User:', error);
+    })
   }
 }
 // Save profile and update database
