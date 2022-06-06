@@ -3,7 +3,7 @@ const { verifySignUp } = require("../middleware");
 module.exports = app => {
   const users = require("../controllers/auth.controller.js");
   var router = require("express").Router();
-  // Create a new Tutorial
+  // Create a new User
   router.post("/", 
     [
       verifySignUp.checkDuplicateUsernameOrEmail,

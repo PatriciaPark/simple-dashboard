@@ -15,6 +15,9 @@
 .font-bold {
   font-weight: bold;
 }
+.color-main {
+  color:rgba(40, 125, 250, 0.8);
+}
 /* Global */
   * {
     box-sizing: border-box;
