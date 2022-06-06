@@ -1,11 +1,8 @@
 let email = localStorage.getItem('emailForSignIn');
-if (email == null) {
-    email = sessionStorage.getItem('userSIEmail');
-}
 
 function emailVerification(email){
     let data = { email: email, emailVerification: 1 };
-// update database - email verification(emailVerification= 0 -> 1)
+    // update database - email verification(emailVerification= 0 -> 1)
     fetch('/api/users/verificationData/'+ email, {
         method: 'PUT',
         headers: {
@@ -34,14 +31,22 @@ function getAllUsers(){
     });
 }
 
-function userData(data) {
-    var userName = document.getElementById("username");
-    // Login user info
-    var div = document.createElement("div");
-    div.innerHTML = data.username;
-    userName.appendChild(div);
-    // remove email from local storage
-    // window.localStorage.removeItem('emailForSignIn');
+function getUserData(data) {
+    if (email == null) {
+        email = sessionStorage.getItem('userSIEmail');
+    }
+    fetch('/api/users/' + email)
+        .then((response) => response.json())
+        .then((data) => {
+            var userName = document.getElementById("username");
+            // Login user info
+            var div = document.createElement("div");
+            div.innerHTML = data.username;
+            userName.appendChild(div);
+        })
+        .catch((error) => {
+        console.error('Fail to Get User data:', error);
+    });
 }
 
 function appendData(data) {
@@ -67,7 +72,7 @@ function appendData(data) {
 
 window.addEventListener('DOMContentLoaded', function() {
     if(email) emailVerification(email);
-    userData();
+    getUserData();
     getAllUsers();
     // , document.getElementById("btnUserInfo").addEventListener("click")
 });
