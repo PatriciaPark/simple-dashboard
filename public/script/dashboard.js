@@ -44,9 +44,9 @@ function userData(data) {
 
 function appendData(data) {
     var dataList = document.getElementById("dataList");
+    var div = document.createElement("div").setAttribute("class", "grid-item");
     // All users info
     if(data.length) {
-        var div = document.createElement("div").setAttribute("class", "grid-item");
         for(var i = 0; i< data.length; i++) {
             div.innerHTML = data[i].id + data[i].username + data[i].email + data[i].createdAt + data[i].loginCnt + data[i].lastSession;
             // div.innerHTML = data[i].id;
