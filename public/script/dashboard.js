@@ -51,11 +51,11 @@ function getUserData(data) {
 
 function appendData(data) {
     var dataList = document.getElementById("dataList");
-    var div = document.createElement("div");
-    div.setAttribute("class", "grid-item");
     // All users info
     if(data.length) {
         for(var i = 0; i< data.length; i++) {
+            var div = document.createElement("div");
+            div.setAttribute("class", "grid-item");
             div.innerHTML += data[i].id;
             div.innerHTML += data[i].username;
             div.innerHTML += data[i].email;
