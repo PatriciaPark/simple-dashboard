@@ -62,6 +62,7 @@ function appendData(data) {
             // div.innerHTML = data[i].createdAt;
             // div.innerHTML = data[i].loginCnt;
             // div.innerHTML = data[i].lastSession;
+            // dataList.appendChild(div);
             var result = '';
             result += '<div class="grid-item">' + data[i].id + '</div>';
             result += '<div class="grid-item">' + data[i].username + '</div>';
@@ -69,8 +70,7 @@ function appendData(data) {
             result += '<div class="grid-item">' + data[i].createdAt + '</div>';
             result += '<div class="grid-item">' + data[i].loginCnt + '</div>';
             result += '<div class="grid-item">' + data[i].lastSession + '</div>';
-
-            dataList.appendChild(result);
+            dataList.innerHTML = result;
         }
     } else {
         div.innerHTML = "No Data Availed";
