@@ -73,7 +73,7 @@ function appendData(data) {
 function countVisitors() {
     var todayCnt = document.getElementById("todayCnt");
     var avgCnt = document.getElementById("avgCnt");
-    fetch('/api/users/count')
+    fetch('/api/users/count/')
         .then((response) => response.json())
         .then((data) => {
             todayCnt.innerHTML = data[0];
