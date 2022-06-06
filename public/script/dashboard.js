@@ -49,12 +49,12 @@ function appendData(data) {
     // All users info
     if(data.length) {
         for(var i = 0; i< data.length; i++) {
-            div.innerHTML = data[i].id;
-            div.innerHTML = data[i].username;
-            div.innerHTML = data[i].email;
-            div.innerHTML = data[i].createdAt;
-            div.innerHTML = data[i].loginCnt;
-            div.innerHTML = data[i].lastSession;
+            div.append = data[i].id;
+            div.append = data[i].username;
+            div.append = data[i].email;
+            div.append = data[i].createdAt;
+            div.append = data[i].loginCnt;
+            div.append = data[i].lastSession;
             
             dataList.appendChild(div);
         }
