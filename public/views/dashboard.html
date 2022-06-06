@@ -14,7 +14,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
     <script src="../script/firebase.js"></script>
-    <script src="../script/dashboard.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"/>
     <title>Profile</title>
@@ -52,7 +51,7 @@
                         <!-- User statistics info -->
                         <p>All User:<span id="allUserCnt"></span> Today:<span id="todayCnt"></span> Avg num of last 7 days:<span id="avgCnt"></span></p>
                     </div>
-                    <div class="grid-container">
+                    <div class="grid-container" id="dataList">
                         <div class="grid-item">NO</div>
                         <div class="grid-item">USER NAME</div>
                         <div class="grid-item">Email</div>
@@ -60,12 +59,12 @@
                         <div class="grid-item">Number of logins</div>
                         <div class="grid-item">Last user session</div>
                         <!-- Users info from DB -->
-                        <div id="dataList"></div>
                     </div>
                 </div>
             </div>
         </div>
     </form>
     <script data-main="../server" src="../script/script.js"></script>
+    <script src="../script/dashboard.js"></script>
 </body>
 </html>

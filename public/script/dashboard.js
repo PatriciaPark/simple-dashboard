@@ -28,7 +28,7 @@ function getAllUsers(){
             appendData(data);
         })
         .catch((error) => {
-        console.error('Fail to Get User:', error);
+        console.error('Fail to Get All Users:', error);
     });
 }
 
@@ -48,7 +48,7 @@ function appendData(data) {
     if(data.length) {
         var div = document.createElement("div").setAttribute("class", "grid-item");
         for(var i = 0; i< data.length; i++) {
-            div.innerHTML = data[i].id + data[i].username + data[i].email + data[i].createdAt + data[i].loginCnt + data[i].lastSession
+            div.innerHTML = data[i].id + data[i].username + data[i].email + data[i].createdAt + data[i].loginCnt + data[i].lastSession;
             // div.innerHTML = data[i].id;
             // div.innerHTML = data[i].username;
             // div.innerHTML = data[i].email;
@@ -64,7 +64,9 @@ function appendData(data) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    emailVerification(email)
-    , getAllUsers()
+    if(email) {
+        emailVerification(email)
+    };
+    getAllUsers()
     // , document.getElementById("btnUserInfo").addEventListener("click")
 });
