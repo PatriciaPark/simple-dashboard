@@ -76,8 +76,8 @@ function countVisitors() {
     fetch('/api/users/count')
         .then((response) => response.json())
         .then((data) => {
-            todayCnt.innerHTML = data[0];
-            avgCnt.innerHTML = data[1];
+            todayCnt.innerHTML = data.today;
+            avgCnt.innerHTML = data.weekAvg;
         })
         .catch((error) => {
         console.error('Fail to Get Count:', error);
