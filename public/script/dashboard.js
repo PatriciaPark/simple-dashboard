@@ -44,7 +44,7 @@ function userData(data) {
 
 function appendData(data) {
     var dataList = document.getElementById("dataList");
-    var div = document.createElement("div").setAttribute("class", "grid-item");
+    var div = document.createElement("div");//.setAttribute("class", "grid-item");
     // All users info
     if(data.length) {
         console.log("data.length: " + data.length);
