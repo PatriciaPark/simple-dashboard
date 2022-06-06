@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// cookie session
 app.use(
   cookieSession({
     name: "pyjee8-session",
@@ -25,6 +26,21 @@ app.use(
     sameSite: 'strict'
   })
 );
+
+// // Count today's visitors
+// var count = 0;
+// app.use(function (req, res, next) {
+//   var date = new Date();
+//   var today=date.getYear()+" "+date.getMonth()+" "+date.getDate();
+// // Update views
+// console.log(req.session.lastVisit);
+// if(req.session.lastVisit != today){
+//   req.session.lastVisit = today;
+//   count++;
+// }
+// // Write response
+// res.end(count + 'visit')
+// })
 
 // Database
 const db = require("./models");

@@ -37,7 +37,7 @@ User.findById = (email, result) => {
   });
 };
 User.getAll = (email, result) => {
-  let query = "SELECT * FROM users";
+  let query = "SELECT id, username, email, password, DATE_FORMAT(createdAt, '%Y-%m-%d %H:%i:%s') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%d %H:%i:%s') as updatedAt, loginCnt, DATE_FORMAT(lastSession, '%Y-%m-%d %H:%i:%s') as lastSession, emailVerification FROM users";
   if (email) {
     query += ` WHERE email LIKE '%${email}%'`;
   }
@@ -65,6 +65,20 @@ User.findByEmailVerified = (email, result) => {
     }
     // not found User with the id
     result({ kind: "not_found" }, null);
+  });
+};
+User.countVisitors = (email, result) => {
+  let query = "SELECT count(*) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW() ";
+      query += `UNION ALL `;
+      query += `SELECT count(*)/7 as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("Count Visitors: ", res);
+    result(null, res);
   });
 };
 User.updateById = (email, user, result) => {

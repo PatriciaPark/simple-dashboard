@@ -14,6 +14,8 @@ module.exports = app => {
   router.get("/", users.findAll);
   // Retrieve verified email user
   router.get("/:email", users.findVerified);
+  // Retrieve visitor counts
+  router.get("/visitors", users.visitors);
   // Retrieve a single Tutorial with id
   router.get("/:id", users.findOne);
   // Update a User with id

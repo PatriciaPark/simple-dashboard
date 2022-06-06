@@ -24,7 +24,7 @@ exports.create = (req, res) => {
         });
       else res.send(data);
     });
-  };
+};
 // Retrieve all Users from the database (with condition).
 exports.findAll = (req, res) => {
     const email = null;
@@ -36,13 +36,30 @@ exports.findAll = (req, res) => {
         });
       else res.send(data);
     });
-  };
-exports.verified = (req, res) => {
-  User.getEmailVerified((err, data) => {
+};
+// Find email verified Users
+exports.findVerified = (req, res) => {
+  User.findByEmailVerified(req.params.email, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found User with email ${req.params.email}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving User with email " + req.params.email
+        });
+      }
+    } else res.send(data);
+  });
+};
+// Retrieve visitor counts.
+exports.visitors = (req, res) => {
+  User.countVisitors((err, data) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving users."
+          err.message || "Some error occurred while retrieving visitors."
       });
     else res.send(data);
   });
@@ -62,22 +79,6 @@ exports.findOne = (req, res) => {
           }
         } else res.send(data);
       });
-};
-// Find email verified Users
-exports.findVerified = (req, res) => {
-  User.findByEmailVerified(req.params.email, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Not found User with email ${req.params.email}.`
-        });
-      } else {
-        res.status(500).send({
-          message: "Error retrieving User with email " + req.params.email
-        });
-      }
-    } else res.send(data);
-  });
 };
 // Update a User by the id in the request
 exports.update = (req, res) => {
