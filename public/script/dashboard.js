@@ -71,10 +71,9 @@ function appendData(data) {
 }
 
 function countVisitors() {
-    console.log("*****************visitors js");
     var todayCnt = document.getElementById("todayCnt");
     var avgCnt = document.getElementById("avgCnt");
-    fetch('/api/users/visitors')
+    fetch('/api/users/count')
         .then((response) => response.json())
         .then((data) => {
             todayCnt.innerHTML = data[0];
