@@ -55,7 +55,8 @@ exports.findVerified = (req, res) => {
 };
 // Retrieve visitor counts.
 exports.visitors = (req, res) => {
-  User.countVisitors((err, data) => {
+  const email = null;
+  User.countVisitors(email, (err, data) => {
     if (err)
       res.status(500).send({
         message:
