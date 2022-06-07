@@ -224,11 +224,11 @@ function signIn(){
 }
 // Display login user info to edit_user_info.html
 function editInfo() {
-    window.location.replace("../views/edit_user_info.html");
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
-        console.log("****************username: " + data.username + " email: " + data.email + " pwd: " + data.password);
+        window.location.replace("../views/edit_user_info.html");
+        alert("****************username: " + data.username + " email: " + data.email + " pwd: " + data.password);
         document.getElementById("userFullName").value = data.username;
         document.getElementById("userEmail").value = data.email;
         document.getElementById("userPassword").value = data.password;
