@@ -244,7 +244,7 @@ function saveProfile(){
     .then((response) => response.json())
     .then((json) => {
         alert("Edit Profile Successful.");
-        window.location.replace("./views/dashboard.html");
+        window.location.replace("./dashboard.html");
         // let user = firebase.auth().currentUser;
         // let uid;
         // if(user != null){
