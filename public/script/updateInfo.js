@@ -1,3 +1,5 @@
+let email = sessionStorage.getItem('userSIEmail');
+
 // Display login user info to edit_user_info.html
 function editInfo() {
     fetch('/api/users/' + email)
