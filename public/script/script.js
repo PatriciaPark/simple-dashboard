@@ -229,13 +229,15 @@ function editInfo() {
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
+        username = data.username;
+        useremail = data.useremail;
         alert("1: " + data.username + " " + data.email);
         window.location.replace("../views/edit_user_info.html");
-        alert("2: " + data.username + " " + data.email);
+        alert("2: " + username + " " + useremail);
         // document.getElementById("userFullName").textContent  = data.username;
         // document.getElementById("userEmail").textContent  = data.email;
-        document.getElementById("userFullName").setAttribute("value", data.username);
-        document.getElementById("userEmail").setAttribute("value", data.email);
+        document.getElementById("userFullName").setAttribute("value", username);
+        document.getElementById("userEmail").setAttribute("value", useremail);
         // document.getElementById("userPassword").value = data.password;
     })
     .catch((error) => {
