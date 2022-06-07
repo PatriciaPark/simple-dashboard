@@ -304,9 +304,8 @@ function resetPassword(){
             }
         })
         .catch((error) => {
-        console.error('Fail to reset password:', error);
+            console.error('Fail to reset password:', error);
         })
-        window.location.replace("./views/dashboard.html");
         // let user = firebase.auth().currentUser;
         // let uid;
         // if(user != null){
