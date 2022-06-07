@@ -224,15 +224,18 @@ function signIn(){
 }
 // Display login user info to edit_user_info.html
 function editInfo() {
+    var username;
+    var useremail;
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
+        alert("1: " + data.username + " " + data.email);
         window.location.replace("../views/edit_user_info.html");
-        document.getElementById("userFullName").textContent  = data.username;
-        document.getElementById("userEmail").textContent  = data.email;
-        alert(data.username + " " + data.email);
-        // document.getElementById("userFullName").setAttribute("value", data.username);
-        // document.getElementById("userEmail").setAttribute("value", data.email);
+        alert("2: " + data.username + " " + data.email);
+        // document.getElementById("userFullName").textContent  = data.username;
+        // document.getElementById("userEmail").textContent  = data.email;
+        document.getElementById("userFullName").setAttribute("value", data.username);
+        document.getElementById("userEmail").setAttribute("value", data.email);
         // document.getElementById("userPassword").value = data.password;
     })
     .catch((error) => {
