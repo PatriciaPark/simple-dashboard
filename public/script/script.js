@@ -224,13 +224,13 @@ function signIn(){
 }
 // Display login user info to edit_user_info.html
 function editInfo() {
+    window.location.replace("../views/edit_user_info.html");
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
         sessionStorage.setItem('username', data.username);
         sessionStorage.setItem('useremail', data.email);
         alert("1: " + data.username + " " + data.email);
-        window.location.replace("../views/edit_user_info.html");
         alert("2: " + sessionStorage.getItem('username') + " " + sessionStorage.getItem('useremail'));
         // document.getElementById("userFullName").textContent  = data.username;
         // document.getElementById("userEmail").textContent  = data.email;
