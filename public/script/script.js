@@ -228,8 +228,8 @@ function editInfo() {
     .then((response) => response.json())
     .then((data) => {
         window.location.replace("../views/edit_user_info.html");
-        document.getElementById("userFullName").value = data.username;
-        document.getElementById("userEmail").value = data.email;
+        document.getElementById("userFullName").value = JSON.stringify(data.username);
+        document.getElementById("userEmail").value = JSON.stringify(data.email);
         // document.getElementById("userPassword").value = data.password;
     })
     .catch((error) => {
