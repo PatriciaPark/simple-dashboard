@@ -289,7 +289,7 @@ function resetPassword(){
       return checkUserConfirmPassword();
     }else{
         // check User Old Password
-        fetch('/api/users/oldpwd'+ email)
+        fetch('/api/users/oldpwd/'+ email)
         .then((response) => response.json())
         .then((data) => {
             if(data.message){
@@ -299,9 +299,8 @@ function resetPassword(){
                 document.getElementById("userOldPassword").focus();
             } else {
                 // Success
-                
                 alert("Reset passwords successful.");
-                window.location.replace("./views/dashboard.html");
+                window.location.replace("./dashboard.html");
             }
         })
         .catch((error) => {
