@@ -1,4 +1,4 @@
-let email = localStorage.getItem('emailForSignIn');
+let email = sessionStorage.getItem('userSIEmail'); //localStorage.getItem('emailForSignIn');
 
 function emailVerification(email){
     let data = { email: email, emailVerification: 1 };
