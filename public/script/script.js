@@ -228,10 +228,9 @@ function editInfo() {
     .then((response) => response.json())
     .then((data) => {
         window.location.replace("../views/edit_user_info.html");
-        alert("****************username: " + data.username + " email: " + data.email + " pwd: " + data.password);
-        document.getElementById("userFullName").innerHTML = data.username;
-        document.getElementById("userEmail").innerHTML = data.email;
-        document.getElementById("userPassword").innerHTML = data.password;
+        document.getElementById("userFullName").value = data.username;
+        document.getElementById("userEmail").value = data.email;
+        // document.getElementById("userPassword").value = data.password;
     })
     .catch((error) => {
     console.error('Fail to Get User data:', error);
@@ -241,11 +240,11 @@ function editInfo() {
 function saveProfile(){
   let userFullName = document.getElementById("userFullName").value;
   var userEmail = document.getElementById("userEmail").value;
-  var userPassword = document.getElementById("userPassword").value;
+//   var userPassword = document.getElementById("userPassword").value;
   var userFullNameFormate = /^([A-Za-z.\s_-])/; 
   var checkUserFullNameValid = userFullName.match(userFullNameFormate);
 
-  var data = { username:userFullName, password: userPassword, email: userEmail };
+  var data = { username:userFullName, email: userEmail };
   if(checkUserFullNameValid == null){
       return checkUserFullName();
   }else{
