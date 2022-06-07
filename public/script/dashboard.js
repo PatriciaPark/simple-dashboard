@@ -32,6 +32,9 @@ function getAllUsers(){
 }
 
 function getUserData() {
+    if (email == null) {
+        email = sessionStorage.getItem('userSIEmail');
+    }
     fetch('/api/users/' + email)
         .then((response) => response.json())
         .then((data) => {
