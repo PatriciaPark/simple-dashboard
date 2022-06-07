@@ -189,20 +189,6 @@ function signIn(){
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
     var data = { email: userSIEmail, loginCnt: 'loginCnt+1' };
-    fetch('/api/users/loginCount/'+ userSIEmail, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then((response) => response.json())
-    .then((json) => {
-        console.log('Success Count:', json);
-    })
-    .catch((error) => {
-        console.error('Fail to Count:', error);
-    }),
     fetch('/api/users/'+ userSIEmail)
     .then((response) => response.json())
     .then((data) => {
@@ -213,6 +199,21 @@ function signIn(){
             window.location.replace("./views/email_verification.html");
         } else {
             // Already verified email : emailVerification=1
+            fetch('/api/users/loginCount/'+ userSIEmail, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((json) => {
+                console.log('Success Count:', json);
+            })
+            .catch((error) => {
+                console.error('Fail to Count:', error);
+            })
+            
             window.location.replace("./views/dashboard.html");
         }
     })
