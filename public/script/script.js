@@ -229,9 +229,9 @@ function editInfo() {
     .then((data) => {
         window.location.replace("../views/edit_user_info.html");
         alert("****************username: " + data.username + " email: " + data.email + " pwd: " + data.password);
-        document.getElementById("userFullName").value = data.username;
-        document.getElementById("userEmail").value = data.email;
-        document.getElementById("userPassword").value = data.password;
+        document.getElementById("userFullName").innerHTML = data.username;
+        document.getElementById("userEmail").innerHTML = data.email;
+        document.getElementById("userPassword").innerHTML = data.password;
     })
     .catch((error) => {
     console.error('Fail to Get User data:', error);
