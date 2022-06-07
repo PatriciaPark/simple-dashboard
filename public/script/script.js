@@ -228,9 +228,10 @@ function editInfo() {
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
+        console.log("****************username: " + data.username + " email: " + data.email + " pwd: " + data.password);
         document.getElementById("userFullName").value = data.username;
         document.getElementById("userEmail").value = data.email;
-        document.getElementById("userPassword").value = data.userPassword;
+        document.getElementById("userPassword").value = data.password;
     })
     .catch((error) => {
     console.error('Fail to Get User data:', error);
@@ -313,6 +314,7 @@ function resetPassword(){
                 document.getElementById("userOldPassword").focus();
             } else {
                 // Success
+                
                 alert("Reset passwords successful.");
                 window.location.replace("./views/dashboard.html");
             }
@@ -320,8 +322,6 @@ function resetPassword(){
         .catch((error) => {
         console.error('Fail to reset password:', error);
         })
-            // 일치하면 디비 업뎃
-
         window.location.replace("./views/dashboard.html");
         // let user = firebase.auth().currentUser;
         // let uid;

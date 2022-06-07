@@ -99,8 +99,8 @@ User.findOldPwd = (email, password, result) => {
 };
 User.updateById = (email, user, result) => {
   sql.query(
-    "UPDATE users SET username = ?, password = ? WHERE email = ?",
-    [user.username, user.password, email],
+    "UPDATE users SET username = ? WHERE email = ?",
+    [user.username, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
