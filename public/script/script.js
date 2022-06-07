@@ -188,7 +188,6 @@ function signIn(){
   }else{
     // Signin successful
     // update database - login count(loginCnt), last session(lastSession)
-    var data = { email: userSIEmail, loginCnt: 'loginCnt+1' };
     fetch('/api/users/'+ userSIEmail)
     .then((response) => response.json())
     .then((data) => {
@@ -199,12 +198,13 @@ function signIn(){
             window.location.replace("./views/email_verification.html");
         } else {
             // Already verified email : emailVerification=1
+            var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
             fetch('/api/users/loginCount/'+ userSIEmail, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(dataCnt),
             })
             .then((response) => response.json())
             .then((json) => {
@@ -213,7 +213,7 @@ function signIn(){
             .catch((error) => {
                 console.error('Fail to Count:', error);
             })
-            
+
             window.location.replace("./views/dashboard.html");
         }
     })
@@ -222,24 +222,58 @@ function signIn(){
     })
   }
 }
+// Display login user info to edit_user_info.html
+function editInfo() {
+    window.location.replace("../views/edit_user_info.html");
+    fetch('/api/users/' + email)
+    .then((response) => response.json())
+    .then((data) => {
+        document.getElementById("userFullName").value = data.username;
+        document.getElementById("userEmail").value = data.email;
+        document.getElementById("userPassword").value = data.userPassword;
+    })
+    .catch((error) => {
+    console.error('Fail to Get User data:', error);
+    });
+}
 // Save profile and update database
 function saveProfile(){
-  let userFullName = document.getElementById("userFullName").value 
+  let userFullName = document.getElementById("userFullName").value;
+  var userEmail = document.getElementById("userEmail").value;
+  var userPassword = document.getElementById("userPassword").value;
   var userFullNameFormate = /^([A-Za-z.\s_-])/; 
   var checkUserFullNameValid = userFullName.match(userFullNameFormate);
+
+  var data = { username:userFullName, password: userPassword, email: userEmail };
   if(checkUserFullNameValid == null){
       return checkUserFullName();
   }else{
-      let user = firebase.auth().currentUser;
-      let uid;
-      if(user != null){
-          uid = user.uid;
-      }
-      var firebaseRef = firebase.database().ref();
-      var userData = {
-          userFullName: userFullName,
-      }
-      firebaseRef.child(uid).set(userData);
+    fetch('/api/users/'+ userEmail, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+    .then((response) => response.json())
+    .then((json) => {
+        alert("Edit Profile Successful.");
+        window.location.replace("./views/dashboard.html");
+        // let user = firebase.auth().currentUser;
+        // let uid;
+        // if(user != null){
+        //     uid = user.uid;
+        // }
+        // var firebaseRef = firebase.database().ref();
+        // var userData = {
+        //     userFullName: userFullName,
+        // }
+        // firebaseRef.child(uid).set(userData);
+        console.log('Success update username:', json);
+    })
+    .catch((error) => {
+        console.error('Fail to update username:', error);
+    })
     //   swal({
     //       type: 'successfull',
     //       title: 'Update successfull',
@@ -255,10 +289,12 @@ function saveProfile(){
 }
 // Reset password and update database && checkUserOldPassword
 function resetPassword(){
+    var email = sessionStorage.getItem('userSIEmail');
+    console.log("*********************pwd: " + email);
     var userPassword = document.getElementById("userPassword").value;
     var userConfirmPassword = document.getElementById("userConfirmPassword").value;
     var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-    var checkUserPasswordValid = userFullName.match(userPasswordFormate);
+    var checkUserPasswordValid = userPassword.match(userPasswordFormate);
     if(checkUserPasswordValid == null){
         document.getElementById("userPassword").focus();
         return checkUserPassword();
@@ -266,16 +302,37 @@ function resetPassword(){
         document.getElementById("userConfirmPassword").focus();
       return checkUserConfirmPassword();
     }else{
-        let user = firebase.auth().currentUser;
-        let uid;
-        if(user != null){
-            uid = user.uid;
-        }
-        var firebaseRef = firebase.database().ref();
-        var userData = {
-            userPassword: userPassword,
-        }
-        firebaseRef.child(uid).set(userData);
+        // check User Old Password
+        fetch('/api/users/oldpwd'+ email)
+        .then((response) => response.json())
+        .then((data) => {
+            if(data.message){
+                // Previous password not match
+                console.log(data.message);
+                alert("Please check your previous passwords.");
+                document.getElementById("userOldPassword").focus();
+            } else {
+                // Success
+                alert("Reset passwords successful.");
+                window.location.replace("./views/dashboard.html");
+            }
+        })
+        .catch((error) => {
+        console.error('Fail to reset password:', error);
+        })
+            // 일치하면 디비 업뎃
+
+        window.location.replace("./views/dashboard.html");
+        // let user = firebase.auth().currentUser;
+        // let uid;
+        // if(user != null){
+        //     uid = user.uid;
+        // }
+        // var firebaseRef = firebase.database().ref();
+        // var userData = {
+        //     userPassword: userPassword,
+        // }
+        // firebaseRef.child(uid).set(userData);
       //   swal({
       //       type: 'successfull',
       //       title: 'Update successfull',
@@ -289,7 +346,6 @@ function resetPassword(){
       //   });
     }
   }
-
 // Working For Sign Out
 function signOut(){
   firebase.auth().signOut().then(function() {
@@ -301,4 +357,38 @@ function signOut(){
     // An error happened.
     alert(error.message);
   });
+}
+// Delete User
+function deleteUser() {
+    var email = document.getElementById("userEmail").value;
+    var user = document.getElementById("userFullName").value;
+    // const user = auth.currentUser;
+    // Confirm: Are you sure?
+    var answer = confirm("Are you sure?")
+	if (answer){
+		fetch('/api/users/'+ email, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((json) => {
+            firebase.auth().deleteUser(user).then(() => {
+                // User deleted.
+              }).catch((error) => {
+                // An error ocurred
+                // ...
+            });
+            console.log('Success Delete User:', json);
+            window.location.replace("../index.html");
+        })
+        .catch((error) => {
+            console.error('Fail to Delete User:', error);
+        })
+	}
+	else{
+		alert("Thanks for sticking around!");
+	}
 }

@@ -8,10 +8,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../style.css">
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <!-- Nunito Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,700" rel="stylesheet">
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-auth-compat.js"></script>
+    <script src="../script/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"/>
     <title>Reset</title>
 </head>
 <body class="bg-light">
@@ -22,16 +26,16 @@
                     <h2 class="h2 text-center text-dark mb-3">Reset Password</h2>
                     <div class="form-group">
                         <label for="userOldPassword">Old Password<span class="text-danger ml-1">*</span></label>
-                        <input type="password" class="form-control" id="userOldPassword" onblur="checkUserOldPassword()" placeholder="**********">
+                        <input type="password" class="form-control" id="userOldPassword" placeholder="**********">
                     </div>
                     <div class="form-group">
                         <label for="userPassword">New Password<span class="text-danger ml-1">*</span></label>
-                        <input type="password" class="form-control" id="userPassword" onblur="checkUserPassword()" placeholder="**********">
+                        <input type="password" class="form-control" id="userPassword" onkeyup="checkUserPassword()" placeholder="**********">
                         <small id="userPasswordError" class="form-text text-danger" style="display: none;">At least one uppercase, lowercase, numeral, symbol and minimum 8 characters.</small>
                     </div>
                     <div class="form-group">
                         <label for="userConfirmPassword">Confirm New Password<span class="text-danger ml-1">*</span></label>
-                        <input type="password" class="form-control" id="userConfirmPassword" onblur="checkUserConfirmPassword()" placeholder="**********">
+                        <input type="password" class="form-control" id="userConfirmPassword" onkeyup="checkUserConfirmPassword()" placeholder="**********">
                         <small id="userConfirmPasswordError" class="form-text text-danger" style="display: none;">Passwords do not match.</small>
                     </div>
                     <div class="col-lg-12 col-md-12 text-right">
@@ -42,34 +46,7 @@
             </div>
         </div>
     </div>
-    <!-- Optional JavaScript -->
-
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-    https://firebase.google.com/docs/web/setup#config-web-app -->
-    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
-    <!-- Firebase UI -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css"/>
-
-    <script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-    apiKey: "AIzaSyCBSfZbINX0RkfDLZ_dUWeAE383iXLgowg",
-    authDomain: "simple-dashboard-48420.firebaseapp.com",
-    projectId: "simple-dashboard-48420",
-    storageBucket: "simple-dashboard-48420.appspot.com",
-    messagingSenderId: "132374569431",
-    appId: "1:132374569431:web:df01c30c4f0f25ed3cab92",
-    measurementId: "G-Y72JJ0Q98H"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
-
     <!-- Custom JavaScript -->
-    <script src="../app.js"></script>
-    <script src="../script.js"></script>
+    <script data-main="../server" src="../script/script.js"></script>
 </body>
 </html>

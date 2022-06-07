@@ -65,6 +65,23 @@ exports.visitors = (req, res) => {
     else res.send(data);
   });
 };
+// Compare previous passwords
+exports.oldpwd = (req, res) => {
+  const pwd = bcrypt.hashSync(req.body.password, 8);
+  User.findOldPwd(req.params.email, pwd, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Wrong password with email ${req.params.email}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving password with email " + req.params.email
+        });
+      }
+    } else res.send(data);
+  });
+};
 // Find a single User with an id
 exports.findOne = (req, res) => {
     User.findById(req.params.id, (err, data) => {
@@ -81,7 +98,7 @@ exports.findOne = (req, res) => {
         } else res.send(data);
       });
 };
-// Update a User by the id in the request
+// Update a User by the email in the request
 exports.update = (req, res) => {
   // Validate Request
   if (!req.body) {
@@ -91,17 +108,44 @@ exports.update = (req, res) => {
   }
   console.log(req.body);
   User.updateById(
-    req.params.id,
+    req.params.email,
     new User(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found User with id ${req.params.id}.`
+            message: `Not found User with email ${req.params.email}.`
           });
         } else {
           res.status(500).send({
-            message: "Error updating User with id " + req.params.id
+            message: "Error updating User with email " + req.params.email
+          });
+        }
+      } else res.send(data);
+    }
+  );
+};
+// Update password
+exports.updatePwd = (req, res) => {
+  // Validate Request
+  if (!req.body) {
+    res.status(400).send({
+      message: "Content can not be null!"
+    });
+  }
+  console.log(req.body);
+  Login.updatePwd(
+    req.params.email,
+    new Login(req.body),
+    (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User with email ${req.params.email}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error updating User with email " + req.params.email
           });
         }
       } else res.send(data);
@@ -168,7 +212,7 @@ exports.delete = (req, res) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with id ${req.params.email}.`
+              message: `Not found User with email ${req.params.email}.`
             });
           } else {
             res.status(500).send({

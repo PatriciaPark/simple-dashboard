@@ -1,8 +1,8 @@
 let email = sessionStorage.getItem('userSIEmail'); //localStorage.getItem('emailForSignIn');
 
+// Update database - email verification(emailVerification= 0 -> 1).
 function emailVerification(email){
     let data = { email: email, emailVerification: 1 };
-    // update database - email verification(emailVerification= 0 -> 1)
     fetch('/api/users/verificationData/'+ email, {
         method: 'PUT',
         headers: {
@@ -18,9 +18,8 @@ function emailVerification(email){
             console.error('Fail to Email Verification:', error);
     });
 }
-
+// Get All users infomation.
 function getAllUsers(){
-    // Get All users infomation
     fetch('/api/users/')
         .then((response) => response.json())
         .then((data) => {
@@ -30,7 +29,7 @@ function getAllUsers(){
         console.error('Fail to Get All Users:', error);
     });
 }
-
+// Login user info for display profile.
 function getUserData() {
     if (email == null) {
         email = sessionStorage.getItem('userSIEmail');
@@ -39,7 +38,6 @@ function getUserData() {
         .then((response) => response.json())
         .then((data) => {
             var userName = document.getElementById("username");
-            // Login user info
             var div = document.createElement("div");
             div.innerHTML = data.username;
             userName.appendChild(div);
@@ -48,11 +46,10 @@ function getUserData() {
         console.error('Fail to Get User data:', error);
     });
 }
-
+// All users info for display board.
 function appendData(data) {
     var dataList = document.getElementById("dataList");
     var allUserCnt = document.getElementById("allUserCnt");
-    // All users info
     if(data.length) {
         allUserCnt.innerHTML = data.length;
         for(var i = 0; i< data.length; i++) {
@@ -69,7 +66,7 @@ function appendData(data) {
         div.innerHTML = "No Data Availed";
     } 
 }
-
+// Count visitors(for today, a week).
 function countVisitors() {
     var todayCnt = document.getElementById("todayCnt");
     var avgCnt = document.getElementById("avgCnt");
@@ -83,42 +80,6 @@ function countVisitors() {
         console.error('Fail to Get Count:', error);
     });
 }
-
-function editInfo() {
-    fetch('/api/users/' + email)
-    .then((response) => response.json())
-    .then((data) => {
-        window.location.replace("../views/edit_user_info.html");
-        // Display login user info
-        document.getElementById("userFullName").value = data.username;
-        document.getElementById("userEmail").value = data.email;
-    })
-    .catch((error) => {
-    console.error('Fail to Get User data:', error);
-    });
-}
-// // 오늘의 방문자 수 cookie
-// function countVisitors() {
-//     var todayCnt = document.getElementById("todayCnt");
-//     var avgCnt = document.getElementById("avgCnt");
-
-//     var expireDate = new Date  // 현재의 날짜 객체를 생성 
-//     expireDate.setMinutes(expireDate.getMinutes()+30)  // 현재 시간에 30분을 더함. 쿠키의 유효기간 설정.(현재~30분) 
-//     hitCt = eval(cookieVal("pageHit"))  // 방문 카운트 변수이며 cookieVal 함수를 실행. 
-//     hitCt++  // 방문 카운트 +1
-//     document.cookie = "pageHit="+hitCt+";expires=" + expireDate.toGMTString() // 이곳에서 쿠키를 갱신.
-//     todayCnt.innerHTML = hitCt;
-    
-//     function cookieVal(cookieName) {  // cookieVal 함수를 선언함.   
-//         thisCookie = document.cookie.split("; ")  // 쿠키의 문자열 구조가 '쿠키명=쿠키값; expires=유효기간' 이기 때문에 먼저 세미콜론(;)으로 나눔.(split) 
-//         for (i=0; i<thisCookie.length; i++) { // ; 으로 나눈 만큼 반복문을 실행. 여기서는 2번을 반복함.   
-//             if (cookieName == thisCookie[i].split("=")[0]) {  // 먼저 thisCookie[i].split("=")[0]은 '쿠키명=쿠키값' 구조에서 =으로 나눈 배열의 첫번째 값을 지칭함(쿠키명). 
-//                     return thisCookie[i].split("=")[1]  // thisCookie[i].split("=")[1] 은 =으로 나눈 배열의 두번째 값.(쿠키값) 
-//             }   
-//         }   
-//         return 0   
-//     }   
-// }
 
 window.addEventListener('DOMContentLoaded', function() {
     if(email) emailVerification(email);

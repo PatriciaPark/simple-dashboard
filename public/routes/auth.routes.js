@@ -14,12 +14,16 @@ module.exports = app => {
   router.get("/", users.findAll);
   // Retrieve visitor counts
   router.get("/count", users.visitors);
+  // Compare previous passwords
+  router.get("/oldpwd/:email", users.oldpwd);
   // Retrieve verified email user
   router.get("/:email", users.findVerified);
   // Retrieve a single Tutorial with id
   router.get("/:id", users.findOne);
-  // Update a User with id
-  router.put("/:id", users.update);
+  // Update a User with email
+  router.put("/:email", users.update);
+  // Update password
+  router.put("/passwords/:email", users.updatePwd);
   // Update login data
   router.put("/loginCount/:email", users.loginCount);
   // Update verification data

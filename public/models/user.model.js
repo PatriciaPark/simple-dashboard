@@ -81,6 +81,22 @@ User.countVisitors = (email, result) => {
     result(null, res);
   });
 };
+User.findOldPwd = (email, password, result) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      console.log("found user: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+    // not found User with the id
+    result({ kind: "not_found" }, null);
+  });
+};
 User.updateById = (email, user, result) => {
   sql.query(
     "UPDATE users SET username = ?, password = ? WHERE email = ?",
@@ -92,6 +108,21 @@ User.updateById = (email, user, result) => {
         return;
       }
       console.log("updated user: ", { email: email, ...user });
+      result(null, { email: email, ...user });
+    }
+  );
+};
+Login.updatePwd = (email, user, result) => {
+  sql.query(
+    "UPDATE users SET password = ? WHERE email = ?",
+    [user.password, email],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("updated user password: ", { email: email, ...user });
       result(null, { email: email, ...user });
     }
   );
