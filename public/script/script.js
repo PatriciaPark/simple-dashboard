@@ -222,27 +222,6 @@ function signIn(){
     })
   }
 }
-// Display login user info to edit_user_info.html
-function editInfo() {
-    window.location.replace("../views/edit_user_info.html");
-    fetch('/api/users/' + email)
-    .then((response) => response.json())
-    .then((data) => {
-        sessionStorage.setItem('username', data.username);
-        sessionStorage.setItem('useremail', data.email);
-        alert("1: " + data.username + " " + data.email);
-        alert("2: " + sessionStorage.getItem('username') + " " + sessionStorage.getItem('useremail'));
-        // document.getElementById("userFullName").textContent  = data.username;
-        // document.getElementById("userEmail").textContent  = data.email;
-        document.getElementById("userFullName").setAttribute("value", sessionStorage.getItem('username'));
-        document.getElementById("userEmail").setAttribute("value", sessionStorage.getItem('useremail'));
-        // document.getElementById("userPassword").value = data.password;
-        alert("3: " + username + " " + useremail);
-    })
-    .catch((error) => {
-    console.error('Fail to Get User data:', error);
-    });
-}
 // Save profile and update database
 function saveProfile(){
   let userFullName = document.getElementById("userFullName").value;
