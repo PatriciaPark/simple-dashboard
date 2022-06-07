@@ -164,15 +164,15 @@ exports.verificationData = (req, res) => {
 };
 // Delete a User with the specified id in the request
 exports.delete = (req, res) => {
-    User.remove(req.params.id, (err, data) => {
+    User.remove(req.params.email, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with id ${req.params.id}.`
+              message: `Not found User with id ${req.params.email}.`
             });
           } else {
             res.status(500).send({
-              message: "Could not delete User with id " + req.params.id
+              message: "Could not delete User with email " + req.params.email
             });
           }
         } else res.send({ message: `User was deleted successfully!` });

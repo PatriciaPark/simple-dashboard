@@ -32,9 +32,6 @@ function getAllUsers(){
 }
 
 function getUserData() {
-    if (email == null) {
-        email = sessionStorage.getItem('userSIEmail');
-    }
     fetch('/api/users/' + email)
         .then((response) => response.json())
         .then((data) => {
@@ -84,6 +81,19 @@ function countVisitors() {
     });
 }
 
+function editInfo() {
+    window.location.replace("../views/edit_user_info.html");
+    fetch('/api/users/' + email)
+        .then((response) => response.json())
+        .then((data) => {
+            // Display login user info
+            document.getElementById("userFullName").value = data.username;
+            document.getElementById("userEmail").value = data.email;
+        })
+        .catch((error) => {
+        console.error('Fail to Get User data:', error);
+    });
+}
 // // 오늘의 방문자 수 cookie
 // function countVisitors() {
 //     var todayCnt = document.getElementById("todayCnt");

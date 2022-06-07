@@ -68,7 +68,7 @@ User.findByEmailVerified = (email, result) => {
   });
 };
 User.countVisitors = (email, result) => {
-  let query = "SELECT count(*) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW() ";
+  let query = "SELECT count(*) as visitors FROM users WHERE DATE_FORMAT(lastSession, '%Y-%m-%d') = CURDATE() ";
       query += `UNION ALL `;
       query += `SELECT round(count(*)/7) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
   sql.query(query, (err, res) => {
@@ -126,8 +126,8 @@ Login.updateEmailVerification = (email, user, result) => {
     }
   );
 };
-User.remove = (id, result) => {
-  sql.query("DELETE FROM users WHERE id = ?", id, (err, res) => {
+User.remove = (email, result) => {
+  sql.query("DELETE FROM users WHERE email = ?", email, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
@@ -138,7 +138,7 @@ User.remove = (id, result) => {
       result({ kind: "not_found" }, null);
       return;
     }
-    console.log("deleted user with id: ", id);
+    console.log("deleted user with email: ", email);
     result(null, res);
   });
 };
