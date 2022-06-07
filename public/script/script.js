@@ -224,20 +224,18 @@ function signIn(){
 }
 // Display login user info to edit_user_info.html
 function editInfo() {
-    var username;
-    var useremail;
     fetch('/api/users/' + email)
     .then((response) => response.json())
     .then((data) => {
-        username = data.username;
-        useremail = data.email;
+        sessionStorage.setItem('username', data.username);
+        sessionStorage.setItem('useremail', data.email);
         alert("1: " + data.username + " " + data.email);
         window.location.replace("../views/edit_user_info.html");
-        alert("2: " + username + " " + useremail);
+        alert("2: " + sessionStorage.getItem('username') + " " + sessionStorage.getItem('useremail'));
         // document.getElementById("userFullName").textContent  = data.username;
         // document.getElementById("userEmail").textContent  = data.email;
-        document.getElementById("userFullName").setAttribute("value", username);
-        document.getElementById("userEmail").setAttribute("value", useremail);
+        document.getElementById("userFullName").setAttribute("value", sessionStorage.getItem('username'));
+        document.getElementById("userEmail").setAttribute("value", sessionStorage.getItem('useremail'));
         // document.getElementById("userPassword").value = data.password;
         alert("3: " + username + " " + useremail);
     })
