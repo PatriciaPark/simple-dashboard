@@ -1,0 +1,43 @@
+{
+  "name": "pyjee8",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node public/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PatriciaPark/simple-dashboard.git"
+  },
+  "keywords": [
+    "C"
+  ],
+  "author": "pyjee8",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PatriciaPark/simple-dashboard/issues"
+  },
+  "homepage": "https://github.com/PatriciaPark/simple-dashboard#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-handlebars": "^6.0.5",
+    "firebase": "^9.6.11",
+    "firebaseui": "^6.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.1",
+    "mysql": "^2.18.1",
+    "mysql-upgrade": "^0.1.2",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.0"
+  }
+}
