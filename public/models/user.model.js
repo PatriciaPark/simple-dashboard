@@ -29,16 +29,14 @@ User.select = (email, password, result) => {
       return;
     }
     if (res.length) {
-      console.log("found user by email: ", res[0]);
+      console.log("select user by email: ", res[0]);
       // Compare the password
       if(bcrypt.compare(password, res[0].password)){
         result(null, res[0]);
-        return;
       } else {
         result({ kind: "not_found" }, null);
-        return;
       }
-      
+      return;
     }
     // not found User password with the email
     result({ kind: "not_found" }, null);
