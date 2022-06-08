@@ -101,11 +101,11 @@ function signUp(){
                     };
 
         fetch('/api/users', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
         })
         .then((response) => response.json())
         .then((data) => {
@@ -192,7 +192,7 @@ function signIn(){
         password: userSIPassword
     };
     fetch('/api/users/pwd',{
-        method : "POST",
+        method : 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
