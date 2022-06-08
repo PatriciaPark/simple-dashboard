@@ -321,8 +321,8 @@ function resetPassword(){
                 // Match old password
                 // Update New Password
                 var data = { email: email, password: userPassword };
-                fetch('/api/users/update', {
-                    method: 'POST',
+                fetch('/api/users/pwd/'+ email, {
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },

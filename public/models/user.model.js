@@ -117,7 +117,7 @@ User.updateOne = (email, user, result) => {
     }
   );
 };
-User.updatePwd = (email, password,  user, result) => {
+User.updatePwd = (email, password, user, result) => {
   sql.query(
     "UPDATE users SET password = ? WHERE email = ?",
     [password, email],
