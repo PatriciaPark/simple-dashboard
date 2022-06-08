@@ -21,6 +21,7 @@ User.create = (newUser, result) => {
   });
 };
 User.check = (email, password, result) => {
+  console.log("*************model: " + email + " " + password);
   sql.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);

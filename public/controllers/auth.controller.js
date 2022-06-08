@@ -28,8 +28,8 @@ exports.create = (req, res) => {
 // Check Passwords
 exports.check = (req, res) => {
   const password = bcrypt.hashSync(req.body.password, 8);
-  console.log("*************controller: " + req.params.email + " " + password);
-  User.check(req.params.email, password, (err, data) => {
+  console.log("*************controller: " + req.body.email + " " + password);
+  User.check(req.body.email, password, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
