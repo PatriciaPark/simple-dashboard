@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const bcrypt = require("bcrypt");
 // constructor
 const User = function(user) {
   this.email = user.email;
@@ -20,7 +21,7 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
-User.select = (email, result) => {
+User.select = (email, password, result) => {
   sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -29,8 +30,13 @@ User.select = (email, result) => {
     }
     if (res.length) {
       console.log("found user by email: ", res[0]);
-      result(null, res[0]);
-      return;
+      if(bcrypt.compare(password, res[0].password)){
+        result(null, res[0]);
+        return;
+      } else {
+        result({ kind: "not_found" }, null);
+      }
+      
     }
     // not found User password with the email
     result({ kind: "not_found" }, null);

@@ -1,5 +1,5 @@
 const { User, Login } = require("../models/user.model.js");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -27,7 +27,7 @@ exports.create = (req, res) => {
 };
 // Check Passwords
 exports.select = (req, res) => {
-  User.select(req.body.email, (err, data) => {
+  User.select(req.body.email, req.body.password, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({

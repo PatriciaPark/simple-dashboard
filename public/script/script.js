@@ -195,9 +195,8 @@ function signIn(){
         body: JSON.stringify({email: userSIEmail}),
     })
     .then((response) => response.json())
-    .then((data) => {
-        console.log("***********script: " + data.password);
-        if (bcrypt.compare(userSIPassword, data.password)) {
+    .then((response) => {
+        if (response.token) {
             localStorage.setItem('token', response.token);
             // update database - login count(loginCnt), last session(lastSession)
             fetch('/api/users/'+ userSIEmail)
