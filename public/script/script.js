@@ -100,7 +100,7 @@ function signUp(){
                         password: userPassword
                     };
 
-        fetch('/api/users', {
+        fetch('/api/users/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -191,12 +191,12 @@ function signIn(){
         email: userSIEmail,
         password: userSIPassword
     };
-    fetch('/api/users/pwd',{
-        method : 'POST',
+    fetch('/api/users/pwd', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body : JSON.stringify(data),
+        body: JSON.stringify(data),
     })
     .then(response => response.json())
     .then(response => {

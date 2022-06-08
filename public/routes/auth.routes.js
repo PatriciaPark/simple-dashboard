@@ -6,7 +6,7 @@ module.exports = app => {
   // Check Passwords
   router.post("/pwd", users.check);
   // Create a new User
-  router.post("/", 
+  router.post("/create", 
   [
     verifySignUp.checkDuplicateUsernameOrEmail,
     verifySignUp.checkRolesExisted
