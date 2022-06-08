@@ -30,13 +30,13 @@ User.select = (email, password, result) => {
     }
     if (res.length) {
       console.log("found user by email: ", res[0]);
-      console.log("***************model password: " + password + " " + res[0].password);
-      console.log("***************model compare: " + bcrypt.compareSync(password, res[0].password));
+      // Compare the password
       if(bcrypt.compare(password, res[0].password)){
         result(null, res[0]);
         return;
       } else {
         result({ kind: "not_found" }, null);
+        return;
       }
       
     }
