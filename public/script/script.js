@@ -188,9 +188,10 @@ function signIn(){
   }else{
     // Check Passwords
     var data = {
-        email: userSIEmail,
-        password: userSIPassword
-    };
+                    email: userSIEmail,
+                    password: userSIPassword
+                };
+    alert(data.email + data.password);
     fetch('/api/users/pwd', {
         method: 'POST',
         headers: {
@@ -198,8 +199,8 @@ function signIn(){
         },
         body: JSON.stringify(data),
     })
-    .then(response => response.json())
-    .then(response => {
+    .then((response) => response.json())
+    .then((response) => {
         console.log(response);
         if (response.token) {
             localStorage.setItem('token', response.token);
