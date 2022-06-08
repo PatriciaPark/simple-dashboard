@@ -315,6 +315,7 @@ function resetPassword(){
         .then((data) => {
             if (data.message) {
                 // Not match old password
+                console.log("***************data.message: " + data.message);
                 alert('Please check your previous passwords.');
                 document.getElementById("userOldPassword").focus();
             } else {
