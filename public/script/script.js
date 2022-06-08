@@ -198,7 +198,6 @@ function signIn(){
     .then((data) => {
         console.log("*********************data.message: " + data.message);
         if (!data.message) {
-            localStorage.setItem('token', response.token);
             // update database - login count(loginCnt), last session(lastSession)
             fetch('/api/users/'+ userSIEmail)
             .then((response) => response.json())
