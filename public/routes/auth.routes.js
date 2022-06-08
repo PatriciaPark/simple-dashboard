@@ -3,6 +3,8 @@ const { verifySignUp } = require("../middleware");
 module.exports = app => {
   const users = require("../controllers/auth.controller.js");
   var router = require("express").Router();
+  // Check Passwords
+  router.post("/pwd", users.check);
   // Create a new User
   router.post("/", 
     [
@@ -10,8 +12,6 @@ module.exports = app => {
       verifySignUp.checkRolesExisted
     ],
     users.create);
-  // Check Passwords
-  router.post("/pwd", users.check);
   // Retrieve all Tutorials
   router.get("/", users.getAll);
   // Retrieve visitor counts
