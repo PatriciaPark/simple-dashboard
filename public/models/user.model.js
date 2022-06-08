@@ -20,16 +20,15 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
-User.check = (email, password, result) => {
-  console.log("*************model: " + email + " " + password);
-  sql.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, (err, res) => {
+User.select = (email, result) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
       return;
     }
     if (res.length) {
-      console.log("found user password by email: ", res[0]);
+      console.log("found user by email: ", res[0]);
       result(null, res[0]);
       return;
     }

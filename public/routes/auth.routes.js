@@ -3,8 +3,6 @@ const { verifySignUp } = require("../middleware");
 module.exports = app => {
   const users = require("../controllers/auth.controller.js");
   var router = require("express").Router();
-  // Check Passwords
-  router.post("/pwd", users.check);
   // Create a new User
   router.post("/create", 
   [
@@ -12,15 +10,17 @@ module.exports = app => {
     verifySignUp.checkRolesExisted
   ],
   users.create);
-  // Retrieve all Tutorials
+  // Retrieve a user with email POST
+  router.post("/select", users.select);
+  // Retrieve all users
   router.get("/", users.getAll);
   // Retrieve visitor counts
   router.get("/count", users.getCnt);
   // Retrieve verified email user
   router.get("/email/:email", users.getAuth);
-  // Retrieve a single Tutorial with id
+  // Retrieve a single user with email
   router.get("/:email", users.getOne);
-  // Update a User with email
+  // Update a user with email
   router.put("/:email", users.setOne);
   // Update password
   router.put("/pwd/:email", users.setPwd);
@@ -28,9 +28,9 @@ module.exports = app => {
   router.put("/count/:email", users.setCnt);
   // Update verification data
   router.put("/email/:email", users.setAuth);
-  // Delete a User with id
+  // Delete a user with email
   router.delete("/:email", users.deleteOne);
-  // Delete all Users
+  // Delete all users
   router.delete("/", users.deleteAll);
   app.use('/api/users', router);
 };

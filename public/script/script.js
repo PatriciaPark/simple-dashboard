@@ -187,21 +187,17 @@ function signIn(){
       return checkUserSIPassword();
   }else{
     // Check Passwords
-    var data = {
-                    email: userSIEmail,
-                    password: userSIPassword
-                };
-    fetch('/api/users/pwd', {
+    fetch('/api/users/select', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({email: userSIEmail}),
     })
     .then((response) => response.json())
-    .then((response) => {
-        console.log(response);
-        if (response.token) {
+    .then((data) => {
+        console.log("***********script: " + data.password);
+        if (bcrypt.compare(userSIPassword, data.password)) {
             localStorage.setItem('token', response.token);
             // update database - login count(loginCnt), last session(lastSession)
             fetch('/api/users/'+ userSIEmail)
