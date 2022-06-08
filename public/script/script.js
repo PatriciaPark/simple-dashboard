@@ -187,12 +187,16 @@ function signIn(){
       return checkUserSIPassword();
   }else{
     // Check Passwords
+    var data = {
+        email: userSIEmail,
+        password: userSIPassword
+    };
     fetch('api/users/pwd',{
         method : "POST",
-        body : JSON.stringify({
-            email : userSIEmail,
-            password : userSIPassword
-            })
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body : JSON.stringify(data),
     })
     .then(response => response.json())
     .then(response => {
