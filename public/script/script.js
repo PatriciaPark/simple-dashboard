@@ -195,8 +195,9 @@ function signIn(){
         body: JSON.stringify({email: userSIEmail, password: userSIPassword}),
     })
     .then((response) => response.json())
-    .then((response) => {
-        if (response.token) {
+    .then((data) => {
+        console.log("*********************data.message: " + data.message);
+        if (!data.message) {
             localStorage.setItem('token', response.token);
             // update database - login count(loginCnt), last session(lastSession)
             fetch('/api/users/'+ userSIEmail)

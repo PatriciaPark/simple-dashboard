@@ -30,7 +30,8 @@ User.select = (email, password, result) => {
     }
     if (res.length) {
       console.log("found user by email: ", res[0]);
-      console.log("***************model password" + password + " " + res[0].password);
+      console.log("***************model password: " + password + " " + res[0].password);
+      console.log("***************model compare: " + bcrypt.compare(password, res[0].password));
       if(bcrypt.compare(password, res[0].password)){
         result(null, res[0]);
         return;
@@ -86,7 +87,7 @@ User.readAuth = (email, result) => {
       result(null, res[0]);
       return;
     }
-    // not found User with the id
+    // not found User with the email
     result({ kind: "not_found" }, null);
   });
 };
@@ -172,7 +173,7 @@ User.remove = (email, result) => {
       return;
     }
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
+      // not found user with the email
       result({ kind: "not_found" }, null);
       return;
     }
