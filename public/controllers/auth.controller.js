@@ -133,18 +133,18 @@ exports.setPwd = (req, res) => {
     });
   }
   console.log(req.body);
-  Login.updatePwd(
+  User.updatePwd(
     req.params.email, bcrypt.hashSync(req.body.password, 8),
     new User(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found User with email ${req.params.email}.`
+            message: `Not found User Password with email ${req.params.email}.`
           });
         } else {
           res.status(500).send({
-            message: "Error updating User with email " + req.params.email
+            message: "Error updating User Password " + req.params.email
           });
         }
       } else res.send(data);

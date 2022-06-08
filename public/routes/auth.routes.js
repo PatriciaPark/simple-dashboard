@@ -12,6 +12,8 @@ module.exports = app => {
   users.create);
   // Retrieve a user with email POST
   router.post("/select", users.select);
+  // Update password
+  router.post("/update", users.setPwd);
   // Retrieve all users
   router.get("/", users.getAll);
   // Retrieve visitor counts
@@ -22,8 +24,6 @@ module.exports = app => {
   router.get("/:email", users.getOne);
   // Update a user with email
   router.put("/:email", users.setOne);
-  // Update password
-  router.put("/pwd/:email", users.setPwd);
   // Update login data
   router.put("/count/:email", users.setCnt);
   // Update verification data

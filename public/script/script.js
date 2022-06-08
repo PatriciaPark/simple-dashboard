@@ -321,8 +321,8 @@ function resetPassword(){
                 // Match old password
                 // Update New Password
                 var data = { email: email, password: userPassword };
-                fetch('/api/users/pwd/'+ email, {
-                    method: 'PUT',
+                fetch('/api/users/update', {
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -334,7 +334,7 @@ function resetPassword(){
                     window.location.replace("./dashboard.html");
                 })
                 .catch((error) => {
-                    console.error('Fail to update username:', error);
+                    console.error('Fail to update password:', error);
                 })
             }
         })

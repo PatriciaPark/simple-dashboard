@@ -117,10 +117,10 @@ User.updateOne = (email, user, result) => {
     }
   );
 };
-Login.updatePwd = (email, user, result) => {
+User.updatePwd = (email, password,  user, result) => {
   sql.query(
     "UPDATE users SET password = ? WHERE email = ?",
-    [user.password, email],
+    [password, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
