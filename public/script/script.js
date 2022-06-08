@@ -184,6 +184,7 @@ function signIn(){
       alert("Please check your Email Address");
       return checkUserSIEmail();
   }else if(checkUserPasswordValid == null){
+        alert("Wrong Email or Passwords");
       return checkUserSIPassword();
   }else{
     // Check Passwords
@@ -196,7 +197,6 @@ function signIn(){
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log("*********************data.message: " + data.message)
         if (data.message) {
             alert('Wrong Email or Passwords');
             
