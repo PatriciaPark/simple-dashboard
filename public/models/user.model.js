@@ -49,7 +49,7 @@ User.readOne = (email, result) => {
       result(null, res[0]);
       return;
     }
-    // not found User with the id
+    // not found User with the email
     result({ kind: "not_found" }, null);
   });
 };
