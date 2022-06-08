@@ -192,7 +192,7 @@ function signIn(){
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({email: userSIEmail}),
+        body: JSON.stringify({email: userSIEmail, password: userSIPassword}),
     })
     .then((response) => response.json())
     .then((response) => {
