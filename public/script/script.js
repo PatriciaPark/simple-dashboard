@@ -191,7 +191,7 @@ function signIn(){
         email: userSIEmail,
         password: userSIPassword
     };
-    fetch('api/users/pwd',{
+    fetch('/api/users/pwd',{
         method : "POST",
         headers: {
             'Content-Type': 'application/json',
