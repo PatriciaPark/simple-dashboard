@@ -20,7 +20,23 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
-User.findById = (email, result) => {
+User.check = (email, password, result) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      console.log("found user password by email: ", res[0]);
+      result(null, res[0]);
+      return;
+    }
+    // not found User password with the email
+    result({ kind: "not_found" }, null);
+  });
+};
+User.readOne = (email, result) => {
   sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -36,7 +52,7 @@ User.findById = (email, result) => {
     result({ kind: "not_found" }, null);
   });
 };
-User.getAll = (email, result) => {
+User.readAll = (email, result) => {
   let query = "SELECT id, username, email, password, DATE_FORMAT(createdAt, '%Y-%m-%d %H:%i:%s') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%d %H:%i:%s') as updatedAt, loginCnt, DATE_FORMAT(lastSession, '%Y-%m-%d %H:%i:%s') as lastSession, emailVerification FROM users";
   if (email) {
     query += ` WHERE email LIKE '%${email}%'`;
@@ -51,7 +67,7 @@ User.getAll = (email, result) => {
     result(null, res);
   });
 };
-User.findByEmailVerified = (email, result) => {
+User.readAuth = (email, result) => {
   sql.query(`SELECT * FROM users WHERE emailVerification=1 AND email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -67,7 +83,7 @@ User.findByEmailVerified = (email, result) => {
     result({ kind: "not_found" }, null);
   });
 };
-User.countVisitors = (email, result) => {
+User.readCnt = (email, result) => {
   let query = "SELECT count(*) as visitors FROM users WHERE DATE_FORMAT(lastSession, '%Y-%m-%d') = CURDATE() ";
       query += `UNION ALL `;
       query += `SELECT round(count(*)/7) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
@@ -81,23 +97,7 @@ User.countVisitors = (email, result) => {
     result(null, res);
   });
 };
-User.findOldPwd = (email, password, result) => {
-  sql.query(`SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`, (err, res) => {
-    if (err) {
-      console.log("error: ", err);
-      result(err, null);
-      return;
-    }
-    if (res.length) {
-      console.log("found user: ", res[0]);
-      result(null, res[0]);
-      return;
-    }
-    // not found User with the id
-    result({ kind: "not_found" }, null);
-  });
-};
-User.updateById = (email, user, result) => {
+User.updateOne = (email, user, result) => {
   sql.query(
     "UPDATE users SET username = ? WHERE email = ?",
     [user.username, email],
@@ -127,7 +127,7 @@ Login.updatePwd = (email, user, result) => {
     }
   );
 };
-Login.updateLogin = (email, user, result) => {
+Login.updateCnt = (email, user, result) => {
   sql.query(
     "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
     [email],
@@ -142,7 +142,7 @@ Login.updateLogin = (email, user, result) => {
     }
   );
 };
-Login.updateEmailVerification = (email, user, result) => {
+Login.updateAuth = (email, user, result) => {
   sql.query(
     "UPDATE users SET emailVerification=1 WHERE email = ?",
     [email],

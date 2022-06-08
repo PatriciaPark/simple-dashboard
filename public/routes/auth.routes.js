@@ -10,26 +10,26 @@ module.exports = app => {
       verifySignUp.checkRolesExisted
     ],
     users.create);
+  // Check Passwords
+  router.post("/pwd", users.check);
   // Retrieve all Tutorials
-  router.get("/", users.findAll);
+  router.get("/", users.getAll);
   // Retrieve visitor counts
-  router.get("/count", users.visitors);
-  // Compare previous passwords
-  router.get("/oldpwd/:email", users.oldpwd);
+  router.get("/count", users.getCnt);
   // Retrieve verified email user
-  router.get("/:email", users.findVerified);
+  router.get("/email/:email", users.getAuth);
   // Retrieve a single Tutorial with id
-  router.get("/:id", users.findOne);
+  router.get("/:email", users.getOne);
   // Update a User with email
-  router.put("/:email", users.update);
+  router.put("/:email", users.setOne);
   // Update password
-  router.put("/passwords/:email", users.updatePwd);
+  router.put("/pwd/:email", users.setPwd);
   // Update login data
-  router.put("/loginCount/:email", users.loginCount);
+  router.put("/count/:email", users.setCnt);
   // Update verification data
-  router.put("/verificationData/:email", users.verificationData);
+  router.put("/email/:email", users.setAuth);
   // Delete a User with id
-  router.delete("/:email", users.delete);
+  router.delete("/:email", users.deleteOne);
   // Delete all Users
   router.delete("/", users.deleteAll);
   app.use('/api/users', router);

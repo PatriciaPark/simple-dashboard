@@ -33,7 +33,7 @@ function checkUserEmail(){
 // Password Validation
 function checkUserPassword(){
   var userPassword = document.getElementById("userPassword");
-  var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;      
+  var userPasswordFormate = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;      
   var flag;
   if(userPassword.value.match(userPasswordFormate)){
       flag = false;
@@ -70,7 +70,7 @@ function signUp(){
     var userConfirmPassword = document.getElementById("userConfirmPassword").value;
     var userFullNameFormate = /^([A-Za-z.\s_-])/;    
     var userEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/;      
+    var userPasswordFormate = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;      
   
     var checkUserFullNameValid = userFullName.match(userFullNameFormate);
     var checkUserEmailValid = userEmail.match(userEmailFormate);
@@ -174,7 +174,7 @@ function signIn(){
   var userSIEmail = document.getElementById("userSIEmail").value;
   var userSIPassword = document.getElementById("userSIPassword").value;
   var userSIEmailFormate = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var userSIPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{10,}/;      
+  var userSIPasswordFormate = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;      
 
   var checkUserEmailValid = userSIEmail.match(userSIEmailFormate);
   var checkUserPasswordValid = userSIPassword.match(userSIPasswordFormate);
@@ -186,39 +186,56 @@ function signIn(){
   }else if(checkUserPasswordValid == null){
       return checkUserSIPassword();
   }else{
-    // Signin successful
-    // update database - login count(loginCnt), last session(lastSession)
-    fetch('/api/users/'+ userSIEmail)
-    .then((response) => response.json())
-    .then((data) => {
-        sessionStorage.setItem('userSIEmail', userSIEmail);
-        if(data.message){
-            // Not verified email yet : emailVerification=0
-            console.log(data.message);
-            window.location.replace("./views/email_verification.html");
-        } else {
-            // Already verified email : emailVerification=1
-            var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
-            fetch('/api/users/loginCount/'+ userSIEmail, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(dataCnt),
+    // Check Passwords
+    fetch('api/users/pwd',{
+        method : "POST",
+        body : JSON.stringify({
+            email : this.state.email,
+            password : this.state.password
             })
+    })
+    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            // update database - login count(loginCnt), last session(lastSession)
+            fetch('/api/users/'+ userSIEmail)
             .then((response) => response.json())
-            .then((json) => {
-                console.log('Success Count:', json);
+            .then((data) => {
+                sessionStorage.setItem('userSIEmail', userSIEmail);
+                if(data.message){
+                    // Not verified email yet : emailVerification=0
+                    console.log(data.message);
+                    window.location.replace("./views/email_verification.html");
+                } else {
+                    // Already verified email : emailVerification=1
+                    var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
+                    fetch('/api/users/count/'+ userSIEmail, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dataCnt),
+                    })
+                    .then((response) => response.json())
+                    .then((json) => {
+                        console.log('Success Count:', json);
+                    })
+                    .catch((error) => {
+                        console.error('Fail to Count:', error);
+                    })
+
+                    window.location.replace("./views/dashboard.html");
+                }
             })
             .catch((error) => {
-                console.error('Fail to Count:', error);
+            console.error('Fail to Get User:', error);
             })
 
-            window.location.replace("./views/dashboard.html");
+          } else {
+            alert('Wrong Email or Passwords');
         }
-    })
-    .catch((error) => {
-    console.error('Fail to Get User:', error);
     })
   }
 }
@@ -276,10 +293,10 @@ function saveProfile(){
 // Reset password and update database && checkUserOldPassword
 function resetPassword(){
     var email = sessionStorage.getItem('userSIEmail');
-    console.log("*********************pwd: " + email);
+    var userOldPassword = document.getElementById("userOldPassword").value;
     var userPassword = document.getElementById("userPassword").value;
     var userConfirmPassword = document.getElementById("userConfirmPassword").value;
-    var userPasswordFormate = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+    var userPasswordFormate = /^.*(?=^.{8,}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
     var checkUserPasswordValid = userPassword.match(userPasswordFormate);
     if(checkUserPasswordValid == null){
         document.getElementById("userPassword").focus();
@@ -289,7 +306,7 @@ function resetPassword(){
       return checkUserConfirmPassword();
     }else{
         // check User Old Password
-        fetch('/api/users/oldpwd/'+ email)
+        fetch('/api/users/'+ email)
         .then((response) => response.json())
         .then((data) => {
             if(data.message){

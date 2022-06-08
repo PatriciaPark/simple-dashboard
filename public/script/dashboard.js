@@ -3,7 +3,7 @@ let email = sessionStorage.getItem('userSIEmail'); //localStorage.getItem('email
 // Update database - email verification(emailVerification= 0 -> 1).
 function emailVerification(email){
     let data = { email: email, emailVerification: 1 };
-    fetch('/api/users/verificationData/'+ email, {
+    fetch('/api/users/email/'+ email, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

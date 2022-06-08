@@ -25,10 +25,27 @@ exports.create = (req, res) => {
       else res.send(data);
     });
 };
+// Check Passwords
+exports.check = (req, res) => {
+  const password = bcrypt.hashSync(req.body.password, 8);
+  User.check(req.params.email, password, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User passwords ${req.params.email}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving User Password with email " + req.params.email
+          });
+        }
+      } else res.send(data);
+    });
+};
 // Retrieve all Users from the database (with condition).
-exports.findAll = (req, res) => {
+exports.getAll = (req, res) => {
     const email = null;
-    User.getAll(email, (err, data) => {
+    User.readAll(email, (err, data) => {
       if (err)
         res.status(500).send({
           message:
@@ -37,9 +54,21 @@ exports.findAll = (req, res) => {
       else res.send(data);
     });
 };
+// Retrieve visitor counts.
+exports.getCnt = (req, res) => {
+  const email = null;
+  User.readCnt(email, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving visitors."
+      });
+    else res.send(data);
+  });
+};
 // Find email verified Users
-exports.findVerified = (req, res) => {
-  User.findByEmailVerified(req.params.email, (err, data) => {
+exports.getAuth = (req, res) => {
+  User.readAuth(req.params.email, (err, data) => {
     if (err) {
       if (err.kind === "not_found") {
         res.status(404).send({
@@ -53,53 +82,24 @@ exports.findVerified = (req, res) => {
     } else res.send(data);
   });
 };
-// Retrieve visitor counts.
-exports.visitors = (req, res) => {
-  const email = null;
-  User.countVisitors(email, (err, data) => {
-    if (err)
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving visitors."
-      });
-    else res.send(data);
-  });
-};
-// Compare previous passwords
-exports.oldpwd = (req, res) => {
-  const pwd = bcrypt.hashSync(req.body.password, 8);
-  User.findOldPwd(req.params.email, pwd, (err, data) => {
-    if (err) {
-      if (err.kind === "not_found") {
-        res.status(404).send({
-          message: `Wrong password with email ${req.params.email}.`
-        });
-      } else {
-        res.status(500).send({
-          message: "Error retrieving password with email " + req.params.email
-        });
-      }
-    } else res.send(data);
-  });
-};
-// Find a single User with an id
-exports.findOne = (req, res) => {
-    User.findById(req.params.id, (err, data) => {
+// Find a single User with an email
+exports.getOne = (req, res) => {
+    User.readOne(req.params.email, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found User with id ${req.params.id}.`
+              message: `Not found User with email ${req.params.email}.`
             });
           } else {
             res.status(500).send({
-              message: "Error retrieving User with id " + req.params.id
+              message: "Error retrieving User with email " + req.params.email
             });
           }
         } else res.send(data);
       });
 };
 // Update a User by the email in the request
-exports.update = (req, res) => {
+exports.setOne = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -107,7 +107,7 @@ exports.update = (req, res) => {
     });
   }
   console.log(req.body);
-  User.updateById(
+  User.updateOne(
     req.params.email,
     new User(req.body),
     (err, data) => {
@@ -126,7 +126,7 @@ exports.update = (req, res) => {
   );
 };
 // Update password
-exports.updatePwd = (req, res) => {
+exports.setPwd = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -153,7 +153,7 @@ exports.updatePwd = (req, res) => {
   );
 };
 // Update login data
-exports.loginCount = (req, res) => {
+exports.setCnt = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -161,7 +161,7 @@ exports.loginCount = (req, res) => {
     });
   }
   console.log(req.body);
-  Login.updateLogin(
+  Login.updateCnt(
     req.params.email,
     new Login(req.body),
     (err, data) => {
@@ -180,7 +180,7 @@ exports.loginCount = (req, res) => {
   );
 };
 // Update verificationData data
-exports.verificationData = (req, res) => {
+exports.setAuth = (req, res) => {
   // Validate Request
   if (!req.body) {
     res.status(400).send({
@@ -188,7 +188,7 @@ exports.verificationData = (req, res) => {
     });
   }
   console.log(req.body);
-  Login.updateEmailVerification(
+  Login.updateAuth(
     req.params.email,
     new Login(req.body),
     (err, data) => {
@@ -207,7 +207,7 @@ exports.verificationData = (req, res) => {
   );
 };
 // Delete a User with the specified id in the request
-exports.delete = (req, res) => {
+exports.deleteOne = (req, res) => {
     User.remove(req.params.email, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
