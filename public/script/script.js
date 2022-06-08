@@ -190,8 +190,8 @@ function signIn(){
     fetch('api/users/pwd',{
         method : "POST",
         body : JSON.stringify({
-            email : this.state.email,
-            password : this.state.password
+            email : userSIEmail,
+            password : userSIPassword
             })
     })
     .then(response => response.json())
