@@ -199,7 +199,6 @@ function signIn(){
     .then((data) => {
         if (data.message) {
             alert('Wrong Email or Passwords');
-            
         } else {
               // update database - login count(loginCnt), last session(lastSession)
               fetch('/api/users/'+ userSIEmail)
@@ -234,7 +233,6 @@ function signIn(){
               .catch((error) => {
               console.error('Fail to Get User:', error);
               })
-            
         }
     })
   }
@@ -305,47 +303,43 @@ function resetPassword(){
         document.getElementById("userConfirmPassword").focus();
       return checkUserConfirmPassword();
     }else{
-        // check User Old Password
-        fetch('/api/users/'+ email)
+        // Check Old Passwords
+        fetch('/api/users/select', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({email: email, password: userOldPassword}),
+        })
         .then((response) => response.json())
         .then((data) => {
-            if(data.message){
-                // Previous password not match
-                console.log(data.message);
-                alert("Please check your previous passwords.");
+            if (data.message) {
+                // Not match old password
+                alert('Please check your previous passwords.');
                 document.getElementById("userOldPassword").focus();
             } else {
-                // Success
-                alert("Reset passwords successful.");
-                window.location.replace("./dashboard.html");
+                // Match old password
+                // Update New Password
+                var data = { email: email, password: userPassword };
+                fetch('/api/users/pwd/'+ email, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((json) => {
+                    alert("Reset passwords successful.");
+                    window.location.replace("./dashboard.html");
+                })
+                .catch((error) => {
+                    console.error('Fail to update username:', error);
+                })
             }
         })
-        .catch((error) => {
-            console.error('Fail to reset password:', error);
-        })
-        // let user = firebase.auth().currentUser;
-        // let uid;
-        // if(user != null){
-        //     uid = user.uid;
-        // }
-        // var firebaseRef = firebase.database().ref();
-        // var userData = {
-        //     userPassword: userPassword,
-        // }
-        // firebaseRef.child(uid).set(userData);
-      //   swal({
-      //       type: 'successfull',
-      //       title: 'Update successfull',
-      //       text: 'Profile updated.', 
-      //   }).then((value) => {
-      //       setTimeout(function(){
-      //           document.getElementById("profileSection").style.display = "block";
-  
-      //           document.getElementById("editProfileForm").style.display = "none";
-      //       }, 1000)
-      //   });
     }
-  }
+}
 // Working For Sign Out
 function signOut(){
   firebase.auth().signOut().then(function() {
