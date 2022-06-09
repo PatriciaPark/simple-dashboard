@@ -370,13 +370,13 @@ function deleteUser() {
         })
         .then((response) => response.json())
         .then((json) => {
+            console.log('Success Delete User:', json);
+            window.location.replace("../index.html");
+            console.log("****************firebase user: " + user);
             user.delete().then(() => {
                 // User deleted.
-                console.log('Success Delete User:', json);
-                window.location.replace("../index.html");
-              }).catch((error) => {
-                // An error ocurred
-                // ...
+            }).catch((error) => {
+                console.error('Fail to Delete User from firebase:', error);
             });
         })
         .catch((error) => {
