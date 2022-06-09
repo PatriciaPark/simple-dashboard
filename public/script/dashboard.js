@@ -31,9 +31,10 @@ function getAllUsers(){
 }
 // Login user info for display profile.
 function getUserData() {
-    if (email == null) {
-        email = sessionStorage.getItem('userSIEmail');
-    }
+    // if (email == null) {
+    //     email = sessionStorage.getItem('userSIEmail');
+    // }
+    console.log("************dashboard js: " + email);
     fetch('/api/users/' + email)
         .then((response) => response.json())
         .then((data) => {
