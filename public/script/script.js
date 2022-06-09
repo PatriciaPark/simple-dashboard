@@ -356,7 +356,7 @@ function signOut(){
 // Delete User
 function deleteUser() {
     var email = document.getElementById("userEmail").value;
-    var user = document.getElementById("userFullName").value;
+    var user = firebase.auth().currentUser;
     // const user = auth.currentUser;
     // Confirm: Are you sure?
     var answer = confirm("Are you sure?")
@@ -370,14 +370,14 @@ function deleteUser() {
         })
         .then((response) => response.json())
         .then((json) => {
-            firebase.auth().deleteUser(user).then(() => {
+            user.delete().then(() => {
                 // User deleted.
+                console.log('Success Delete User:', json);
+                window.location.replace("../index.html");
               }).catch((error) => {
                 // An error ocurred
                 // ...
             });
-            console.log('Success Delete User:', json);
-            window.location.replace("../index.html");
         })
         .catch((error) => {
             console.error('Fail to Delete User:', error);
