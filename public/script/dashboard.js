@@ -84,7 +84,7 @@ function countVisitors() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    if(email) emailVerification(email);
+    if(emailForSignIn) emailVerification(emailForSignIn);
     getUserData(emailForSignIn);
     getAllUsers();
     countVisitors();
