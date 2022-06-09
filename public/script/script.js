@@ -200,39 +200,41 @@ function signIn(){
         if (data.message) {
             alert('Wrong Email or Passwords');
         } else {
-              // update database - login count(loginCnt), last session(lastSession)
-              fetch('/api/users/'+ userSIEmail)
-              .then((response) => response.json())
-              .then((data) => {
-                  sessionStorage.setItem('userSIEmail', userSIEmail);
-                  if(data.message){
-                      // Not verified email yet : emailVerification=0
-                      console.log(data.message);
-                      window.location.replace("./views/email_verification.html");
-                  } else {
-                      // Already verified email : emailVerification=1
-                      var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
-                      fetch('/api/users/count/'+ userSIEmail, {
-                          method: 'PUT',
-                          headers: {
-                              'Content-Type': 'application/json',
-                          },
-                          body: JSON.stringify(dataCnt),
-                      })
-                      .then((response) => response.json())
-                      .then((json) => {
-                          console.log('Success Count:', json);
-                      })
-                      .catch((error) => {
-                          console.error('Fail to Count:', error);
-                      })
-  
-                      window.location.replace("./views/dashboard.html");
-                  }
-              })
-              .catch((error) => {
-              console.error('Fail to Get User:', error);
-              })
+
+            
+            fetch('/api/users/'+ userSIEmail)
+            .then((response) => response.json())
+            .then((data) => {
+                sessionStorage.setItem('userSIEmail', userSIEmail);
+                if(data.message){
+                    // Not verified email yet : emailVerification=0
+                    console.log("********************** verify 0: " + data.message);
+                    window.location.replace("./views/email_verification.html");
+                } else {
+                    // Already verified email : emailVerification=1
+                    // update database - login count(loginCnt), last session(lastSession)
+                    var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
+                    fetch('/api/users/count/'+ userSIEmail, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dataCnt),
+                    })
+                    .then((response) => response.json())
+                    .then((json) => {
+                        console.log('Success Count:', json);
+                    })
+                    .catch((error) => {
+                        console.error('Fail to Count:', error);
+                    })
+
+                    window.location.replace("./views/dashboard.html");
+                }
+            })
+            .catch((error) => {
+            console.error('Fail to Get User:', error);
+            })
         }
     })
   }
@@ -372,7 +374,6 @@ function deleteUser() {
         .then((json) => {
             console.log('Success Delete User:', json);
             window.location.replace("../index.html");
-            console.log("****************firebase user: " + user);
             user.delete().then(() => {
                 // User deleted.
             }).catch((error) => {
