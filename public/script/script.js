@@ -312,10 +312,10 @@ function resetPassword(){
             body: JSON.stringify({email: email, password: userOldPassword}),
         })
         .then((response) => response.json())
-        .then((data) => {
-            if (data.message) {
+        .then((response) => {
+            console.log("***************response.status(): " + response.status());
+            if (response.status() == 404) {
                 // Not match old password
-                console.log("***************data.message: " + data.message);
                 alert('Please check your previous passwords.');
                 document.getElementById("userOldPassword").focus();
             } else {
