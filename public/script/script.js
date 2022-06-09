@@ -200,9 +200,8 @@ function signIn(){
         if (data.message) {
             alert('Wrong Email or Passwords');
         } else {
-
-            
-            fetch('/api/users/'+ userSIEmail)
+            // Check email verification
+            fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())
             .then((data) => {
                 sessionStorage.setItem('userSIEmail', userSIEmail);

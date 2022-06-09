@@ -42,7 +42,7 @@ User.select = (email, password, result) => {
   });
 };
 User.readOne = (email, result) => {
-  sql.query(`SELECT * FROM users WHERE email = '${email}' AND emailVerification = 1`, (err, res) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
