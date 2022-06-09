@@ -4,7 +4,7 @@ import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app
 document.getElementById("resendEmailA").addEventListener("click", emailLinkSend, false);
 let config = {
   apiKey: "AIzaSyCBSfZbINX0RkfDLZ_dUWeAE383iXLgowg",
-  authDomain: "simple-dashboard-pyjee8.herokuapp.com/", //"simple-dashboard-48420.firebaseapp.com",
+  authDomain: "simple-dashboard-pyjee8.herokuapp.com", //"simple-dashboard-48420.firebaseapp.com",
   projectId: "simple-dashboard-48420",
   storageBucket: "simple-dashboard-48420.appspot.com",
   messagingSenderId: "132374569431",
@@ -29,7 +29,7 @@ function emailLinkSend(){
       // The link was successfully sent. Inform the user.
       // Save the email locally so you don't need to ask the user for it again
       // window.localStorage.setItem('emailForSignIn', email);
-      alert("Send Email Successfully");
+      alert("Send Email Successfully: " + email);
     })
     .catch((error) => {
       const errorCode = error.code;
