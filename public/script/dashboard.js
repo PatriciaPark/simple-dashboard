@@ -1,4 +1,5 @@
-let email = sessionStorage.getItem('userSIEmail'); //localStorage.getItem('emailForSignIn');
+let email = sessionStorage.getItem('userSIEmail'); 
+let emailForSignIn = localStorage.getItem('emailForSignIn');    // from email.js
 
 // Update database - email verification(emailVerification= 0 -> 1).
 function emailVerification(email){
@@ -30,12 +31,12 @@ function getAllUsers(){
     });
 }
 // Login user info for display profile.
-function getUserData(email) {
+function getUserData(emailForSignIn) {
     // if (email == null) {
     //     email = sessionStorage.getItem('userSIEmail');
     // }
-    console.log("************dashboard js: " + email);
-    fetch('/api/users/' + email)
+    console.log("************dashboard js: " + emailForSignIn);
+    fetch('/api/users/' + emailForSignIn)
         .then((response) => response.json())
         .then((data) => {
             var userName = document.getElementById("username");
@@ -84,7 +85,7 @@ function countVisitors() {
 
 window.addEventListener('DOMContentLoaded', function() {
     if(email) emailVerification(email);
-    getUserData(email);
+    getUserData(emailForSignIn);
     getAllUsers();
     countVisitors();
 });
