@@ -4,7 +4,7 @@ import * as firebase from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-app
 document.getElementById("resendEmailA").addEventListener("click", emailLinkSend, false);
 let config = {
   apiKey: "AIzaSyCBSfZbINX0RkfDLZ_dUWeAE383iXLgowg",
-  authDomain: "simple-dashboard-48420.firebaseapp.com",
+  authDomain: "simple-dashboard-pyjee8.herokuapp.com/", //"simple-dashboard-48420.firebaseapp.com",
   projectId: "simple-dashboard-48420",
   storageBucket: "simple-dashboard-48420.appspot.com",
   messagingSenderId: "132374569431",
@@ -22,15 +22,7 @@ function emailLinkSend(){
     // URL must be in the authorized domains list in the Firebase Console.
     // url: 'https://simple-dashboard-48420.web.app/',
     url: 'https://simple-dashboard-pyjee8.herokuapp.com/',
-    handleCodeInApp: true,
-    iOS: {
-      bundleId: 'https://simple-dashboard-pyjee8.herokuapp.com/'
-    },
-    android: {
-      packageName: 'https://simple-dashboard-pyjee8.herokuapp.com/',
-      installApp: true,
-      minimumVersion: '12'
-    }
+    handleCodeInApp: true
   };
   sendSignInLinkToEmail(auth, email, actionCodeSettings)
     .then(() => {
