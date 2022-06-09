@@ -35,7 +35,6 @@ function getUserData(emailForSignIn) {
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
     }
-    console.log("************dashboard js: " + emailForSignIn);
     fetch('/api/users/' + emailForSignIn)
         .then((response) => response.json())
         .then((data) => {
