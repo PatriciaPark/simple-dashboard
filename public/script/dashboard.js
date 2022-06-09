@@ -30,7 +30,7 @@ function getAllUsers(){
     });
 }
 // Login user info for display profile.
-function getUserData() {
+function getUserData(email) {
     // if (email == null) {
     //     email = sessionStorage.getItem('userSIEmail');
     // }
@@ -84,7 +84,7 @@ function countVisitors() {
 
 window.addEventListener('DOMContentLoaded', function() {
     if(email) emailVerification(email);
-    getUserData();
+    getUserData(email);
     getAllUsers();
     countVisitors();
 });

@@ -204,11 +204,10 @@ function signIn(){
             fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())
             .then((data) => {
-                alert("**********************script email: " + data.message + " " + data.JSON);
+                alert("**********************script email: " + userSIEmail+" "+data.message + " " + data.json() + " " + data.answer);
                 sessionStorage.setItem('userSIEmail', userSIEmail);
                 if(data.message){
                     // Not verified email yet : emailVerification=0
-                    console.log("********************** verify 0: " + data.message);
                     window.location.replace("./views/email_verification.html");
                 } else {
                     // Already verified email : emailVerification=1
