@@ -204,7 +204,6 @@ function signIn(){
             fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())
             .then((data) => {
-                alert("**********************script email: " + userSIEmail+" "+data.message + " " + data.answer);
                 sessionStorage.setItem('userSIEmail', userSIEmail);
                 if(data.message){
                     // Not verified email yet : emailVerification=0
@@ -316,7 +315,6 @@ function resetPassword(){
         .then((data) => {
             if (data.message) {
                 // Not match old password
-                console.log("***************data.message: " + data.message);
                 alert('Please check your previous passwords.');
                 document.getElementById("userOldPassword").focus();
             } else {
