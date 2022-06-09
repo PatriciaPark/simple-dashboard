@@ -133,9 +133,9 @@ exports.setPwd = (req, res) => {
     });
   }
   console.log(req.body);
-  Login.updatePwd(
-    req.params.email, bcrypt.hashSync(req.body.password, 8),
-    new Login(req.body),
+  User.updatePwd(
+    req.params.email,
+    new User(req.body),
     (err, data) => {
       if (err) {
         if (err.kind === "not_found") {

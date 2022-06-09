@@ -117,10 +117,10 @@ User.updateOne = (email, user, result) => {
     }
   );
 };
-Login.updatePwd = (email, password, user, result) => {
+User.updatePwd = (email, user, result) => {
   sql.query(
     "UPDATE users SET password = ? WHERE email = ?",
-    [password, email],
+    [bcrypt.hashSync(user.password, 8), email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
