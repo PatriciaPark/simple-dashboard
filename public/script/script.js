@@ -204,7 +204,7 @@ function signIn(){
             fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())
             .then((data) => {
-                alert("**********************script email: " + userSIEmail+" "+data.message + " " + data.json() + " " + data.answer);
+                alert("**********************script email: " + userSIEmail+" "+data.message + " " + data.answer);
                 sessionStorage.setItem('userSIEmail', userSIEmail);
                 if(data.message){
                     // Not verified email yet : emailVerification=0
