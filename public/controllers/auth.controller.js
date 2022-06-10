@@ -39,8 +39,8 @@ exports.select = (req, res) => {
           });
         }
       } else {
-        // res.cookie('useremail', req.body.email);
-        // res.cookie('userpwd', req.body.password);
+        res.cookie('useremail', req.body.email);
+        res.cookie('userpwd', req.body.password);
         res.send(data);
       }
     });
