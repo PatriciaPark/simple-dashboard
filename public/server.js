@@ -5,7 +5,7 @@ const cookieSession = require("cookie-session");
 const app = express();
 
 // // set the view engine to ejs
-// const path = require('path');
+const path = require('path');
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 
@@ -49,7 +49,8 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // simple route
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static(path.join(__dirname)));
 app.get("/", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
