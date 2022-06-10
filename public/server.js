@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 // const expressSession = require('express-session');
 const app = express();
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 // cookie parser
-app.use(cookieParser);
+// app.use(cookieParser);
 
 // cookie session
 // app.use(expressSession({
