@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
-var router = require("express").Router();
 // const expressSession = require('express-session');
 const app = express();
 
@@ -73,7 +72,7 @@ app.get("/", (req, res) => {
 });
 
 
-router.route('/api/users/').get(function(req,res, next){
+app.use('/api/users/').get(function(req,res,next){
   console.log('***********************************/api/users/ called.' + req.session.user);
   if(req.session.user){
       next();
