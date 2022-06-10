@@ -232,7 +232,10 @@ exports.deleteAll = (req, res) => {
         else res.send({ message: `All Users were deleted successfully!` });
       });
 };
-
+// The 404 Route
+exports.status404 = (req, res) => {
+  res.status(404).sendFile('./404.html');
+};
 // const db = require("../models");
 // const config = require("../config/auth.config");
 // const User = db.user;

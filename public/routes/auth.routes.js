@@ -33,8 +33,6 @@ module.exports = app => {
   // Delete all users
   router.delete("/", users.deleteAll);
   //The 404 Route (ALWAYS Keep this as the last route)
-  router.get('*', function(req, res){
-    res.status(404).sendFile('./404.html');
-  });
+  router.get('*', users.status404);
   app.use('/api/users', router);
 };
