@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-// const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
 // const expressSession = require('express-session');
 const app = express();
 
@@ -11,20 +11,10 @@ const app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
 
+// Cross-Origin Resource Sharing, CORS
 app.use(cors());
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
-// cookie parser
-// app.use(cookieParser);
-
-// cookie session
-// app.use(expressSession({
-//   secret:'COOKIE_SECRET',
-//   resave:true,
-//   saveUninitialized:true
-// }));
+// cookie
+app.use(cookieParser());
 app.use(
   cookieSession({
     name: "pyjee8-session",
@@ -33,6 +23,19 @@ app.use(
     sameSite: "strict"
   })
 );
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// cookie session
+// app.use(expressSession({
+//   secret:'COOKIE_SECRET',
+//   resave:true,
+//   saveUninitialized:true
+// }));
+
 
 // // Count today's visitors
 // var count = 0;
