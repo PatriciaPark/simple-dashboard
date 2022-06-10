@@ -54,9 +54,6 @@ app.get("/", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
-app.all('*/users/*', requireAuthentication, function (req, res, next){
-  next();
-});
 
 // routes
 require("./routes/auth.routes")(app);
