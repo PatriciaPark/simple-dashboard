@@ -2,8 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require('cookie-parser');
-// const cookieSession = require("cookie-session");
-const expressSession = require('express-session');
+const cookieSession = require("cookie-session");
+// const expressSession = require('express-session');
 const app = express();
 
 // // set the view engine to ejs
@@ -20,19 +20,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser);
 
 // cookie session
-app.use(expressSession({
-  secret:'COOKIE_SECRET',
-  resave:true,
-  saveUninitialized:true
-}));
-// app.use(
-//   cookieSession({
-//     name: "pyjee8-session",
-//     secret: "COOKIE_SECRET", // should use as secret environment variable
-//     httpOnly: true,
-//     sameSite: 'strict'
-//   })
-// );
+// app.use(expressSession({
+//   secret:'COOKIE_SECRET',
+//   resave:true,
+//   saveUninitialized:true
+// }));
+app.use(
+  cookieSession({
+    name: "pyjee8-session",
+    secret: "COOKIE_SECRET", // should use as secret environment variable
+    httpOnly: true,
+    sameSite: 'strict'
+  })
+);
 
 // // Count today's visitors
 // var count = 0;
