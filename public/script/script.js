@@ -1,4 +1,7 @@
 // ********** Working For Sign Up Form **********
+
+import { response } from "express";
+
 // Name Validation 
 function checkUserFullName(){
     var userSurname = document.getElementById("userFullName").value;
@@ -228,6 +231,7 @@ function signIn(){
                     })
 
                     window.location.replace("/dashboard");
+                    // response.redirect("/dashboard");
                 }
             })
             .catch((error) => {
