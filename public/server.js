@@ -54,10 +54,6 @@ app.get("/", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
-// The 404 Route (ALWAYS Keep this as the last route)
-app.all('*', (req, res) => {
-  res.status(404).sendFile('./404.html');
-});
 
 // routes
 require("./routes/auth.routes")(app);
