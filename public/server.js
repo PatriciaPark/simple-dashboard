@@ -67,16 +67,6 @@ require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
 
-router.route('*/api/users/*').get(function(req,res, next){
-  console.log('/api/users/ called.');
-  
-  if(req.session.user){
-      next();
-  }else{
-      res.redirect('./index.html');
-  }
-});
-
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 console.log(PORT);
