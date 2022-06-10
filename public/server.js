@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
 
 
 router.route('/dashboard').get(function(req,res){
-  console.log('***********************************/api/users/ called.' + req.session.user);
+  console.log('***********************************/dashboard called.' + req.session.user);
   if(req.session.user){
       res.redirect('./views/dashboard.html');
   }else{
