@@ -5,14 +5,9 @@ const cookieSession = require("cookie-session");
 const app = express();
 
 // // set the view engine to ejs
-const path = require('path');
+// const path = require('path');
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
-
-app.use('/views', express.static(path.resolve(__dirname, 'views')));
-app.use('/public', express.static(path.resolve(__dirname, 'public')));
-app.use('/script', express.static(path.resolve(__dirname, 'script')));
-
 
 app.use(cors());
 
@@ -48,22 +43,22 @@ app.use(
 // })
 
 // Database
-const db = require("../models");
+const db = require("./models");
 const Role = db.role;
 
 // db.sequelize.sync();
 
 // simple route
-// app.use(express.static('public'));
+app.use(express.static('public'));
 app.get("/", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
 // routes
-require("../routes/auth.routes")(app);
-require("../routes/user.routes")(app);
-require("../routes/tutorial.routes")(app);
+require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
+require("./routes/tutorial.routes")(app);
 
 // The 404 Route
 app.use(function(req,res){
