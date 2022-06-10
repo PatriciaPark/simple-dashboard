@@ -20,18 +20,15 @@ app.use(
     name: "pyjee8-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
-    sameSite: "strict"
+    sameSite: "strict",
+    cookie: {
+      secureProxy: true,
+      httpOnly: true,
+      domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
+      expires: 3600
+    }
   })
 );
-
-router.route('*/api/users/*').get(function(req,res, next){
-  console.log('/api/users/ called.');
-  if(req.session.user){
-      next();
-  }else{
-      res.redirect('./index.html');
-  }
-});
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());

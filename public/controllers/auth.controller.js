@@ -43,6 +43,11 @@ exports.select = (req, res) => {
         // res.cookie('userpwd', req.body.password);
         // // res.setHeader('Set-Cookie','visited=true; Max-Age=3600; HttpOnly, Secure');
         // console.log("**************cookie: " + req.session);
+        req.session.user = {
+          email:req.body.email,
+          password:req.body.password,
+          authorized:true
+        };
         res.send(data);
       }
     });
