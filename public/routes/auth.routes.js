@@ -3,14 +3,6 @@ const { verifySignUp } = require("../middleware");
 module.exports = app => {
   const users = require("../controllers/auth.controller.js");
   var router = require("express").Router();
-  router.route('/api/users/').get(function(req,res, next){
-    console.log('***********************************/api/users/ called.' + req.session.user);
-    if(req.session.user){
-        next();
-    }else{
-        res.redirect('./index.html');
-    }
-  });
   // Create a new User
   router.post("/create", 
   [
