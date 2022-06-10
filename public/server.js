@@ -24,6 +24,15 @@ app.use(
   })
 );
 
+router.route('*/api/users/*').get(function(req,res, next){
+  console.log('/api/users/ called.');
+  if(req.session.user){
+      next();
+  }else{
+      res.redirect('./index.html');
+  }
+});
+
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
