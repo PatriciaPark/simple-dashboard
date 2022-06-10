@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const cookieSession = require("cookie-session");
+const cookieParser = require('cookie-parser');
+// const cookieSession = require("cookie-session");
+const expressSession = require('express-session');
 const app = express();
 
 // // set the view engine to ejs
@@ -10,22 +12,27 @@ const app = express();
 // app.set('view engine', 'ejs');
 
 app.use(cors());
-
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
-
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
+// cookie parser
+app.use(cookieParser);
 
 // cookie session
-app.use(
-  cookieSession({
-    name: "pyjee8-session",
-    secret: "COOKIE_SECRET", // should use as secret environment variable
-    httpOnly: true,
-    sameSite: 'strict'
-  })
-);
+app.use(expressSession({
+  secret:'COOKIE_SECRET',
+  resave:true,
+  saveUninitialized:true
+}));
+// app.use(
+//   cookieSession({
+//     name: "pyjee8-session",
+//     secret: "COOKIE_SECRET", // should use as secret environment variable
+//     httpOnly: true,
+//     sameSite: 'strict'
+//   })
+// );
 
 // // Count today's visitors
 // var count = 0;
@@ -55,14 +62,20 @@ app.get("/", (req, res) => {
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
-app.all(['*server.js*', '*config/**', '*models/**', '*package.json*', '*routes/**', '*middleware/**', '*controllers/**', '*script/**', '*public/**'], function (req, res, next) {
-  res.send({auth: false})
-});
-
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
+
+router.route('*/api/users/*').get(function(req,res, next){
+  console.log('/api/users/ called.');
+  
+  if(req.session.user){
+      next();
+  }else{
+      res.redirect('./index.html');
+  }
+});
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;

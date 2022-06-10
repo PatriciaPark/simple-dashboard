@@ -38,7 +38,11 @@ exports.select = (req, res) => {
             message: "Error retrieving User Password with email " + req.params.email
           });
         }
-      } else res.send(data);
+      } else {
+        res.cookie('useremail', req.body.email);
+        res.cookie('userpwd', req.body.password);
+        res.send(data);
+      }
     });
 };
 // Retrieve all Users from the database (with condition).
