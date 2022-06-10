@@ -1,4 +1,5 @@
 const sql = require("./db.js");
+const bcrypt = require("bcrypt");
 // constructor
 const User = function(user) {
   this.email = user.email;
@@ -20,7 +21,27 @@ User.create = (newUser, result) => {
     result(null, { id: res.insertId, ...newUser });
   });
 };
-User.findById = (email, result) => {
+User.select = (email, password, result) => {
+  sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+    if (res.length) {
+      if(bcrypt.compareSync(password, res[0].password)){
+        console.log("found user by email: ", res[0]);
+        result(null, res[0]);
+      } else {
+        result({ kind: "not_found" }, null);
+      }
+      return;
+    }
+    // not found User password with the email
+    result({ kind: "not_found" }, null);
+  });
+};
+User.readOne = (email, result) => {
   sql.query(`SELECT * FROM users WHERE email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -32,11 +53,11 @@ User.findById = (email, result) => {
       result(null, res[0]);
       return;
     }
-    // not found User with the id
+    // not found User with the email
     result({ kind: "not_found" }, null);
   });
 };
-User.getAll = (email, result) => {
+User.readAll = (email, result) => {
   let query = "SELECT id, username, email, password, DATE_FORMAT(createdAt, '%Y-%m-%d %H:%i:%s') as createdAt, DATE_FORMAT(updatedAt, '%Y-%m-%d %H:%i:%s') as updatedAt, loginCnt, DATE_FORMAT(lastSession, '%Y-%m-%d %H:%i:%s') as lastSession, emailVerification FROM users";
   if (email) {
     query += ` WHERE email LIKE '%${email}%'`;
@@ -51,7 +72,7 @@ User.getAll = (email, result) => {
     result(null, res);
   });
 };
-User.findByEmailVerified = (email, result) => {
+User.readAuth = (email, result) => {
   sql.query(`SELECT * FROM users WHERE emailVerification=1 AND email = '${email}'`, (err, res) => {
     if (err) {
       console.log("error: ", err);
@@ -63,13 +84,12 @@ User.findByEmailVerified = (email, result) => {
       result(null, res[0]);
       return;
     }
-    // not found User with the id
+    // not found User with the email
     result({ kind: "not_found" }, null);
   });
 };
-User.countVisitors = (email, result) => {
-  console.log("*********visitor model");
-  let query = "SELECT count(*) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 DAY ) AND NOW() ";
+User.readCnt = (email, result) => {
+  let query = "SELECT count(*) as visitors FROM users WHERE DATE_FORMAT(lastSession, '%Y-%m-%d') = CURDATE() ";
       query += `UNION ALL `;
       query += `SELECT round(count(*)/7) as visitors FROM users WHERE lastSession BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()`;
   sql.query(query, (err, res) => {
@@ -82,10 +102,10 @@ User.countVisitors = (email, result) => {
     result(null, res);
   });
 };
-User.updateById = (email, user, result) => {
+User.updateOne = (email, user, result) => {
   sql.query(
-    "UPDATE users SET username = ?, password = ? WHERE email = ?",
-    [user.username, user.password, email],
+    "UPDATE users SET username = ? WHERE email = ?",
+    [user.username, email],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -97,7 +117,22 @@ User.updateById = (email, user, result) => {
     }
   );
 };
-Login.updateLogin = (email, user, result) => {
+User.updatePwd = (email, user, result) => {
+  sql.query(
+    "UPDATE users SET password = ? WHERE email = ?",
+    [bcrypt.hashSync(user.password, 8), email],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
+      console.log("updated user password: ", { email: email, ...user });
+      result(null, { email: email, ...user });
+    }
+  );
+};
+Login.updateCnt = (email, user, result) => {
   sql.query(
     "UPDATE users SET loginCnt=loginCnt+1, lastSession=CURRENT_TIMESTAMP WHERE email = ?",
     [email],
@@ -112,7 +147,7 @@ Login.updateLogin = (email, user, result) => {
     }
   );
 };
-Login.updateEmailVerification = (email, user, result) => {
+Login.updateAuth = (email, user, result) => {
   sql.query(
     "UPDATE users SET emailVerification=1 WHERE email = ?",
     [email],
@@ -127,19 +162,19 @@ Login.updateEmailVerification = (email, user, result) => {
     }
   );
 };
-User.remove = (id, result) => {
-  sql.query("DELETE FROM users WHERE id = ?", id, (err, res) => {
+User.remove = (email, result) => {
+  sql.query("DELETE FROM users WHERE email = ?", email, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(null, err);
       return;
     }
     if (res.affectedRows == 0) {
-      // not found Tutorial with the id
+      // not found user with the email
       result({ kind: "not_found" }, null);
       return;
     }
-    console.log("deleted user with id: ", id);
+    console.log("deleted user with email: ", email);
     result(null, res);
   });
 };
