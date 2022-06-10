@@ -47,7 +47,6 @@ exports.select = (req, res) => {
           password:req.body.password,
           authorized:true
         };
-        console.log("**************controller cookie: " + req.session.user.email);
         res.send(data);
       }
     });

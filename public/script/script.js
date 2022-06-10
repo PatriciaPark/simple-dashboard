@@ -227,7 +227,7 @@ function signIn(){
                         console.error('Fail to Count:', error);
                     })
 
-                    window.location.replace("./views/dashboard.html");
+                    window.location.replace("/dashboard");
                 }
             })
             .catch((error) => {
