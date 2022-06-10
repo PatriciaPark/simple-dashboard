@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 // const expressSession = require('express-session');
 const app = express();
@@ -30,7 +30,7 @@ app.use(
     name: "pyjee8-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
-    sameSite: 'strict'
+    sameSite: "strict"
   })
 );
 
@@ -56,9 +56,9 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // simple route
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.get("/", (req, res) => {
-  res.sendFile('./index.html', {root: __dirname })
+  res.sendFile("./index.html", {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
