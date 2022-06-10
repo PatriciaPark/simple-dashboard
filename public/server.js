@@ -50,7 +50,7 @@ const Role = db.role;
 
 // simple route
 app.use(express.static('public'));
-app.get("/", (req, res) => {
+app.get("/*", (req, res) => {
   res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
