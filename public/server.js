@@ -43,7 +43,7 @@ app.use(
 // })
 
 // Database
-const db = require("./models");
+const db = require("../models");
 const Role = db.role;
 
 // db.sequelize.sync();
@@ -51,18 +51,18 @@ const Role = db.role;
 // simple route
 app.use(express.static('public'));
 app.get("/", (req, res) => {
-  res.sendFile('./public/index.html', {root: __dirname })
+  res.sendFile('./index.html', {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
 // routes
-require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
-require("./routes/tutorial.routes")(app);
+require("../routes/auth.routes")(app);
+require("../routes/user.routes")(app);
+require("../routes/tutorial.routes")(app);
 
 // The 404 Route
 app.use(function(req,res){
-  res.status(404).sendFile('./public/404.html');
+  res.status(404).sendFile('./404.html');
 });
 
 // set port, listen for requests
