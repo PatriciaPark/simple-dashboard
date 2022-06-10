@@ -55,6 +55,10 @@ app.get("/", (req, res) => {
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
+app.all(['*server.js*', '*config/**', '*models/**', '*package.json*', '*routes/**', '*middleware/**', '*controllers/**', '*script/**', '*public/**'], function (req, res, next) {
+  res.send({auth: false})
+});
+
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
