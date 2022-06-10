@@ -71,16 +71,6 @@ app.get("/", (req, res) => {
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
-
-app.use('/api/users/').get(function(req,res,next){
-  console.log('***********************************/api/users/ called.' + req.session.user);
-  if(req.session.user){
-      next();
-  }else{
-      res.redirect('./index.html');
-  }
-});
-
 // routes
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
