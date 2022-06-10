@@ -65,6 +65,16 @@ app.use(function(req,res){
   res.status(404).sendFile('./404.html');
 });
 
+// URL direct access prohibition
+export async function getServerSideProps({ req, res, params }) {
+  if (!req.headers.referer) {
+    res.statusCode = 302
+    res.setHeader('Location', `https://simple-dashboard-pyjee8.herokuapp.com/`) // Replace <link> with your url link
+    res.end();
+  }
+  return {props: {}}
+}
+
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 console.log(PORT);
