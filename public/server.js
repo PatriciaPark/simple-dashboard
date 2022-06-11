@@ -98,10 +98,9 @@ app.get("/", (req, res) => {
 });
 
 
-
 // routes
 require("./routes/auth.routes")(app);
-require("./routes/page.routes")(app);
+require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
 
