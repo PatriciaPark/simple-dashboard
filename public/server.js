@@ -88,7 +88,12 @@ const Role = db.role;
 app.use(express.static('public'));
 // app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  res.redirect("./index.html");
+  if(req.session.user){
+    res.redirect("./views/dashboard.html");
+  }else{
+    res.redirect("./index.html");
+  }
+  // res.redirect("./index.html");
   // res.sendFile("./index.html", {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
