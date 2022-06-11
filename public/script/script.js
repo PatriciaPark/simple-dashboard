@@ -344,7 +344,7 @@ function resetPassword(){
 function signOut(){
     const logout = (req, res) => {
         req.session.destroy();
-        res.clearCookie("user");
+        res.clearCookie("pyjee8-session");
         res.end()
         // req.session = null;
     };
