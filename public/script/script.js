@@ -347,7 +347,7 @@ function signOut(){
         // Sign-out successful.
         const logout = (req, res) => {
             req.session.destroy();
-            res.clearCookie("key");
+            res.clearCookie("user");
             res.end()
             // req.session = null;
         };
