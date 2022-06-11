@@ -21,18 +21,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 // cookie
 app.use(cookieParser());
-app.use(
-  cookieSession({
+app.use(cookieSession({
     name: "pyjee8-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
     sameSite: "strict",
-    cookie: {
-      secureProxy: true,
-      httpOnly: true,
-      domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
-      expires: 3600
-    }
+    maxAge: 60*60
+    // cookie: {
+    //   secureProxy: true,
+    //   httpOnly: true,
+    //   domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
+    //   expires: 1
+    // }
   })
 );
 
@@ -134,8 +134,8 @@ app.get("/email_verification", function(req, res) {
 // logout
 app.get("/logout", function(req, res) {
   // Clearing the cookie
-  res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"});
-  cookies.set('pyjee8-session', {expires: Date.now()});
+  req.session = null
+  // res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"});
   res.redirect("/");
 });
 
