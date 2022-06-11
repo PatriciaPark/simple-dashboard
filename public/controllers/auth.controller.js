@@ -45,7 +45,7 @@ exports.select = (req, res) => {
         req.session.user = {
           email:req.body.email,
           password:req.body.password,
-          authorized:true
+          username:req.body.username
         };
         res.send(data);
       }
