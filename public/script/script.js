@@ -342,15 +342,18 @@ function resetPassword(){
 }
 // Working For Sign Out
 function signOut(){
+    
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
-        sessionStorage.removeItem('userSIEmail');
-        window.localStorage.removeItem('emailForSignIn');
         const logout = (req, res) => {
             req.session.destroy();
-            // req.session = null;   
-            res.sendFile(__dirname + '/index.html');
+            res.clearCookie("key");
+            res.end()
+            // req.session = null;
         };
+        sessionStorage.removeItem('userSIEmail');
+        window.localStorage.removeItem('emailForSignIn');
+        window.location.replace("../index.html");
     }).catch(function(error) {
         // An error happened.
         alert(error.message);
