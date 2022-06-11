@@ -24,15 +24,13 @@ app.use(cookieParser());
 app.use(cookieSession({
     name: "pyjee8-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
-    domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
-    httpOnly: true,
-    sameSite: "strict"
-    // cookie: {
-    //   secureProxy: true,
-    //   httpOnly: true,
-    //   domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
-    //   expires: 1
-    // }
+    sameSite: "strict",
+    cookie: {
+      secureProxy: true,
+      httpOnly: true,
+      domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
+      expires: 3600
+    }
   })
 );
 
