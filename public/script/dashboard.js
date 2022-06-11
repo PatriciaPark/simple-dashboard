@@ -34,6 +34,13 @@ function getAllUsers(){
 function getUserData(emailForSignIn) {
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
+        // 쿠키 있는 상태에서 url로 접속했을 때
+        console.log("********************script: " + req.session.user.email);
+        function auth(req, res, next) {
+            if(req.session.user) {
+                userSIEmail = req.session.user.email;
+            }
+        }
     }
     fetch('/api/users/' + emailForSignIn)
         .then((response) => response.json())

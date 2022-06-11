@@ -200,15 +200,6 @@ function signIn(){
         if (data.message) {
             alert('Wrong Email or Passwords');
         } else {
-            console.log("********************script: " + req.session.user.email)
-            if(userSIEmail == null) {
-                // 쿠키 있는 상태에서 url로 접속했을 때
-                function auth(req, res, next) {
-                    if(req.session.user) {
-                        userSIEmail = req.session.user.email;
-                    }
-                }
-            }
             // Check email verification
             fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())

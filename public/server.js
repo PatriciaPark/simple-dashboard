@@ -108,7 +108,7 @@ app.get("/dashboard", function(req, res) {
 // editInfo
 app.get("/editInfo", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/editInfo.html");
+    res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     res.sendFile(__dirname + "/index.html");
   }
@@ -116,7 +116,7 @@ app.get("/editInfo", function(req, res) {
 // resetPwd
 app.get("/resetPwd", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/resetPwd.html");
+    res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     res.sendFile(__dirname + "/index.html");
   }
@@ -124,7 +124,7 @@ app.get("/resetPwd", function(req, res) {
 // email_verification
 app.get("/email_verification", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/email_verification.html");
+    res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     res.sendFile(__dirname + "/index.html");
   }
