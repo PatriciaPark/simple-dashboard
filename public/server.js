@@ -72,15 +72,23 @@ app.get("/", (req, res) => {
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
-
-router.route('/dashboard').get(function(req,res){
+//
+app.get('/dashboard', function(req, res) {
   console.log('***********************************/dashboard called.' + req.session.user);
   if(req.session.user){
       res.redirect('./views/dashboard.html');
   }else{
-      res.redirect('./index.html');
+    res.redirect('./index.html');
   }
 });
+// router.route('/dashboard').get(function(req,res){
+//   console.log('***********************************/dashboard called.' + req.session.user);
+//   if(req.session.user){
+//       res.redirect('./views/dashboard.html');
+//   }else{
+//       res.redirect('./index.html');
+//   }
+// });
 
 // routes
 require("./routes/auth.routes")(app);

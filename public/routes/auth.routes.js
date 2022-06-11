@@ -33,12 +33,4 @@ module.exports = app => {
   // Delete all users
   router.delete("/", users.deleteAll);
   app.use('/api/users', router);
-  router.route('/dashboard').get(function(req,res){
-    console.log('***********************************/dashboard called.' + req.session.user);
-    if(req.session.user){
-        res.redirect('./views/dashboard.html');
-    }else{
-        res.redirect('./index.html');
-    }
-  });
 };
