@@ -97,7 +97,7 @@ app.get("/", (req, res) => {
 app.get("/dashboard", function(req, res) {
   console.log('***********************************/dashboard called.' + req.session.user.email);
   if(req.session.user){
-      window.localStorage.setItem("emailForSignIn", req.session.user.email);
+      res.send(req.session.user.email);
       res.redirect("./views/dashboard.html");
   }else{
     res.redirect("./index.html");
