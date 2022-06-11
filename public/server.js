@@ -23,9 +23,9 @@ app.use(cors());
 app.use(cookieParser());
 app.use(cookieSession({
     name: "pyjee8-session",
-    secret: "COOKIE_SECRET", // should use as secret environment variable
+    // secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
-    sameSite: "strict",
+    // sameSite: "strict",
     maxAge: 60*60
     // cookie: {
     //   secureProxy: true,
