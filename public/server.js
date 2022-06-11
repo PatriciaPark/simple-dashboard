@@ -100,9 +100,6 @@ app.get("/", (req, res) => {
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
-    if(sessionStorage.getItem('userSIEmail') == null) {
-      sessionStorage.setItem('userSIEmail', req.session.user.email);
-    }
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     res.sendFile(__dirname + "/index.html");
