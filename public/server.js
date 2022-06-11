@@ -85,9 +85,11 @@ const Role = db.role;
 // app.use(secureStatic(['*.html'])); 
 
 // simple route
+// app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  res.sendFile("./index.html", {root: __dirname })
+  res.redirect("./index.html");
+  // res.sendFile("./index.html", {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
