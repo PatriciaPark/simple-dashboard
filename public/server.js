@@ -62,7 +62,6 @@ app.use(
 // Database
 const db = require("./models");
 const Role = db.role;
-
 // db.sequelize.sync();
 
 // path.join here makes it work cross platform with Windows / Linux / etc
@@ -88,7 +87,7 @@ const Role = db.role;
 // simple route
 app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  res.redirect("./index.html")
+  res.sendFile("./index.html", {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
