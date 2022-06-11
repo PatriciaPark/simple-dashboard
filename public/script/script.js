@@ -126,7 +126,7 @@ function signUp(){
                     console.log(error.message);
                 });
                 alert("Signup Successful");
-                window.location.replace("../views/email_verification.html");
+                window.location.replace("/email_verification");
             }
             // console.log('Success:', data);
         })
@@ -206,7 +206,7 @@ function signIn(){
             .then((data) => {
                 if(data.message){
                     // Not verified email yet : emailVerification=0
-                    window.location.replace("./views/email_verification.html");
+                    window.location.replace("/email_verification");
                 } else {
                     // Already verified email : emailVerification=1
                     // update database - login count(loginCnt), last session(lastSession)
@@ -259,7 +259,7 @@ function saveProfile(){
     .then((response) => response.json())
     .then((json) => {
         alert("Edit Profile Successful.");
-        window.location.replace("./dashboard.html");
+        window.location.replace("/dashboard");
         // let user = firebase.auth().currentUser;
         // let uid;
         // if(user != null){
@@ -331,7 +331,7 @@ function resetPassword(){
                 .then((response) => response.json())
                 .then((json) => {
                     alert("Reset passwords successful.");
-                    window.location.replace("./dashboard.html");
+                    window.location.replace("/dashboard");
                 })
                 .catch((error) => {
                     console.error('Fail to update password:', error);
@@ -342,20 +342,11 @@ function resetPassword(){
 }
 // Working For Sign Out
 function signOut(){
-    const logout = (req, res) => {
-        res.clearCookie('user');
-        res.clearCookie('pyjee8-session',{path:'/',domain:'https://simple-dashboard-pyjee8.herokuapp.com/'}); 
-        req.session.destroy();
-        res.end()
-        // req.session = null;
-    };
     sessionStorage.clear();
     window.localStorage.clear();
-
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
-        window.location.replace("../index.html");
-        
+        window.location.replace("/logout");
     }).catch(function(error) {
         // An error happened.
         alert(error.message);
@@ -379,7 +370,7 @@ function deleteUser() {
         .then((response) => response.json())
         .then((json) => {
             console.log('Success Delete User:', json);
-            window.location.replace("../index.html");
+            window.location.replace('/');
             user.delete().then(() => {
                 // User deleted.
             }).catch((error) => {
