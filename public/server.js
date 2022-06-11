@@ -1,16 +1,16 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const path = require('path');
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
 // var router = require("express").Router();
-// const expressSession = require('express-session');
+// const expressSession = require("express-session");
 
 // // set the view engine to ejs
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+// app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "ejs");
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -38,13 +38,13 @@ app.use(
 
 // cookie session
 // app.use(expressSession({
-//   secret:'COOKIE_SECRET',
+//   secret:"COOKIE_SECRET",
 //   resave:true,
 //   saveUninitialized:true
 // }));
 
 
-// // Count today's visitors
+// // Count today"s visitors
 // var count = 0;
 // app.use(function (req, res, next) {
 //   var date = new Date();
@@ -56,7 +56,7 @@ app.use(
 //   count++;
 // }
 // // Write response
-// res.end(count + 'visit')
+// res.end(count + "visit")
 // })
 
 // Database
@@ -65,7 +65,7 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // path.join here makes it work cross platform with Windows / Linux / etc
-// var statics = express.static(path.join(__dirname, 'public'));
+// var statics = express.static(path.join(__dirname, "public"));
 // function secureStatic(pathsToSecure = []) {
 //   return function (req, res, next) {
 //     if (pathsToSecure.length === 0) {
@@ -74,25 +74,25 @@ const Role = db.role;
 //     }
 //     if (pathsToSecure.indexOf(req.path) > -1) {
 //       // Stop request
-//       return res.status(403).send('<h1>403 Forbidden</h1>'); 
+//       return res.status(403).send("<h1>403 Forbidden</h1>"); 
 //     }
 //     // forward to static route
 //     return statics(req, res, next); 
 //   };
 // }
 // add public files. List all "private" paths (file)
-// instead of app.use(express.static('public'));
-// app.use(secureStatic(['*.html'])); 
+// instead of app.use(express.static("public"));
+// app.use(secureStatic(["*.html"])); 
 
 // simple route
-app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
+// app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   if(req.session.user){
-    res.sendFile(__dirname + '/views/dashboard.html');
+    res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     // Clearing the cookie
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + "/index.html");
   }
   // res.redirect("./index.html");
   // res.sendFile("./index.html", {root: __dirname })
@@ -102,40 +102,42 @@ app.get("/", (req, res) => {
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + '/views/dashboard.html');
+    res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // editInfo
 app.get("/editInfo", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + '/views/editInfo.html');
+    res.sendFile(__dirname + "/views/editInfo.html");
   }else{
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // resetPwd
 app.get("/resetPwd", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + '/views/resetPwd.html');
+    res.sendFile(__dirname + "/views/resetPwd.html");
   }else{
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // email_verification
 app.get("/email_verification", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + '/views/email_verification.html');
+    res.sendFile(__dirname + "/views/email_verification.html");
   }else{
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // logout
 app.get("/logout", function(req, res) {
   // Clearing the cookie
-  res.clearCookie('pyjee8-session',{path:'/',domain:'https://simple-dashboard-pyjee8.herokuapp.com/'});
-  res.sendFile(__dirname + '/index.html');
+  req.session.destroy(err => {
+    res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"});
+  });
+  res.redirect("/");
 });
 
 // routes
