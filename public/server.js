@@ -100,7 +100,6 @@ app.get("/", (req, res) => {
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
-    sessionStorage.setItem('userSIEmail', req.session.user.email);
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
     res.sendFile(__dirname + "/index.html");
@@ -140,6 +139,7 @@ app.get("/logout", function(req, res) {
 
 // routes
 require("./routes/auth.routes")(app);
+require("./routes/page.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
 
