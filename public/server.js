@@ -68,39 +68,39 @@ const Role = db.role;
 // path.join here makes it work cross platform with Windows / Linux / etc
 var statics = express.static(path.join(__dirname, 'public'));
 
-function secureStatic(pathsToSecure = []) {
-  return function (req, res, next) {
-    if (pathsToSecure.length === 0) {
-      // Do not secure, forward to static route
-      return statics(req, res, next);
-    }
-    if (pathsToSecure.indexOf(req.path) > -1) {
-      // Stop request
-      return res.status(403).send('<h1>403 Forbidden</h1>'); 
-    }
-    // forward to static route
-    return statics(req, res, next); 
-  };
-}
+// function secureStatic(pathsToSecure = []) {
+//   return function (req, res, next) {
+//     if (pathsToSecure.length === 0) {
+//       // Do not secure, forward to static route
+//       return statics(req, res, next);
+//     }
+//     if (pathsToSecure.indexOf(req.path) > -1) {
+//       // Stop request
+//       return res.status(403).send('<h1>403 Forbidden</h1>'); 
+//     }
+//     // forward to static route
+//     return statics(req, res, next); 
+//   };
+// }
 // add public files. List all "private" paths (file)
 // instead of app.use(express.static('public'));
-app.use(secureStatic(['public'])); 
+app.use(secureStatic(['*.html'])); 
 
 // simple route
-// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
-  res.sendFile("./index.html", {root: __dirname })
+  res.redirect("./index.html")
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
 // dashboard
-app.get('/dashboard', function(req, res) {
+app.get("/dashboard", function(req, res) {
   console.log('***********************************/dashboard called.' + req.session.user.email);
   if(req.session.user){
-      window.localStorage.setItem('emailForSignIn', req.session.user.email);
-      res.redirect('./views/dashboard.html');
+      window.localStorage.setItem("emailForSignIn", req.session.user.email);
+      res.redirect("./views/dashboard.html");
   }else{
-    res.redirect('./index.html');
+    res.redirect("./index.html");
   }
 });
 
