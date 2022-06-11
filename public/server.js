@@ -26,8 +26,7 @@ app.use(cookieSession({
     secret: "COOKIE_SECRET", // should use as secret environment variable
     domain: "https://simple-dashboard-pyjee8.herokuapp.com/",
     httpOnly: true,
-    sameSite: "strict",
-    maxAge: 24 * 60 * 60 * 1000
+    sameSite: "strict"
     // cookie: {
     //   secureProxy: true,
     //   httpOnly: true,
