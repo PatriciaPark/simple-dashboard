@@ -26,7 +26,7 @@ app.use(cookieSession({
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
     // sameSite: "strict",
-    maxAge: 60*60
+    maxAge: 3600
     // cookie: {
     //   secureProxy: true,
     //   httpOnly: true,
