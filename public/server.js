@@ -134,8 +134,8 @@ app.get("/email_verification", function(req, res) {
 // logout
 app.get("/logout", function(req, res) {
   // Clearing the cookie
-  res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"}).send('cleared cookie');
-  
+  res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"});
+  cookies.set('pyjee8-session', {expires: Date.now()});
   res.redirect("/");
 });
 
