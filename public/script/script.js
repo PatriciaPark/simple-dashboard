@@ -204,7 +204,6 @@ function signIn(){
             fetch('/api/users/email/'+ userSIEmail)
             .then((response) => response.json())
             .then((data) => {
-                sessionStorage.setItem('userSIEmail', userSIEmail);
                 if(data.message){
                     // Not verified email yet : emailVerification=0
                     window.location.replace("./views/email_verification.html");
@@ -226,7 +225,8 @@ function signIn(){
                     .catch((error) => {
                         console.error('Fail to Count:', error);
                     })
-
+                    
+                    sessionStorage.setItem('userSIEmail', userSIEmail);
                     window.location.replace("/dashboard");
                 }
             })

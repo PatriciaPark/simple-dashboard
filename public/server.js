@@ -96,7 +96,7 @@ app.get("/", (req, res) => {
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
-      res.redirect("./views/dashboard.html/email=" + req.session.user.email);
+      res.redirect("./views/dashboard.html");
   }else{
     res.redirect("./index.html");
   }
