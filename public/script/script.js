@@ -342,18 +342,21 @@ function resetPassword(){
 }
 // Working For Sign Out
 function signOut(){
-    
+    const logout = (req, res) => {
+        req.session.destroy();
+        res.clearCookie("user");
+        res.end()
+        // req.session = null;
+    };
+    // sessionStorage.removeItem('userSIEmail');
+    sessionStorage.clear();
+    // window.localStorage.removeItem('emailForSignIn');
+    window.localStorage.clear();
+
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
-        const logout = (req, res) => {
-            req.session.destroy();
-            res.clearCookie("user");
-            res.end()
-            // req.session = null;
-        };
-        sessionStorage.removeItem('userSIEmail');
-        window.localStorage.removeItem('emailForSignIn');
         window.location.replace("../index.html");
+        
     }).catch(function(error) {
         // An error happened.
         alert(error.message);
