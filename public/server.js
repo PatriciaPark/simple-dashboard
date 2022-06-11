@@ -135,7 +135,6 @@ app.get("/email_verification", function(req, res) {
 app.get("/logout", function(req, res) {
   // Clearing the cookie
   res.clearCookie('pyjee8-session',{path:'/',domain:'https://simple-dashboard-pyjee8.herokuapp.com/'});
-  req.session.destroy();
   res.end();
   res.sendFile(__dirname + '/index.html');
 });
