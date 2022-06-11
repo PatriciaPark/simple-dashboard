@@ -4,7 +4,7 @@ module.exports = app => {
   router.get("/dashboard", function(req, res) {
     if(req.session.user){
       console.log("************************page: " + req.session.user.email);
-      // sessionStorage.setItem('userSIEmail', req.session.user.email);
+      sessionStorage.setItem('userSIEmail', req.session.user.email);
       res.sendFile(__dirname + "/views/dashboard.html");
     }else{
       res.sendFile(__dirname + "/index.html");
