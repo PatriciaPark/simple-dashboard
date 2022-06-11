@@ -106,6 +106,22 @@ app.get("/dashboard", function(req, res) {
     res.sendFile(__dirname + '/index.html');
   }
 });
+// editInfo
+app.get("/editInfo", function(req, res) {
+  if(req.session.user){
+    res.sendFile(__dirname + '/views/editInfo.html');
+  }else{
+    res.sendFile(__dirname + '/index.html');
+  }
+});
+// resetPwd
+app.get("/resetPwd", function(req, res) {
+  if(req.session.user){
+    res.sendFile(__dirname + '/views/resetPwd.html');
+  }else{
+    res.sendFile(__dirname + '/index.html');
+  }
+});
 
 // routes
 require("./routes/auth.routes")(app);
