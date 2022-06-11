@@ -344,13 +344,13 @@ function resetPassword(){
 function signOut(){
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
+        sessionStorage.removeItem('userSIEmail');
+        window.localStorage.removeItem('emailForSignIn');
         const logout = (req, res) => {
             req.session.destroy();
             // req.session = null;   
-            res.redirect('/');
+            res.sendFile(__dirname + '/index.html');
         };
-        sessionStorage.removeItem('userSIEmail');
-        window.localStorage.removeItem('emailForSignIn');
     }).catch(function(error) {
         // An error happened.
         alert(error.message);
