@@ -84,7 +84,7 @@ function secureStatic(pathsToSecure = []) {
 }
 // add public files. List all "private" paths (file)
 // instead of app.use(express.static('public'));
-app.use(secureStatic(['admin.html'])); 
+app.use(secureStatic(['public'])); 
 
 // simple route
 // app.use(express.static("public"));
