@@ -343,14 +343,13 @@ function resetPassword(){
 // Working For Sign Out
 function signOut(){
     const logout = (req, res) => {
+        res.clearCookie('user');
+        res.clearCookie('pyjee8-session',{path:'/',domain:'https://simple-dashboard-pyjee8.herokuapp.com/'}); 
         req.session.destroy();
-        res.clearCookie("pyjee8-session");
         res.end()
         // req.session = null;
     };
-    // sessionStorage.removeItem('userSIEmail');
     sessionStorage.clear();
-    // window.localStorage.removeItem('emailForSignIn');
     window.localStorage.clear();
 
     firebase.auth().signOut().then(function() {
