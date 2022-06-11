@@ -344,8 +344,8 @@ function resetPassword(){
 function signOut(){
   firebase.auth().signOut().then(function() {
     // Sign-out successful.
-    window.localStorage.removeItem('emailForSignIn');
     sessionStorage.removeItem('userSIEmail');
+    window.localStorage.removeItem('emailForSignIn');
     window.location.replace("../index.html");
   }).catch(function(error) {
     // An error happened.

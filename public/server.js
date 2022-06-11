@@ -1,16 +1,21 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
-const cookieSession = require("cookie-session");
-const cookieParser = require("cookie-parser");
-var router = require("express").Router();
-// const expressSession = require('express-session');
 const app = express();
+const path = require('path');
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const cookieSession = require("cookie-session");
+// var router = require("express").Router();
+// const expressSession = require('express-session');
 
 // // set the view engine to ejs
-// const path = require('path');
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'ejs');
+
+// parse requests of content-type - application/json
+app.use(bodyParser.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Cross-Origin Resource Sharing, CORS
 app.use(cors());
@@ -30,11 +35,6 @@ app.use(
     }
   })
 );
-
-// parse requests of content-type - application/json
-app.use(bodyParser.json());
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // cookie session
 // app.use(expressSession({
@@ -65,30 +65,45 @@ const Role = db.role;
 
 // db.sequelize.sync();
 
+// path.join here makes it work cross platform with Windows / Linux / etc
+var statics = express.static(path.join(__dirname, 'public'));
+
+function secureStatic(pathsToSecure = []) {
+  return function (req, res, next) {
+    if (pathsToSecure.length === 0) {
+      // Do not secure, forward to static route
+      return statics(req, res, next);
+    }
+    if (pathsToSecure.indexOf(req.path) > -1) {
+      // Stop request
+      return res.status(403).send('<h1>403 Forbidden</h1>'); 
+    }
+    // forward to static route
+    return statics(req, res, next); 
+  };
+}
+// add public files. List all "private" paths (file)
+// instead of app.use(express.static('public'));
+app.use(secureStatic(['admin.html'])); 
+
 // simple route
-app.use(express.static("public"));
+// app.use(express.static("public"));
 app.get("/", (req, res) => {
   res.sendFile("./index.html", {root: __dirname })
   // res.json({ message: "Welcome to simple-dashboard application." });
 });
 
-//
+// dashboard
 app.get('/dashboard', function(req, res) {
-  console.log('***********************************/dashboard called.' + req.session.user);
+  console.log('***********************************/dashboard called.' + req.session.user.email);
   if(req.session.user){
+      window.localStorage.setItem('emailForSignIn', req.session.user.email);
       res.redirect('./views/dashboard.html');
   }else{
     res.redirect('./index.html');
   }
 });
-// router.route('/dashboard').get(function(req,res){
-//   console.log('***********************************/dashboard called.' + req.session.user);
-//   if(req.session.user){
-//       res.redirect('./views/dashboard.html');
-//   }else{
-//       res.redirect('./index.html');
-//   }
-// });
+
 
 // routes
 require("./routes/auth.routes")(app);
