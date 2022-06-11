@@ -66,8 +66,7 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // path.join here makes it work cross platform with Windows / Linux / etc
-var statics = express.static(path.join(__dirname, 'public'));
-
+// var statics = express.static(path.join(__dirname, 'public'));
 // function secureStatic(pathsToSecure = []) {
 //   return function (req, res, next) {
 //     if (pathsToSecure.length === 0) {
@@ -84,7 +83,7 @@ var statics = express.static(path.join(__dirname, 'public'));
 // }
 // add public files. List all "private" paths (file)
 // instead of app.use(express.static('public'));
-app.use(secureStatic(['*.html'])); 
+// app.use(secureStatic(['*.html'])); 
 
 // simple route
 app.use(express.static(path.join(__dirname, 'public')));
