@@ -39,11 +39,16 @@ function getUserData(emailForSignIn) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
         // 쿠키 있는 상태에서 url로 접속했을 때
         if(sessionStorage.getItem('userSIEmail') == null) {
-            function session(req, res, next) {
-                console.log("********************script session: " + req.session.user.email);
-                emailForSignIn = req.session.user.email;
-                // sessionStorage.setItem('userSIEmail', req.session.user.email);
-            };
+            var x = getCookie('emailForSession');
+            console.log("********************getCookie xxxxxx: " + x);
+            if (x) {
+                emailForSignIn = x;
+            }
+            // function session(req, res, next) {
+            //     console.log("********************script session: " + req.session.user.email);
+            //     emailForSignIn = req.session.user.email;
+            //     // sessionStorage.setItem('userSIEmail', req.session.user.email);
+            // };
         }
     }
     fetch('/api/users/' + emailForSignIn)
@@ -91,6 +96,17 @@ function countVisitors() {
         .catch((error) => {
         console.error('Fail to Get Count:', error);
     });
+}
+
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
 }
 
 window.addEventListener('DOMContentLoaded', function() {
