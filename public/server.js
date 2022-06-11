@@ -89,9 +89,9 @@ app.use(express.static('public'));
 // app.use(express.static(path.join(__dirname, 'public')));
 app.get("/", (req, res) => {
   if(req.session.user){
-    res.redirect("./views/dashboard.html");
+    res.sendFile(__dirname + '/views/dashboard.html');
   }else{
-    res.redirect("./index.html");
+    res.sendFile(__dirname + '/index.html');
   }
   // res.redirect("./index.html");
   // res.sendFile("./index.html", {root: __dirname })
@@ -101,12 +101,11 @@ app.get("/", (req, res) => {
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
-      res.redirect("./views/dashboard.html");
+    res.sendFile(__dirname + '/views/dashboard.html');
   }else{
-    res.redirect("./index.html");
+    res.sendFile(__dirname + '/index.html');
   }
 });
-
 
 // routes
 require("./routes/auth.routes")(app);
