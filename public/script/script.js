@@ -225,7 +225,7 @@ function signIn(){
                     .catch((error) => {
                         console.error('Fail to Count:', error);
                     })
-                    
+
                     sessionStorage.setItem('userSIEmail', userSIEmail);
                     window.location.replace("/dashboard");
                 }
@@ -342,15 +342,19 @@ function resetPassword(){
 }
 // Working For Sign Out
 function signOut(){
-  firebase.auth().signOut().then(function() {
-    // Sign-out successful.
-    sessionStorage.removeItem('userSIEmail');
-    window.localStorage.removeItem('emailForSignIn');
-    window.location.replace("../index.html");
-  }).catch(function(error) {
-    // An error happened.
-    alert(error.message);
-  });
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        const logout = (req, res) => {
+            req.session.destroy();
+            // req.session = null;   
+            res.redirect('/');
+        };
+        sessionStorage.removeItem('userSIEmail');
+        window.localStorage.removeItem('emailForSignIn');
+    }).catch(function(error) {
+        // An error happened.
+        alert(error.message);
+    });
 }
 // Delete User
 function deleteUser() {
