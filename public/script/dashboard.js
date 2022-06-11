@@ -34,7 +34,6 @@ function getAllUsers(){
 function getUserData(emailForSignIn) {
     console.log("********************localStorage: " + localStorage.getItem('emailForSignIn'));
     console.log("********************sessionStorage: " + sessionStorage.getItem('userSIEmail'));
-    console.log("********************sessionStorage: " + document.cookie);
     
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
