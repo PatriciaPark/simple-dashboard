@@ -32,6 +32,7 @@ function getAllUsers(){
 }
 // Login user info for display profile.
 function getUserData(emailForSignIn) {
+    console.log("********************localStorage: " + localStorage.getItem('emailForSignIn'));
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
         // 쿠키 있는 상태에서 url로 접속했을 때
