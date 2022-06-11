@@ -36,7 +36,11 @@ function getUserData(emailForSignIn) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
         // 쿠키 있는 상태에서 url로 접속했을 때
         if(sessionStorage.getItem('userSIEmail') == null) {
-            session();
+            function session(req, res, next) {
+                console.log("********************script session: " + req.session.user.email);
+                emailForSignIn = req.session.user.email;
+                // sessionStorage.setItem('userSIEmail', req.session.user.email);
+            };
         }
     }
     fetch('/api/users/' + emailForSignIn)
@@ -84,12 +88,6 @@ function countVisitors() {
         .catch((error) => {
         console.error('Fail to Get Count:', error);
     });
-}
-
-function session(req, res, next) {
-    console.log("********************script session: " + req.session.user.email);
-    emailForSignIn = req.session.user.email;
-    // sessionStorage.setItem('userSIEmail', req.session.user.email);
 }
 
 window.addEventListener('DOMContentLoaded', function() {

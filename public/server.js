@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(cookieSession({
     name: "pyjee8-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
-    sameSite: "strict",
+    // sameSite: "strict",
     cookie: {
       secureProxy: true,
       httpOnly: true,
