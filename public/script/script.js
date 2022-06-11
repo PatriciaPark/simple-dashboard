@@ -210,6 +210,14 @@ function signIn(){
                 } else {
                     // Already verified email : emailVerification=1
                     // update database - login count(loginCnt), last session(lastSession)
+                    if(userSIEmail == null) {
+                        // 쿠키 있는 상태에서 url로 접속했을 때
+                        function auth(req, res, next) {
+                            if(req.session.user) {
+                                userSIEmail = req.session.user.email;
+                            }
+                        }
+                    }
                     var dataCnt = { email: userSIEmail, loginCnt: 'loginCnt+1' };
                     fetch('/api/users/count/'+ userSIEmail, {
                         method: 'PUT',

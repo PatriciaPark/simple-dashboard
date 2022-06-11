@@ -39,9 +39,7 @@ exports.select = (req, res) => {
           });
         }
       } else {
-        // res.cookie('useremail', req.body.email);
-        // res.cookie('userpwd', req.body.password);
-        // // res.setHeader('Set-Cookie','visited=true; Max-Age=3600; HttpOnly, Secure');
+        // save session
         req.session.user = {
           email:req.body.email,
           password:req.body.password,
