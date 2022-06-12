@@ -1,5 +1,6 @@
 let email = sessionStorage.getItem('userSIEmail'); 
-let emailForSignIn = localStorage.getItem('emailForSignIn');    // from email.js
+let emailForSignIn = localStorage.getItem('emailForSignIn');// from email.js
+let emailForAuth = sessionStorage.getItem('emailForAuth');  // from auth.js
 
 // Update database - email verification(emailVerification= 0 -> 1).
 function emailVerification(email){
@@ -32,23 +33,15 @@ function getAllUsers(){
 }
 // Login user info for display profile.
 function getUserData(emailForSignIn) {
-    console.log("********************localStorage: " + localStorage.getItem('emailForSignIn'));
-    console.log("********************sessionStorage: " + sessionStorage.getItem('userSIEmail'));
+    console.log("********************localStorage: " + emailForSignIn);
     
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
+        console.log("********************sessionStorage: " + emailForSignIn);
         // 쿠키 있는 상태에서 url로 접속했을 때
         if(sessionStorage.getItem('userSIEmail') == null) {
-            var x = getCookie('emailForSession');
-            console.log("********************getCookie xxxxxx: " + x);
-            if (x) {
-                emailForSignIn = x;
-            }
-            // function session(req, res, next) {
-            //     console.log("********************script session: " + req.session.user.email);
-            //     emailForSignIn = req.session.user.email;
-            //     // sessionStorage.setItem('userSIEmail', req.session.user.email);
-            // };
+            emailForSignIn = emailForAuth;
+            console.log("********************emailForAuth: " + emailForSignIn);
         }
     }
     fetch('/api/users/' + emailForSignIn)
