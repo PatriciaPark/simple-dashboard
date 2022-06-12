@@ -91,6 +91,7 @@ exports.getAuth = (req, res) => {
 };
 // Find a single User with an email
 exports.getOne = (req, res) => {
+  console.log("********************** req.params.email!!! " + req.params.email);
   if (!req.params.email) {
     console.log("********************** session!!!");
     User.readOne(req.session.user.email, (err, data) => {
