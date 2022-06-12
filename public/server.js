@@ -35,7 +35,7 @@ const Role = db.role;
 // simple route
 app.use(express.static("public"));
 // index
-app.get("/", (req, res, next) => {
+app.get("/index", (req, res, next) => {
   if(req.session.user){
     res.redirect("/dashboard");
   }else{
@@ -55,7 +55,7 @@ app.get("/editInfo", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/editInfo.html");
   }else{
-    res.redirect("/");
+    res.redirect("/index");
   }
 });
 // resetPwd
@@ -63,7 +63,7 @@ app.get("/resetPwd", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/resetPwd.html");
   }else{
-    res.redirect("/");
+    res.redirect("/index");
   }
 });
 // emailVerification
@@ -71,14 +71,14 @@ app.get("/emailVerification", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/emailVerification.html");
   }else{
-    res.redirect("/");
+    res.redirect("/index");
   }
 });
 // logout
 app.get("/logout", function(req, res) {
   // Clearing the cookie
   req.session = null;
-  res.redirect("/");
+  res.redirect("/index");
 });
 
 // routes
