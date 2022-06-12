@@ -61,7 +61,7 @@ var handleSignedInUser = function(user) {
     } else {
       // User in DB
       var dataCnt = { email: user.email, loginCnt: 'loginCnt+1' };
-      fetch('/api/users/count/'+ userSIEmail, {
+      fetch('/api/users/count/'+ user.email, {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json',
