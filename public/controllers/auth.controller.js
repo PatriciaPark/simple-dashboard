@@ -93,6 +93,7 @@ exports.getAuth = (req, res) => {
 exports.getOne = (req, res) => {
   let email = req.params.email;
   console.log("**************controller email: " + email);
+  console.log("**************controller session cookie: " + req.session.user.email);
   if (email == null) {
     email = req.session.user.email;
     console.log("**************controller session cookie: " + req.session.user.email);
