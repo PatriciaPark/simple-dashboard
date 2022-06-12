@@ -91,13 +91,6 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
   }
 });
-app.get("*", (req, res) => {
-  if(req.session.user){
-    res.sendFile(__dirname + "/views/dashboard.html");
-  }else{
-    res.sendFile(__dirname + "/index.html");
-  }
-});
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
@@ -139,6 +132,13 @@ app.get("/logout", function(req, res) {
   // Clearing the cookie
   req.session = null;
   res.redirect("/");
+});
+app.get("*", (req, res) => {
+  if(req.session.user){
+    res.sendFile(__dirname + "/views/dashboard.html");
+  }else{
+    res.sendFile(__dirname + "/index.html");
+  }
 });
 
 // routes
