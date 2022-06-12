@@ -63,6 +63,8 @@ var handleSignedInUser = function(user) {
           console.error('Fail:', error);
       });
     } else {
+      // User in DB
+      sessionStorage.setItem('emailForAuth', user.email);
       window.location.replace("/dashboardForAuth");
     }
   })
