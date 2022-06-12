@@ -94,7 +94,7 @@ exports.getOne = (req, res) => {
   let email = req.params.email;
   console.log("**************controller email 1: " + email);
   console.log("**************controller session cookie1: " + req.session.user.email);
-  if (email === null) {
+  if (!req.params.email) {
     email = req.session.user.email;
     console.log("**************controller session cookie2: " + req.session.user.email);
   }
