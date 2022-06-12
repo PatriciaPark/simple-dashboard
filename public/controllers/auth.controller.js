@@ -92,24 +92,7 @@ exports.getAuth = (req, res) => {
 // Find a single User with an email
 exports.getOne = (req, res) => {
   console.log("********************** req.params.email!!! " + req.params.email);
-  if (!req.params.email) {
-    console.log("********************** session!!!");
-    User.readOne(req.session.user.email, (err, data) => {
-      if (err) {
-        if (err.kind === "not_found") {
-          res.status(404).send({
-            message: `Not found User with email ${req.session.user.email}.`
-          });
-        } else {
-          res.status(500).send({
-            message: "Error retrieving User with email " + req.session.user.email
-          });
-        }
-      } else {
-        res.send(data);
-      }
-    });
-  } else {
+  if (req.params.email) {
     console.log("********************** params!!!");
     User.readOne(req.params.email, (err, data) => {
         if (err) {
@@ -128,6 +111,23 @@ exports.getOne = (req, res) => {
           res.send(data);
         }
       });
+  } else {
+    console.log("********************** session!!!");
+    User.readOne(req.session.user.email, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found User with email ${req.session.user.email}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving User with email " + req.session.user.email
+          });
+        }
+      } else {
+        res.send(data);
+      }
+    });
   }
 };
 // Update a User by the email in the request
