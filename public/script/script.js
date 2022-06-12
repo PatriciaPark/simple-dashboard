@@ -370,7 +370,7 @@ function deleteUser() {
         .then((response) => response.json())
         .then((json) => {
             console.log('Success Delete User:', json);
-            window.location.replace('/');
+            window.location.replace('/logout');
             user.delete().then(() => {
                 // User deleted.
             }).catch((error) => {

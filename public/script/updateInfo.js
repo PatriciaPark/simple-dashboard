@@ -1,6 +1,9 @@
 let email = sessionStorage.getItem('userSIEmail');
 if(email == null) {
     email = localStorage.getItem('emailForSignIn');
+    if(email == null) {
+        email = sessionStorage.getItem('emailForAuth');
+    }
 }
 
 // Display login user info to edit_user_info.html
