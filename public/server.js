@@ -106,9 +106,9 @@ app.get("/dashboard", function(req, res) {
   }
 });
 // dashboardForAuth
-app.get("/dashboardForAuth", function(req, res) {
-    res.sendFile(__dirname + "/views/dashboard.html");
-});
+// app.get("/dashboardForAuth", function(req, res) {
+//     res.sendFile(__dirname + "/views/dashboard.html");
+// });
 // editInfo
 app.get("/editInfo", function(req, res) {
   if(req.session.user){
