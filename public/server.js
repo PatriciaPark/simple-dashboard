@@ -83,23 +83,15 @@ const Role = db.role;
 // app.use(secureStatic(["*.html"])); 
 
 // simple route
-// app.use(express.static("public"));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static("public"));
 // index
-app.use('/', function (req, res) {
+app.get("/", (req, res) => {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/dashboard.html");
+    res.redirect("/dashboard");
   }else{
     res.sendFile(__dirname + "/index.html");
   }
 });
-// app.get("/", (req, res) => {
-//   if(req.session.user){
-//     res.redirect("/dashboard");
-//   }else{
-//     res.sendFile(__dirname + "/index.html");
-//   }
-// });
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
