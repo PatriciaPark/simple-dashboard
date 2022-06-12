@@ -92,14 +92,8 @@ exports.getAuth = (req, res) => {
 // Find a single User with an email
 exports.getOne = (req, res) => {
   let email = req.params.email;
-  console.log("**************controller email 1: " + email);
-  // console.log("**************controller session cookie1: " + req.session.user.email);
-  if (!req.body) {
-    email = req.session.user.email;
-    console.log("**************controller session cookie2: " + req.session.user.email);
-  }
-  console.log("**************controller session email 2: " + email);
-  User.readOne(email, (err, data) => {
+  if (!email) {
+    User.readOne(req.session.user.email, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -116,6 +110,25 @@ exports.getOne = (req, res) => {
         res.send(data);
       }
     });
+  } else {
+    User.readOne(email, (err, data) => {
+        if (err) {
+          if (err.kind === "not_found") {
+            res.status(404).send({
+              message: `Not found User with email ${req.params.email}.`
+            });
+          } else {
+            res.status(500).send({
+              message: "Error retrieving User with email " + req.params.email
+            });
+          }
+        } else {
+          // save session
+          req.session.user = { email:req.params.email };
+          res.send(data);
+        }
+      });
+  }
 };
 // Update a User by the email in the request
 exports.setOne = (req, res) => {
