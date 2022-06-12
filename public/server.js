@@ -86,7 +86,7 @@ const Role = db.role;
 app.use(express.static("public"));
 app.get("/", (req, res) => {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/dashboard.html");
+    res.redirect("/dashboard");
   }else{
     res.sendFile(__dirname + "/index.html");
   }
@@ -96,7 +96,7 @@ app.get("/dashboard", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.redirect("/");
   }
 });
 // dashboardForAuth
@@ -108,7 +108,7 @@ app.get("/editInfo", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/editInfo.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.redirect("/");
   }
 });
 // resetPwd
@@ -116,7 +116,7 @@ app.get("/resetPwd", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/resetPwd.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.redirect("/");
   }
 });
 // email_verification
@@ -124,7 +124,7 @@ app.get("/email_verification", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/email_verification.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.redirect("/");
   }
 });
 // logout
@@ -132,13 +132,6 @@ app.get("/logout", function(req, res) {
   // Clearing the cookie
   req.session = null;
   res.redirect("/");
-});
-app.get("*", (req, res) => {
-  if(req.session.user){
-    res.sendFile(__dirname + "/views/dashboard.html");
-  }else{
-    res.sendFile(__dirname + "/index.html");
-  }
 });
 
 // routes
