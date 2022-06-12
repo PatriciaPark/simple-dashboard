@@ -86,11 +86,7 @@ const Role = db.role;
 app.use(express.static("public"));
 // index
 app.use('/', function (req, res) {
-  if(req.session.user){
     res.redirect("/dashboard");
-  }else{
-    res.sendFile(__dirname + "/index.html");
-  }
 });
 // app.get("/", (req, res) => {
 //   if(req.session.user){
@@ -104,7 +100,7 @@ app.get("/dashboard", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.redirect("/");
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // editInfo
