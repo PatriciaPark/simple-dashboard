@@ -92,9 +92,6 @@ app.use(express.static("public"));
 //   }
 // });
 // index
-app.get("/", function(req, res) {
-  res.redirect("/dashboard");
-});
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
