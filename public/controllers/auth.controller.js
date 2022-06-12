@@ -91,7 +91,12 @@ exports.getAuth = (req, res) => {
 };
 // Find a single User with an email
 exports.getOne = (req, res) => {
-  User.readOne(req.params.email, (err, data) => {
+  let email = req.params.email;
+  if (!req.body) {
+    email = req.session.user.email;
+    console.log("**************controller session cookie: " + req.session.user.email);
+  }
+  User.readOne(email, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -105,7 +110,6 @@ exports.getOne = (req, res) => {
       } else {
         // save session
         req.session.user = { email:req.params.email };
-        console.log("controller session cookie: " + req.session.user.email);
         res.send(data);
       }
     });
