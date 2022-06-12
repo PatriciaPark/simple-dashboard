@@ -85,11 +85,11 @@ const Role = db.role;
 // simple route
 app.use(express.static("public"));
 // index
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   if(req.session.user){
     res.redirect("/dashboard");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.render("/index.html");
   }
 });
 // dashboard
