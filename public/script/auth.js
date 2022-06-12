@@ -60,6 +60,21 @@ var handleSignedInUser = function(user) {
       });
     } else {
       // User in DB
+      var dataCnt = { email: user.email, loginCnt: 'loginCnt+1' };
+      fetch('/api/users/count/'+ userSIEmail, {
+          method: 'PUT',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataCnt),
+      })
+      .then((response) => response.json())
+      .then((json) => {
+          console.log('Success Count:', json);
+      })
+      .catch((error) => {
+          console.error('Fail to Count:', error);
+      })
       sessionStorage.setItem('emailForAuth', user.email);
       window.location.replace("/dashboard");
     }
