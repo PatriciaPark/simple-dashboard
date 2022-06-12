@@ -33,15 +33,11 @@ function getAllUsers(){
 }
 // Login user info for display profile.
 function getUserData(emailForSignIn) {
-    console.log("********************localStorage: " + emailForSignIn);
-    
     if (emailForSignIn == null) {
         emailForSignIn = sessionStorage.getItem('userSIEmail');
-        console.log("********************sessionStorage: " + emailForSignIn);
-        // 쿠키 있는 상태에서 url로 접속했을 때
         if(sessionStorage.getItem('userSIEmail') == null) {
+            // Auth login
             emailForSignIn = emailForAuth;
-            console.log("********************emailForAuth: " + emailForSignIn);
         }
     }
     fetch('/api/users/' + emailForSignIn)
