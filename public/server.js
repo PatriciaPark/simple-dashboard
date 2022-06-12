@@ -107,12 +107,6 @@ app.get("/dashboard", function(req, res) {
 });
 // dashboardForAuth
 app.get("/dashboardForAuth", function(req, res) {
-    // save session
-    req.session.user = {
-      email:req.body.email,
-      password:req.body.password,
-      username:req.body.username
-    };
     res.sendFile(__dirname + "/views/dashboard.html");
 });
 // editInfo

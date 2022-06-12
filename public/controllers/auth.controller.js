@@ -22,7 +22,11 @@ exports.create = (req, res) => {
           message:
             err.message || "Some error occurred while creating the User."
         });
-      else res.send(data);
+      else {
+        // save session
+        req.session.user = { email:req.params.email };
+        res.send(data);
+      }
     });
 };
 // Check Passwords
@@ -40,11 +44,7 @@ exports.select = (req, res) => {
         }
       } else {
         // save session
-        req.session.user = {
-          email:req.body.email,
-          password:req.body.password,
-          username:req.body.username
-        };
+        req.session.user = { email:req.params.email };
         res.send(data);
       }
     });
@@ -102,7 +102,11 @@ exports.getOne = (req, res) => {
             message: "Error retrieving User with email " + req.params.email
           });
         }
-      } else res.send(data);
+      } else {
+        // save session
+        req.session.user = { email:req.params.email };
+        res.send(data);
+      }
     });
 };
 // Update a User by the email in the request
