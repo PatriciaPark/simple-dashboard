@@ -33,13 +33,13 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // simple route
-// app.use(express.static("public"));
+app.use(express.static("public/views"));
 // index
 app.get("/", (req, res, next) => {
   if(req.session.user){
     res.redirect("/dashboard");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "../index.html");
   }
 });
 // dashboard
@@ -47,7 +47,7 @@ app.get("/dashboard", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "../index.html");
   }
 });
 // editInfo
