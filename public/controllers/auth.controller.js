@@ -105,6 +105,7 @@ exports.getOne = (req, res) => {
       } else {
         // save session
         req.session.user = { email:req.params.email };
+        console.log("controller session cookie: " + req.session.user.email);
         res.send(data);
       }
     });

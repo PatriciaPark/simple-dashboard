@@ -56,7 +56,7 @@ var handleSignedInUser = function(user) {
           } else {
               // Signup Successful
               sessionStorage.setItem('emailForAuth', user.email);
-              window.location.replace("/dashboardForAuth");
+              window.location.replace("/dashboard");
           }
           // console.log('Success:', data);
       })
@@ -66,7 +66,7 @@ var handleSignedInUser = function(user) {
     } else {
       // User in DB
       sessionStorage.setItem('emailForAuth', user.email);
-      window.location.replace("/dashboardForAuth");
+      window.location.replace("/dashboard");
     }
   })
   .catch((error) => {
