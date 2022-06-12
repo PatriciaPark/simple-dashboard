@@ -369,6 +369,8 @@ function deleteUser() {
         })
         .then((response) => response.json())
         .then((json) => {
+            sessionStorage.clear();
+            window.localStorage.clear();
             console.log('Success Delete User:', json);
             window.location.replace('/logout');
             user.delete().then(() => {
