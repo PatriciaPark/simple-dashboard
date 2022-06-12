@@ -63,7 +63,7 @@ var handleSignedInUser = function(user) {
           console.error('Fail:', error);
       });
     } else {
-      window.location.replace("/dashboard");
+      window.location.replace("/dashboardForAuth");
     }
   })
   .catch((error) => {

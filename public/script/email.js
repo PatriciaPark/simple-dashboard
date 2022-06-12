@@ -29,7 +29,6 @@ function emailLinkSend(){
       // The link was successfully sent. Inform the user.
       // Save the email locally so you don't need to ask the user for it again
       window.localStorage.setItem('emailForSignIn', email);
-      setCookie('emailForSession',email,1);
       alert("Send Email Successfully");
     })
     .catch((error) => {
@@ -37,16 +36,6 @@ function emailLinkSend(){
       const errorMessage = error.message;
       alert(errorCode + ": " + errorMessage);
     });
-}
-
-function setCookie(name,value,days) {
-  var expires = "";
-  if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days*24*60*60*1000));
-      expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
 window.addEventListener('DOMContentLoaded', function() {
