@@ -46,7 +46,7 @@ var handleSignedInUser = function(user) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({username: displayName, email: email, password:''}),
+        body: JSON.stringify({username: user.displayName, email: user.email, password:''}),
       })
       .then((response) => response.json())
       .then((data) => {
