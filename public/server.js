@@ -1,16 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
-// var router = require("express").Router();
-// const expressSession = require("express-session");
-
-// // set the view engine to ejs
-// app.set("views", path.join(__dirname, "views"));
-// app.set("view engine", "ejs");
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
@@ -34,53 +27,10 @@ app.use(cookieSession({
   })
 );
 
-// cookie session
-// app.use(expressSession({
-//   secret:"COOKIE_SECRET",
-//   resave:true,
-//   saveUninitialized:true
-// }));
-
-
-// // Count today"s visitors
-// var count = 0;
-// app.use(function (req, res, next) {
-//   var date = new Date();
-//   var today=date.getYear()+" "+date.getMonth()+" "+date.getDate();
-// // Update views
-// console.log(req.session.lastVisit);
-// if(req.session.lastVisit != today){
-//   req.session.lastVisit = today;
-//   count++;
-// }
-// // Write response
-// res.end(count + "visit")
-// })
-
 // Database
 const db = require("./models");
 const Role = db.role;
 // db.sequelize.sync();
-
-// path.join here makes it work cross platform with Windows / Linux / etc
-// var statics = express.static(path.join(__dirname, "public"));
-// function secureStatic(pathsToSecure = []) {
-//   return function (req, res, next) {
-//     if (pathsToSecure.length === 0) {
-//       // Do not secure, forward to static route
-//       return statics(req, res, next);
-//     }
-//     if (pathsToSecure.indexOf(req.path) > -1) {
-//       // Stop request
-//       return res.status(403).send("<h1>403 Forbidden</h1>"); 
-//     }
-//     // forward to static route
-//     return statics(req, res, next); 
-//   };
-// }
-// add public files. List all "private" paths (file)
-// instead of app.use(express.static("public"));
-// app.use(secureStatic(["*.html"])); 
 
 // simple route
 app.use(express.static("public"));
@@ -132,10 +82,7 @@ app.get("/logout", function(req, res) {
 });
 
 // routes
-// require("./routes/page.routes")(app);
 require("./routes/auth.routes")(app);
-require("./routes/user.routes")(app);
-require("./routes/tutorial.routes")(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', (req, res) => {

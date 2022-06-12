@@ -7,11 +7,6 @@ const uiConfig = {
       if (authResult.user) {
         handleSignedInUser(authResult.user);
       }
-      // if (authResult.additionalUserInfo) {
-      //   document.getElementById('is-new-user').textContent =
-      //       authResult.additionalUserInfo.isNewUser ?
-      //       'New User' : 'Existing User';
-      // }
       // Do not redirect.
       return false;
       // console.log("Auth Signin successful");
@@ -72,6 +67,4 @@ var handleSignedInUser = function(user) {
   .catch((error) => {
     console.error('Fail to Get User:', error);
   });
-  // document.getElementById('username').textContent = user.displayName;
-  // document.getElementById('email').textContent = user.email;
 };

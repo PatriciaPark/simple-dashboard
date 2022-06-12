@@ -260,32 +260,11 @@ function saveProfile(){
     .then((json) => {
         alert("Edit Profile Successful.");
         window.location.replace("/dashboard");
-        // let user = firebase.auth().currentUser;
-        // let uid;
-        // if(user != null){
-        //     uid = user.uid;
-        // }
-        // var firebaseRef = firebase.database().ref();
-        // var userData = {
-        //     userFullName: userFullName,
-        // }
-        // firebaseRef.child(uid).set(userData);
         console.log('Success update username:', json);
     })
     .catch((error) => {
         console.error('Fail to update username:', error);
     })
-    //   swal({
-    //       type: 'successfull',
-    //       title: 'Update successfull',
-    //       text: 'Profile updated.', 
-    //   }).then((value) => {
-    //       setTimeout(function(){
-    //           document.getElementById("profileSection").style.display = "block";
-
-    //           document.getElementById("editProfileForm").style.display = "none";
-    //       }, 1000)
-    //   });
   }
 }
 // Reset password and update database && checkUserOldPassword
