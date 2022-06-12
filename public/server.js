@@ -84,19 +84,20 @@ const Role = db.role;
 
 // simple route
 app.use(express.static("public"));
-// app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    // Clearing the cookie
     res.sendFile(__dirname + "/index.html");
   }
-  // res.redirect("./index.html");
-  // res.sendFile("./index.html", {root: __dirname })
-  // res.json({ message: "Welcome to simple-dashboard application." });
 });
-
+app.get("*", (req, res) => {
+  if(req.session.user){
+    res.sendFile(__dirname + "/views/dashboard.html");
+  }else{
+    res.sendFile(__dirname + "/index.html");
+  }
+});
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){

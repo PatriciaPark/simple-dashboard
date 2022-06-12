@@ -91,9 +91,7 @@ exports.getAuth = (req, res) => {
 };
 // Find a single User with an email
 exports.getOne = (req, res) => {
-  console.log("********************** req.params.email!!! " + req.params.email);
   if (req.params.email == 'null') {
-    console.log("********************** session!!!");
     User.readOne(req.session.user.email, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
@@ -110,7 +108,6 @@ exports.getOne = (req, res) => {
       }
     });
   } else {
-    console.log("********************** params!!!");
     User.readOne(req.params.email, (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
