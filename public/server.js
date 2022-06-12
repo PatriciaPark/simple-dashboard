@@ -93,18 +93,14 @@ app.use(express.static("public"));
 // });
 // index
 app.get("/", function(req, res) {
-  if(req.session.user){
-    res.redirect("/dashboard");
-  }else{
-    res.sendFile(__dirname + "/index.html");
-  }
+  res.redirect("/dashboard");
 });
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.redirect("/");
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // dashboardForAuth
