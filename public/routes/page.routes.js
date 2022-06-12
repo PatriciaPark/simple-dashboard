@@ -24,10 +24,10 @@ module.exports = app => {
       res.sendFile(__dirname + "/index.html");
     }
   });
-  // email_verification
-  router.get("/email_verification", function(req, res) {
+  // emailVerification
+  router.get("/emailVerification", function(req, res) {
     if(req.session.user){
-      res.sendFile(__dirname + "/views/email_verification.html");
+      res.sendFile(__dirname + "/views/emailVerification.html");
     }else{
       res.sendFile(__dirname + "/index.html");
     }
@@ -36,7 +36,6 @@ module.exports = app => {
   router.get("/logout", function(req, res) {
     // Clearing the cookie
     req.session = null
-    // res.clearCookie("pyjee8-session",{path:"/",domain:"https://simple-dashboard-pyjee8.herokuapp.com/"});
     res.redirect("/");
   });
   app.use('/', router);

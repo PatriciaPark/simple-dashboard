@@ -126,7 +126,7 @@ function signUp(){
                     console.log(error.message);
                 });
                 alert("Signup Successful");
-                window.location.replace("/email_verification");
+                window.location.replace("/emailVerification");
             }
             // console.log('Success:', data);
         })
@@ -206,7 +206,7 @@ function signIn(){
             .then((data) => {
                 if(data.message){
                     // Not verified email yet : emailVerification=0
-                    window.location.replace("/email_verification");
+                    window.location.replace("/emailVerification");
                 } else {
                     // Already verified email : emailVerification=1
                     // update database - login count(loginCnt), last session(lastSession)

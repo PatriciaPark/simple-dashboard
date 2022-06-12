@@ -84,26 +84,22 @@ const Role = db.role;
 
 // simple route
 app.use(express.static("public"));
-// app.get("/", (req, res) => {
-//   if(req.session.user){
-//     res.redirect("/dashboard");
-//   }else{
-//     res.sendFile(__dirname + "/index.html");
-//   }
-// });
 // index
+app.get("/", (req, res) => {
+  if(req.session.user){
+    res.redirect("/dashboard");
+  }else{
+    res.sendFile(__dirname + "/index.html");
+  }
+});
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
     res.sendFile(__dirname + "/views/dashboard.html");
   }else{
-    res.sendFile(__dirname + "/index.html");
+    res.redirect("/");
   }
 });
-// dashboardForAuth
-// app.get("/dashboardForAuth", function(req, res) {
-//     res.sendFile(__dirname + "/views/dashboard.html");
-// });
 // editInfo
 app.get("/editInfo", function(req, res) {
   if(req.session.user){
@@ -120,10 +116,10 @@ app.get("/resetPwd", function(req, res) {
     res.redirect("/");
   }
 });
-// email_verification
-app.get("/email_verification", function(req, res) {
+// emailVerification
+app.get("/emailVerification", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + "/views/email_verification.html");
+    res.sendFile(__dirname + "/views/emailVerification.html");
   }else{
     res.redirect("/");
   }
