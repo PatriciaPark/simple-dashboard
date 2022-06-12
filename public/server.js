@@ -83,6 +83,7 @@ app.get("/logout", function(req, res) {
 
 // routes
 require("./routes/auth.routes")(app);
+require("./routes/user.routes")(app);
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', (req, res) => {
