@@ -99,7 +99,7 @@ function getCookie(name) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    if(emailForSignIn) emailVerification(emailForSignIn);
+    if(email) emailVerification(email);
     getUserData(emailForSignIn);
     getAllUsers();
     countVisitors();
