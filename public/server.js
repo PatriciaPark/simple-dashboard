@@ -84,14 +84,6 @@ const Role = db.role;
 
 // simple route
 app.use(express.static("public"));
-// index
-app.get("/", (req, res) => {
-  if(req.session.user){
-    res.redirect("/dashboard");
-  }else{
-    res.sendFile(__dirname + "/index.html");
-  }
-});
 // dashboard
 app.get("/dashboard", function(req, res) {
   if(req.session.user){
@@ -136,6 +128,15 @@ app.get("/logout", function(req, res) {
 require("./routes/auth.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/tutorial.routes")(app);
+
+// index
+app.get("/", (req, res) => {
+  if(req.session.user){
+    res.redirect("/dashboard");
+  }else{
+    res.sendFile(__dirname + "/index.html");
+  }
+});
 
 //The 404 Route (ALWAYS Keep this as the last route)
 app.get('*', (req, res) => {
