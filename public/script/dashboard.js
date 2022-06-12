@@ -4,21 +4,23 @@ let emailForAuth = sessionStorage.getItem('emailForAuth');  // from auth.js
 
 // Update database - email verification(emailVerification= 0 -> 1).
 function emailVerification(email){
-    let data = { email: email, emailVerification: 1 };
-    fetch('/api/users/email/'+ email, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success Email Verification:', data);
-        })
-        .catch((error) => {
-            console.error('Fail to Email Verification:', error);
-    });
+    if (email){
+        let data = { email: email, emailVerification: 1 };
+        fetch('/api/users/email/'+ email, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success Email Verification:', data);
+            })
+            .catch((error) => {
+                console.error('Fail to Email Verification:', error);
+        });
+    }
 }
 // Get All users infomation.
 function getAllUsers(){
