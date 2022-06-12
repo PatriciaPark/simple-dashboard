@@ -33,13 +33,13 @@ const Role = db.role;
 // db.sequelize.sync();
 
 // simple route
-app.use(express.static("public"));
+// app.use(express.static("public"));
 // index
 app.get("/", (req, res, next) => {
   if(req.session.user){
     res.redirect("/dashboard");
   }else{
-    res.render("/index.html");
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // dashboard
