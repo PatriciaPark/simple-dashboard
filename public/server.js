@@ -91,12 +91,12 @@ app.use(express.static("public"));
 //     res.sendFile(__dirname + "/index.html");
 //   }
 // });
-// dashboard
+// index
 app.get("/", function(req, res) {
   if(req.session.user){
-    res.sendFile(__dirname + "/dashboard");
+    res.redirect("/dashboard");
   }else{
-    res.redirect("/");
+    res.sendFile(__dirname + "/index.html");
   }
 });
 // dashboard
