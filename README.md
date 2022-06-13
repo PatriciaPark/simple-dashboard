@@ -4,6 +4,9 @@
 
 # Story board > https://ovenapp.io/view/ceDKa3XTdMa3HjwRIahZWT8RT3jBSbtS/A9KTv
 
+# Project overview description(KR) > https://url.kr/8pryot 
+^프로젝트 개발 개요(한국어)
+
 # Source code directory
 ![image](https://user-images.githubusercontent.com/14973104/173263977-7b8c76c7-30f0-4013-8503-53d6f49fdb56.png)
 
