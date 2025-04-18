@@ -1,9 +1,5 @@
 # simple-dashboard
 
-# Live Demo > https://simple-dashboard-pyjee8.herokuapp.com/index
-
-# Story board > https://ovenapp.io/view/ceDKa3XTdMa3HjwRIahZWT8RT3jBSbtS/A9KTv
-
 # Project overview description(KR) > https://url.kr/8pryot 
 ^프로젝트 개발 개요(한국어)
 
@@ -45,3 +41,7 @@
 
 # API
 ![image](https://user-images.githubusercontent.com/14973104/173264024-926e1eeb-6ce6-490f-980d-3fa28ba1643f.png)
+
+
+Live Demo > https://simple-dashboard-pyjee8.herokuapp.com/index
+Story board > https://ovenapp.io/view/ceDKa3XTdMa3HjwRIahZWT8RT3jBSbtS/A9KTv
